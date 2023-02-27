@@ -41,7 +41,7 @@ class TablesTable extends Table
         // parent::initialize($config);
     }
 
-		public function getTables() {
+		public function getList() {
 			$Collection = ConnectionManager::get('default')->getSchemaCollection();
 			$tables = $Collection->listTables();
 			return $tables;

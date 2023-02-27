@@ -47,7 +47,7 @@ class PagesController extends BaseController
     public function display(string ...$path): ?Response
     {
         if (!$path) {
-            return $this->redirect('/');
+            return $this->redirect('/tusk');
         }
         if (in_array('..', $path, true) || in_array('.', $path, true)) {
             throw new ForbiddenException();

@@ -158,6 +158,7 @@ var settings = {
 	cssVendor: {
 		src: [
 			src + "css/vendor/**/*.css",
+			"./node_modules/@picocss/pico/css/pico.min.css"
 			// Add single vendor files here,
 			// they will be copied as is to `{prefix}/css/vendor/`,
 			// e.g. './node_modules/flickity/dist/flickity.min.css'

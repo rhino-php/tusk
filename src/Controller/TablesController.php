@@ -19,7 +19,7 @@ class TablesController extends AppController
      */
     public function index()
     {
-        $tables = $this->Tables->getTables();
+        $tables = $this->Tables->getList();
 
         $this->set(compact('tables'));
     }
