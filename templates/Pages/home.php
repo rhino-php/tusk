@@ -1,6 +1,5 @@
-<h1>Test</h1>
-<?= $foo ?><br>
-<?= $page ?><br>
-<?= $subpage ?><br>
-
-<?= $this->Html->link("Some Test", ["customers", "new"]) ?>
+<div class="inner-bound">
+	<h1>Welcome to Tusk</h1>
+	<p>Backend comming soon.</p>
+	<?= $this->Html->link("Tables", ["controller" => "Tables"]) ?>
+</div>

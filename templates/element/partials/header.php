@@ -6,7 +6,7 @@
 		<a id="home" href="/">
 			<div class="logo">
 				<!-- $this->parse(PATHTOWEBROOT . 'dist/img/logo.svg') ?> -->
-				<span>WEBNAME</span>
+				<span>Tusk</span>
 			</div>
 			<span class="sr-only">cmt_title</span>
 		</a>

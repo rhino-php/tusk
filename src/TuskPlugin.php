@@ -45,6 +45,7 @@ class TuskPlugin extends BasePlugin
             function (RouteBuilder $builder) {
                 // Add custom routes here
 			        	$builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
+			        	$builder->connect('/tables', ['controller' => 'Tables']);
 
                 $builder->fallbacks();
             }

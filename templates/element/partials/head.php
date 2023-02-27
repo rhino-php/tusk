@@ -11,21 +11,14 @@
 	<meta name="author" content="carsten.coull@swu.de">
 
 	<!-- To do: add Version Number to css -->
-	<?= $this->Html->css(['webfonts', 'main']) ?>
+	<?= $this->Html->css(['Tusk.webfonts', 'Tusk.main']) ?>
 
 		<!-- Load main javascript -->
-	<?= $this->Html->script(['main'], ["type" => "module"]) ?>
+	<?= $this->Html->script(['Tusk.main'], ["type" => "module"]) ?>
 
 	<?= $this->fetch('meta') ?>
 	<?= $this->fetch('css') ?>
 	<?= $this->fetch('script') ?>
-
-	<style>
-		body {
-			--background-color: red !important;
-		}
-	</style>
-
 
 	<!-- To do: check for OG support -->
 	<!-- og:title, og:description, og:image, og:locale, og:type, og:url -->

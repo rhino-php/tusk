@@ -1,7 +1,6 @@
 <footer class="main-footer box">
 	<div class="outer-bound inverted">
 		<div class="stack">
-			Some Text
 			<!-- $this->getWidgetChannel(1) ?> -->
 		</div>
 
