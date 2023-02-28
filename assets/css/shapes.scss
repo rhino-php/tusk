@@ -32,7 +32,7 @@
 @forward"shapes/lib/utils";
 
 @forward"shapes/lib/button" with (
-  $color: var(--background-color),
+  $color: var(--contrast-color),
   $background-color: var(--primary-color),
   $padding: settings.$gutter,
   $border-radius: var(--border-radius),
@@ -44,7 +44,7 @@
 
 @forward"shapes/lib/box" with (
   $box-color: var(--contrast-color),
-  $box-background: var(--background-color),
+  $box-background: var(--primary-color),
   $box-padding: settings.$gutter,
   $box-border-color: var(--primary-color),
   $box-border-width: 0, //settings.$border-width,

@@ -3,7 +3,9 @@
 </div>
 
 <main id="main" class="main-content">
-	 <?= $this->fetch('content') ?>
+	<div class="outer-bound stack--200">
+		<?= $this->fetch('content') ?>
+	</div>
 
 	<!-- Dummy Element for appling margin to -->
 	<hr class="footer-margin" />

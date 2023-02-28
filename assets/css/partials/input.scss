@@ -8,17 +8,27 @@
 a, button, input, select, textarea {
 	font: inherit;
 	cursor: pointer;
-	
+	color: inherit;
+
 	&:focus {
 		outline: none;
 	}
 }
 
-input {
-	background-color: var(--text-color);
-	color: var(--background-color);
+input, textarea, select {
+	background-color: var(--contrast-color);
+	color: var(--text-color);
+	border: var(--border-width) var(--border-type) var(--border-color);
+	border-radius: var(--border-radius);
 	@include shapes.type-setting(400);
 	@include padding;
+}
+
+.input {
+	display: flex;
+	flex-direction: column;
+	min-width: 42ex;
+	width: fit-content;
 }
 
 .icon-button {
@@ -26,7 +36,7 @@ input {
 	@include shapes.button-reset;
 }
 
-.button {
+.button, button {
 	@include shapes.button;
 	font-weight: 600;
 }

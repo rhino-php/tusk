@@ -44,8 +44,16 @@ class TuskPlugin extends BasePlugin
             ['path' => '/tusk'],
             function (RouteBuilder $builder) {
                 // Add custom routes here
-			        	$builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
-			        	$builder->connect('/tables', ['controller' => 'Tables']);
+				$builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
+				$builder->connect('/tables', ['controller' => 'Tables']);
+
+				// Add this
+				// New route we're adding for our tagged action.
+				// The trailing `*` tells CakePHP that this action has
+				// passed parameters.
+				$builder->scope('/articles', function (RouteBuilder $builder) {
+					$builder->connect('/tagged/*', ['controller' => 'Articles', 'action' => 'tags']);
+				});
 
                 $builder->fallbacks();
             }
@@ -61,8 +69,6 @@ class TuskPlugin extends BasePlugin
      */
     public function middleware(MiddlewareQueue $middlewareQueue): MiddlewareQueue
     {
-        // Add your middlewares here
-
         return $middlewareQueue;
     }
 

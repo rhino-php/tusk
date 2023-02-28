@@ -11,7 +11,8 @@
 	<meta name="author" content="carsten.coull@swu.de">
 
 	<!-- To do: add Version Number to css -->
-	<?= $this->Html->css(['Tusk.webfonts', 'Tusk.main', 'Tusk.vendor/pico.min']) ?>
+	<?= $this->Html->css(['Tusk.webfonts', 'Tusk.main']) ?>
+	<!--  $this->Html->css(['Tusk.webfonts', 'Tusk.main', 'Tusk.vendor/pico.min']) ?> -->
 
 		<!-- Load main javascript -->
 	<?= $this->Html->script(['Tusk.main'], ["type" => "module"]) ?>
