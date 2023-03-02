@@ -10,6 +10,8 @@ class AppController extends BaseController
 	public function initialize(): void
     {
         parent::initialize();
+		$this->loadComponent('Authentication.Authentication');
+		$this->loadComponent('Authorization.Authorization');
     }
 
 }

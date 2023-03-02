@@ -3,7 +3,7 @@
 <header class="main-header box">
 	<div class="outer-bound">
 
-		<a id="home" href="/">
+		<a id="home" href="<?= $this->Url->build(['controller' => 'Pages', 'action' => 'display', 'home']) ?>">
 			<div class="logo">
 				<!-- $this->parse(PATHTOWEBROOT . 'dist/img/logo.svg') ?> -->
 				<span>Tusk</span>

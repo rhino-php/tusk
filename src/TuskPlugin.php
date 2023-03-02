@@ -10,6 +10,8 @@ use Cake\Core\PluginApplicationInterface;
 use Cake\Http\MiddlewareQueue;
 use Cake\Routing\RouteBuilder;
 
+use Authorization\Middleware\AuthorizationMiddleware;
+
 /**
  * Plugin for Tusk
  */
@@ -39,12 +41,19 @@ class TuskPlugin extends BasePlugin
      */
     public function routes(RouteBuilder $routes): void
     {
+		// $routes->registerMiddleware('authtorize', new AuthorizationMiddleware(Application));
+
+		// $routes->scope('/tusk', function (RouteBuilder $builder) {
+		// 	$builder->applyMiddleware('authtorize');
+		// });
+
         $routes->plugin(
             'Tusk',
             ['path' => '/tusk'],
             function (RouteBuilder $builder) {
                 // Add custom routes here
-				$builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'home']);
+				
+				$builder->connect('/', ['controller' => 'Users', 'action' => 'login']);
 				$builder->connect('/tables', ['controller' => 'Tables']);
 
 				// Add this
