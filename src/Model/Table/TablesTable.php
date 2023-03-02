@@ -38,12 +38,11 @@ class TablesTable extends Table
      */
     public function initialize(array $config): void
     {
-        // parent::initialize($config);
+		// parent::initialize($config);
+		$this->Collection = ConnectionManager::get('default')->getSchemaCollection();
     }
 
-		public function getList() {
-			$Collection = ConnectionManager::get('default')->getSchemaCollection();
-			$tables = $Collection->listTables();
-			return $tables;
-		}
+	public function getList() {
+		return $this->Collection->listTables();
+	}
 }

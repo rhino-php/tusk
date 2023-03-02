@@ -20,7 +20,6 @@ class TablesController extends AppController
     public function index()
     {
         $tables = $this->Tables->getList();
-
         $this->set(compact('tables'));
     }
 
@@ -31,13 +30,17 @@ class TablesController extends AppController
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view($tableName = null)
     {
-        $table = $this->Tables->get($id, [
-            'contain' => [],
-        ]);
+        $this->Tables->setTable($tableName);
+		$schema = $this->Tables->getSchema($tableName);
+		$data = $this->paginate($this->Tables);
 
-        $this->set(compact('table'));
+        $this->set([
+			'data' => $data,
+			'columns' => $schema->columns(),
+			'table' => $tableName
+		]);
     }
 
     /**

@@ -1,6 +1,10 @@
-<div class="users form">
-    <?= $this->Flash->render() ?>
-    <h3>Login</h3>
+<?php
+/**
+ * @var \App\View\AppView $this
+ */
+?>
+<div class="users form content">
+	<?= $this->Flash->render() ?>
     <?= $this->Form->create() ?>
     <fieldset>
         <legend><?= __('Please enter your username and password') ?></legend>
@@ -9,6 +13,4 @@
     </fieldset>
     <?= $this->Form->submit(__('Login')); ?>
     <?= $this->Form->end() ?>
-
-    <?= $this->Html->link("Add User", ['action' => 'add']) ?>
 </div>
