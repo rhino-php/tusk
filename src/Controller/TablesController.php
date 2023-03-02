@@ -39,7 +39,7 @@ class TablesController extends AppController
         $this->set([
 			'data' => $data,
 			'columns' => $schema->columns(),
-			'table' => $tableName
+			'tableName' => $tableName
 		]);
     }
 
@@ -70,21 +70,27 @@ class TablesController extends AppController
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function edit($id = null)
+    public function edit($tableName = null, $id = null)
     {
-        $table = $this->Tables->get($id, [
+		$this->Tables->setTable($tableName);
+		$schema = $this->Tables->getSchema($tableName);
+        $entry = $this->Tables->get($id, [
             'contain' => [],
         ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $table = $this->Tables->patchEntity($table, $this->request->getData());
-            if ($this->Tables->save($table)) {
-                $this->Flash->success(__('The table has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $table = $this->Tables->patchEntity($entry, $this->request->getData());
+            if ($this->Tables->save($entry)) {
+                $this->Flash->success(__('The entry has been saved.'));
+
+                return $this->redirect(['action' => 'view', $tableName]);
             }
             $this->Flash->error(__('The table could not be saved. Please, try again.'));
         }
-        $this->set(compact('table'));
+        $this->set([
+			'entry' => $entry,
+			'columns' => $schema->columns()
+		]);
     }
 
     /**
@@ -94,16 +100,17 @@ class TablesController extends AppController
      * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null)
+    public function delete($tableName = null, $id = null)
     {
+		$this->Tables->setTable($tableName);
         $this->request->allowMethod(['post', 'delete']);
-        $table = $this->Tables->get($id);
-        if ($this->Tables->delete($table)) {
+        $entry = $this->Tables->get($id);
+        if ($this->Tables->delete($entry)) {
             $this->Flash->success(__('The table has been deleted.'));
         } else {
             $this->Flash->error(__('The table could not be deleted. Please, try again.'));
         }
 
-        return $this->redirect(['action' => 'index']);
+        return $this->redirect(['action' => 'view', $tableName]);
     }
 }

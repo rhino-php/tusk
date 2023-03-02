@@ -6,7 +6,7 @@
 ?>
 <div class="tables index content stack">
 	
-	<h3><?= __(ucfirst($table)) ?></h3>
+	<h3><?= __(ucfirst($tableName)) ?></h3>
 
 	<div class="cluster">
 		<?= $this->Html->link(__('back'), ['action' => 'index'], ['class' => 'button']) ?>
@@ -24,15 +24,14 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($data as $table): ?>
+                <?php foreach ($data as $entry): ?>
                 <tr>
 					<?php foreach($columns as $column) : ?>
-						<td><?= h($table->{$column}) ?></td>
+						<td><?= h($entry->{$column}) ?></td>
 					<?php endforeach ?>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $table->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $table->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $table->id], ['confirm' => __('Are you sure you want to delete # {0}?', $table->id)]) ?>
+                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $tableName, $entry->id]) ?>
+                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $tableName, $entry->id], ['confirm' => __('Are you sure you want to delete # {0}?', $entry->id)]) ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>
