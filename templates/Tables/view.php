@@ -10,10 +10,10 @@
 
 	<div class="cluster">
 		<?= $this->Html->link(__('back'), ['action' => 'index'], ['class' => 'button']) ?>
-		<?= $this->Html->link(__('new'), ['action' => 'add'], ['class' => 'button']) ?>
+		<?= $this->Html->link(__('new'), ['action' => 'add', $tableName], ['class' => 'button']) ?>
 	</div>
 	
-    <div class="table-responsive">
+    <figure>
         <table>
             <thead>
                 <tr>
@@ -37,7 +37,7 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
-    </div>
+    </figure>
     <div class="paginator">
         <ul class="pagination cluster list-style-none">
             <?= $this->Paginator->first('<< ' . __('first')) ?>

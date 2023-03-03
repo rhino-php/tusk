@@ -48,19 +48,24 @@ class TablesController extends AppController
      *
      * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
      */
-    public function add()
+    public function add($tableName = null)
     {
-        $table = $this->Tables->newEmptyEntity();
+		$this->Tables->setTable($tableName);
+		$schema = $this->Tables->getSchema($tableName);
+        $entry = $this->Tables->newEmptyEntity();
         if ($this->request->is('post')) {
-            $table = $this->Tables->patchEntity($table, $this->request->getData());
-            if ($this->Tables->save($table)) {
+            $table = $this->Tables->patchEntity($entry, $this->request->getData());
+            if ($this->Tables->save($entry)) {
                 $this->Flash->success(__('The table has been saved.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'view', $tableName]);
             }
             $this->Flash->error(__('The table could not be saved. Please, try again.'));
         }
-        $this->set(compact('table'));
+		$this->set([
+			'entry' => $entry,
+			'columns' => $schema->columns()
+		]);
     }
 
     /**

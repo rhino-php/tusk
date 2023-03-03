@@ -3,8 +3,10 @@
  */
 
 // change to path if needed
-@forward "shapes/lib/reset";
+@forward "shapes/lib/reset" with ($list-reset: false);
 
 @forward "partials";
 
 @forward "components";
+
+@forward "../../node_modules/@picocss/pico/scss/pico.scss";

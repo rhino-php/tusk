@@ -116,6 +116,13 @@ class UsersController extends AppController
 	public function login()
 	{
 		$this->Authorization->skipAuthorization();
+
+		$this->title = 'Login';
+		$this->set('title', 'View Active Users');
+
+		// $this->viewBuilder()->assign('title', 'Login');
+		$this->viewBuilder()->setLayout('blank');
+		
 		$this->request->allowMethod(['get', 'post']);
 		$result = $this->Authentication->getResult();
 		// regardless of POST or GET, redirect if user is logged in
@@ -126,13 +133,15 @@ class UsersController extends AppController
 				'action' => 'display',
 				'home'
 			]);
-
+			
 			return $this->redirect($redirect);
 		}
 		// display error if user submitted and authentication failed
 		if ($this->request->is('post') && !$result->isValid()) {
 			$this->Flash->error(__('Invalid username or password'));
 		}
+
+		$this->set(["title" => 'Login']);
 	}
 
 	public function logout()

@@ -44,7 +44,7 @@
 
 @forward"shapes/lib/box" with (
   $box-color: var(--contrast-color),
-  $box-background: var(--primary-color),
+  $box-background: var(--text-color),
   $box-padding: settings.$gutter,
   $box-border-color: var(--primary-color),
   $box-border-width: 0, //settings.$border-width,

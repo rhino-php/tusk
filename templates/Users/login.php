@@ -1,10 +1,4 @@
-<?php
-/**
- * @var \App\View\AppView $this
- */
-?>
 <div class="users form content">
-	<?= $this->Flash->render() ?>
     <?= $this->Form->create() ?>
     <fieldset>
         <legend><?= __('Please enter your username and password') ?></legend>

@@ -1,7 +1,7 @@
 	<?= $this->Html->charset() ?>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-	<title>Tusk | <?= $this->fetch('title') ?> </title>
+	<title>Tusk | <?= h($this->fetch('title')) ?> </title>
 
 	<script type="module">
 		document.documentElement.classList.remove('no-js');

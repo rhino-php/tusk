@@ -3,6 +3,8 @@
 
 
 :root {
+	--primary: #43a047;
+	
 	@each $color,
 	$value in $colors {
 		--#{$color}-color: #{$value};

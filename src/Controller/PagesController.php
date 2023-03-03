@@ -21,7 +21,7 @@ use Cake\Http\Exception\ForbiddenException;
 use Cake\Http\Exception\NotFoundException;
 use Cake\Http\Response;
 use Cake\View\Exception\MissingTemplateException;
-use App\Controller\AppController as BaseController;
+use Tusk\Controller\AppController as BaseController;
 
 /**
  * Static content controller

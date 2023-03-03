@@ -1,4 +1,4 @@
-<h1>Edit</h1>
+<h1>New</h1>
 <?php
     echo $this->Form->create($entry, ["class" => "stack"]);
 	foreach ($columns as $column) {
