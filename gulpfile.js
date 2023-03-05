@@ -106,7 +106,8 @@ var settings = {
 		dest: dist + "css/",
 		srcMain: [
 			src + "css/main.scss",
-			src + "css/webfonts.scss"
+			src + "css/webfonts.scss",
+			src + "css/pico.scss"
 			// './src/css/email.scss',
 			// You can add more files here that will be built seperately,
 			// f.e. newsletter.scss
@@ -158,7 +159,7 @@ var settings = {
 	cssVendor: {
 		src: [
 			src + "css/vendor/**/*.css",
-			"./node_modules/@picocss/pico/css/pico.min.css"
+			// "./node_modules/@picocss/pico/css/pico.min.css"
 			// Add single vendor files here,
 			// they will be copied as is to `{prefix}/css/vendor/`,
 			// e.g. './node_modules/flickity/dist/flickity.min.css'
@@ -181,14 +182,17 @@ var settings = {
 	},
 
 	icons: {
-		src: src + "icon/**/*.svg",
+		src: [
+			src + "icon/**/*.svg",
+			'./node_modules/feather-icons/dist/icons/*.svg'
+		],
 		dest: dist + "icon/",
 		options: [$.imagemin.svgo(svgoOptions)],
 	},
 
 	favicon: {
-		src: src + "img/logo.svg",
-		dest: dist + "img/favicons/",
+		src: src + "icon/logo.svg",
+		dest: dist + "icon/favicons/",
 		background: "#ffffff",
 	},
 

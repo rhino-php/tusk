@@ -1,10 +1,10 @@
-<div class="users form content">
-    <?= $this->Form->create() ?>
-    <fieldset>
-        <legend><?= __('Please enter your username and password') ?></legend>
-        <?= $this->Form->control('email', ['required' => true]) ?>
-        <?= $this->Form->control('password', ['required' => true]) ?>
-    </fieldset>
+<div class="box box--alt form stack">
+	<div class="center login-logo">
+		<?php include APP . "../plugins/Tusk/webroot/icon/logo-big.svg" ?>
+	</div>
+    <?= $this->Form->create(null, ['class' => 'stack']) ?>
+	<?= $this->Form->control('email', ['required' => true]) ?>
+	<?= $this->Form->control('password', ['required' => true]) ?>
     <?= $this->Form->submit(__('Login')); ?>
     <?= $this->Form->end() ?>
 </div>

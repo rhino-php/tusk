@@ -28,12 +28,13 @@ html {
 	-webkit-font-smoothing: antialiased;
 	text-rendering: optimizeLegibility;
 	font-size: slope-rem-minmax(0.85rem, 1.2rem, 320px, 1920px);
+	letter-spacing: -0.3px;
 }
 
 body {
 	@include type-setting(400);
 	color: var(--text-color);
-	font-family: 'Inter', sans-serif;
+	font-family: 'Manrope', sans-serif;
 }
 
 .headline--big, h1 {

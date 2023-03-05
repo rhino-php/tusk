@@ -24,10 +24,14 @@ input, textarea, select {
 	@include padding;
 }
 
+label {
+	font-weight: 600;
+}
+
 .input {
 	display: flex;
 	flex-direction: column;
-	min-width: 42ex;
+	min-width: 28ex;
 	width: fit-content;
 }
 

@@ -1,0 +1,15 @@
+.users  { // will be .login
+	background-color: var(--text-color);
+	// color: var(--contrast-color);
+
+	.main-content {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	.login-logo svg {
+		width: 100%;
+		height: auto;
+	}
+}

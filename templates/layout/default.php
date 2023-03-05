@@ -4,7 +4,7 @@
 	<?= $this->element('partials/head') ?>
 </head>
 
-<body>
+<body class="<?= h($this->classSave($this->fetch('title'))) ?>">
 	<a href="#main" class="skip-link button">common.skip-navigation</a>
 
 	<div class="frame">
@@ -12,20 +12,22 @@
 		<aside class="frame__sidebar">
 			<a id="home" href="<?= $this->Url->build(['controller' => 'Pages', 'action' => 'display', 'home']) ?>">
 				<div class="logo">
-					<!-- $this->parse(PATHTOWEBROOT . 'dist/img/logo.svg') ?> -->
-					<span>Rhino</span>
+					<?= $this->svg("icon/logo-big.svg") ?>
 				</div>
 				<span class="sr-only">Rhino</span>
 			</a>
 
-			<?= $this->element('partials/nav') ?>
-
-			<div class="stack">
-				<?= $this->Html->link("Logout", ["controller" => "Users", "action" => "logout"]) ?><br />
-				<?= $this->Html->link("Frontend", ["plugin" => null, "controller" => "Pages", "action" => "home"]) ?>
+			<div>
+				<p>Angemeldet als Carsten Coull</p>
+				<?= $this->Html->link("Dashboard", ["plugin" => null, "controller" => "Pages", "action" => "home"], ["class" => "button"]) ?>
+				<?= $this->element('partials/nav') ?>
 			</div>
 
-			
+
+			<div class="stack">
+				<?= $this->Html->link("Logout", ["controller" => "Users", "action" => "logout"], ["class" => "button"]) ?><br />
+				<?= $this->Html->link("Frontend", ["plugin" => null, "controller" => "Pages", "action" => "home"], ["class" => "button"]) ?>
+			</div>	
 		</aside>
 		
 		<!-- Main Content -->

@@ -4,7 +4,7 @@
 	<?= $this->element('partials/head') ?>
 </head>
 
-<body>
+<body class="<?= h($this->classSave($this->fetch('title'))) ?>">
 	<a href="#main" class="skip-link button">common.skip-navigation</a>
 
 	<main id="main" class="main-content">

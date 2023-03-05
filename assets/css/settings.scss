@@ -11,11 +11,11 @@
  **********/
 
 $colors: (
-	primary: #509130,
+	primary: #4ADCB1,
 	secondary: #89a4ef,
-	background: #509130,
-	contrast: #fff, // color-for-bg(var(--primary-color), var(--background-color), $text-color)
-	text: #333
+	background: #837c7c,
+	contrast: #F9F9F9, // color-for-bg(var(--primary-color), var(--background-color), $text-color)
+	text: #0c0e26 // #333
 );
 
 $shades: (
@@ -36,7 +36,7 @@ $shades: (
 
 $border: (
 	width: 2px,
-	radius: 4px,
+	radius: 0,
 	color: currentColor,
 	type: solid,
 );
