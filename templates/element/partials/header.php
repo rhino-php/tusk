@@ -1,5 +1,5 @@
-<header class="main-header box">
+<header class="main-header">
 	<div class="outer-bound">
-		<h1>Tables</h1>
+		<h1><?= h($this->fetch('title')) ?></h1>
 	</div>
 </header>

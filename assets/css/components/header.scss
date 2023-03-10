@@ -7,6 +7,9 @@
 	padding-left: 0;
 	padding-right: 0;
 
+	background-color: var(--text-color);
+	color: var(--contrast-color);
+
 	&>div {
 		display: flex;
 		justify-content: space-between;

@@ -20,7 +20,7 @@
 @import "../../node_modules/@picocss/pico/scss/layout/scroller"; // figure
 
 // Content
-@import "../../node_modules/@picocss/pico/scss/content/typography"; // a, headings, p, ul, blockquote, ...
+// @import "../../node_modules/@picocss/pico/scss/content/typography"; // a, headings, p, ul, blockquote, ...
 @import "../../node_modules/@picocss/pico/scss/content/embedded"; // audio, canvas, iframe, img, svg, video
 @import "../../node_modules/@picocss/pico/scss/content/button"; // button, a[role=button], type=button, type=submit ...
 @import "../../node_modules/@picocss/pico/scss/content/form"; // input, select, textarea, label, fieldset, legend
@@ -31,10 +31,10 @@
 @import "../../node_modules/@picocss/pico/scss/content/miscs"; // hr, template, [hidden], dialog, canvas
 
 // Components
-@import "../../node_modules/@picocss/pico/scss/components/accordion"; // details, summary
+// @import "../../node_modules/@picocss/pico/scss/components/accordion"; // details, summary
 @import "../../node_modules/@picocss/pico/scss/components/card"; // article
 @import "../../node_modules/@picocss/pico/scss/components/modal"; // dialog
-@import "../../node_modules/@picocss/pico/scss/components/nav"; // nav
+// @import "../../node_modules/@picocss/pico/scss/components/nav"; // nav
 @import "../../node_modules/@picocss/pico/scss/components/progress"; // progress
 @import "../../node_modules/@picocss/pico/scss/components/dropdown"; // dropdown
 
