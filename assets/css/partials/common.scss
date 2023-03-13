@@ -35,6 +35,10 @@ body {
 	}
 }
 
+.hidden {
+	display: none;
+}
+
 .box {
   @include shapes.box;
 }

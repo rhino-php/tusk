@@ -8,14 +8,12 @@ $warning-color: yellow;
 $error-color: red;
 
 .flash-messages {
-  position: fixed;
+  position: sticky;
   top: 0;
   z-index: 10;
-  inset: auto 0;
 
   font-weight: 800;
-
-  margin-bottom: -$gutter;
+//   margin-bottom: -$gutter;
   // transform: translateY(-100%);
 	
   & + * {
@@ -23,12 +21,15 @@ $error-color: red;
   }
 	
   .message {
-		color: var(--text-color);
-    background-color: $info-color;
-		transition: 350ms ease-out;
-		transition-property: max-height, opacity;
-		max-height: 4rem;
-		overflow: hidden;
+	color: var(--text-color);
+	background-color: $info-color;
+	transition: 350ms ease-out;
+	transition-property: max-height, opacity;
+	max-height: 4rem;
+	overflow: hidden;
+
+	max-width: var(--outer-bound-width);
+	margin: auto;
 		
     .icon {
 			font-size: 2rem;

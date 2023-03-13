@@ -148,7 +148,7 @@
 				
 				<ul class="nav-block__list">
 					<li class="nav-block__item">
-						<a class="button button--icon" href="/">
+						<a class="button button--icon" href="<?= $this->Url->build(['controller' => 'Users']) ?>">
 							<?= $this->svg("icon/users.svg") ?>
 							<span>Nutzerverwaltung</span>
 						</a>
@@ -171,7 +171,7 @@
 				
 				<ul class="nav-block__list">
 					<li class="nav-block__item">
-						<a class="button button--icon" href="<?= $this->Url->build(['controller' => 'Tables']) ?>">
+						<a class="button button--icon" href="<?= $this->Url->build(['controller' => 'Applications']) ?>">
 							<?= $this->svg("icon/book.svg") ?>
 							<span>Applikation-Manager</span>
 						</a>
