@@ -12,6 +12,14 @@ class AppController extends BaseController
         parent::initialize();
 		$this->loadComponent('Authentication.Authentication');
 		$this->loadComponent('Authorization.Authorization');
-    }
 
+		$this->bootstrap();
+    }
+	
+	private function bootstrap() {
+		$user = ($this->Authentication->getIdentity());
+		if (!empty($user)) {
+			$this->set(['user' => $user]);
+		}
+	}
 }

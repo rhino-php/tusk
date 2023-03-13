@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Tusk\Controller;
 
 use Tusk\Controller\AppController;
+use Cake\Database\Schema\TableSchema;
 
 /**
  * Tables Controller
@@ -118,4 +119,9 @@ class TablesController extends AppController
 
         return $this->redirect(['action' => 'view', $tableName]);
     }
+
+	public function createTable() {
+		$this->Tables->createTable();
+		echo "done";
+	}
 }

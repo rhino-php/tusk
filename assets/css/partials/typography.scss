@@ -27,8 +27,17 @@ html {
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-font-smoothing: antialiased;
 	text-rendering: optimizeLegibility;
-	font-size: slope-rem-minmax(0.85rem, 1.2rem, 320px, 1920px);
-	letter-spacing: -0.3px;
+
+	@include for-size(desktop-down) {
+		font-size: slope-rem-minmax(0.85rem, 1rem, 320px, 1920px);
+	}
+	
+	@include for-size(desktop-up) {
+		font-size: slope-rem-minmax(1rem, 1.2rem, 1920px, 2400px);
+	}
+
+	font-size: 1rem;
+	letter-spacing: -0.1px;
 }
 
 body {

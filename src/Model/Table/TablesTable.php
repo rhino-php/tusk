@@ -8,6 +8,9 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 use Cake\Datasource\ConnectionManager;
+use Migrations\Table as MigTable;
+use Migrations\Migrations;
+use Migrations\AbstractMigration;
 
 /**
  * Users Model
@@ -44,5 +47,42 @@ class TablesTable extends Table
 
 	public function getList() {
 		return $this->Collection->listTables();
+	}
+
+	public function createTable() {
+		// Create Abstact to start Database Operations
+		$migrations = new Migrations;
+		$input = $migrations->getInput('Seed', [], []);
+		$migrations->setInput($input);
+		$config = $migrations->getConfig();
+		$manager = $migrations->getManager($config);
+		$env = $manager->getEnvironment('default');
+		$abstract = new AbstractMigration('default', 1);
+		$abstract->setAdapter($env->getAdapter());
+
+		$table = $abstract->table('products');
+	;
+        $table->addColumn('name', 'string', [
+            'default' => null,
+            'limit' => 255,
+            'null' => false,
+        ]);
+        $table->addColumn('description', 'text', [
+            'default' => null,
+            'null' => false,
+        ]);
+        $table->addColumn('created', 'datetime', [
+            'default' => null,
+            'null' => false,
+        ]);
+        $table->addColumn('modified', 'datetime', [
+            'default' => null,
+            'null' => false,
+        ]);
+        $table->create();
+
+		// echo '<pre>';
+		// var_dump(ConnectionManager::get('default')->getDriver()->newTableSchema());
+		// die('check');
 	}
 }

@@ -40,9 +40,14 @@ body {
 		display: grid;
 		grid-template-columns: 100%;
 		grid-template-rows: max-content auto max-content;
+
+		overflow: auto;
+		max-height: 100vh;
 	}
 
 	.main-header {
+		// position: sticky;
+		// top: 0;
 		background-color: var(--text-color);
 		color: var(--contrast-color);
 		padding: 1rem;
