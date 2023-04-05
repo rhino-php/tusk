@@ -31,14 +31,15 @@ class ApplicationsController extends AppController
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($id = null)
+    public function view($tableName = null)
     {
-		$data = $this->Applications->get($id, [
-			'contain' => ['Articles'],
-        ]);
+		$columns = $this->Applications->getColumns($tableName);
+		$rows = ["Field", "Type", "Null", "Key", "Default", "Extra"];
 
-		$this->set([
-			'data' => $data,
+        $this->set([
+			"tableName" => $tableName, 
+			"columns" => $columns,
+			"rows" => $rows
 		]);
     }
 
@@ -72,24 +73,21 @@ class ApplicationsController extends AppController
      */
     public function edit($tableName = null)
     {
-		// $schema = $this->Tables->getSchema($tableName);
-        // $entry = $this->Tables->get($id, [
-        //     'contain' => [],
-        // ]);
+		$data = [
+			"newName" => $tableName,
+			"oldName" => $tableName,
+		];
 
-        // if ($this->request->is(['patch', 'post', 'put'])) {
-        //     $table = $this->Tables->patchEntity($entry, $this->request->getData());
-        //     if ($this->Tables->save($entry)) {
-        //         $this->Flash->success(__('The entry has been saved.'));
+		$this->set([
+			'data' => $data,
+		]);
 
-        //         return $this->redirect(['action' => 'view', $tableName]);
-        //     }
-        //     $this->Flash->error(__('The table could not be saved. Please, try again.'));
-        // }
-        // $this->set([
-		// 	'entry' => $entry,
-		// 	'columns' => $schema->columns()
-		// ]);
+		if ($this->request->is('post')) {
+			$data = $this->request->getData();
+
+			$this->Applications->rename($data["oldName"], $data["newName"]);
+			return $this->redirect(['action' => 'edit', $data["newName"]]);
+        }
     }
 
     /**
@@ -99,18 +97,18 @@ class ApplicationsController extends AppController
      * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($tableName = null, $id = null)
+    public function delete(string $tableName)
     {
-		$this->Tables->setTable($tableName);
-        $this->request->allowMethod(['post', 'delete']);
-        $entry = $this->Tables->get($id);
-        if ($this->Tables->delete($entry)) {
-            $this->Flash->success(__('The table has been deleted.'));
-        } else {
-            $this->Flash->error(__('The table could not be deleted. Please, try again.'));
-        }
+		// $this->Tables->setTable($tableName);
+        // $this->request->allowMethod(['post', 'delete']);
 
-        return $this->redirect(['action' => 'view', $tableName]);
+        // if ($this->Tables->delete($entry)) {
+        //     $this->Flash->success(__('The table has been deleted.'));
+        // } else {
+        //     $this->Flash->error(__('The table could not be deleted. Please, try again.'));
+        // }
+		$this->Applications->drop($tableName);
+        return $this->redirect(['action' => 'index']);
     }
 
 	public function createTable() {

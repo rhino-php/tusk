@@ -1,9 +1,21 @@
 <div>
 
-	<ul>
+	<table>
+		<tr>
+			<th>Table</th>
+			<th>Actions</th>
+		</tr>
 		<?php foreach ($applications as $table) : ?>
-			<li><?= $this->Html->link($table, ["action" => 'edit', $table]) ?></li>
+		<tr>
+			<td><?= $table ?></td>
+			<td>
+				<?= $this->Html->link("view", ["action" => 'view', $table]) ?>
+				<?= $this->Html->link("edit", ["action" => 'edit', $table]) ?>
+				<?= $this->Html->link("delete", ["action" => 'delete', $table]) ?>
+			</td>
+		</tr>
 		<?php endforeach ?>
-	</ul>
+	</table>
+	
 	<?= $this->Html->link("Create new Table", ["action" => "add"], ["class" => "button"]) ?>
 </div>
