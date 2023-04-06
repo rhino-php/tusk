@@ -18,4 +18,8 @@ trait TuskView
 	public function pathToWebroot(): string {
 		return \Cake\Core\App::path('plugins')[0] . "Tusk" . DS . "webroot" . DS;
 	}
+
+	public function backLink() : string {
+		return isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : "#";
+	}
 }

@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Tusk\Controller;
 
 use Tusk\Controller\AppController;
-use Cake\Database\Schema\TableSchema;
 
 /**
  * Tables Controller
@@ -56,11 +55,11 @@ class ApplicationsController extends AppController
 
 			if (in_array($data['name'], $applications)) {
 				$this->Flash->success(__('The table ' . $data['name'] . ' already exists.'));
-				return;	
+				return;
 			}
 
 			$this->Applications->create($data["name"]);
-			return $this->redirect(['action' => 'edit', $data["name"]]);
+			return $this->redirect(['action' => 'index']);
         }
     }
 
@@ -73,20 +72,17 @@ class ApplicationsController extends AppController
      */
     public function edit($tableName = null)
     {
-		$data = [
-			"newName" => $tableName,
-			"oldName" => $tableName,
-		];
-
 		$this->set([
-			'data' => $data,
+			'data' => [
+				"newName" => $tableName,
+				"oldName" => $tableName,
+			]
 		]);
 
 		if ($this->request->is('post')) {
 			$data = $this->request->getData();
-
 			$this->Applications->rename($data["oldName"], $data["newName"]);
-			return $this->redirect(['action' => 'edit', $data["newName"]]);
+			return $this->redirect(['action' => 'index']);
         }
     }
 
@@ -99,20 +95,12 @@ class ApplicationsController extends AppController
      */
     public function delete(string $tableName)
     {
-		// $this->Tables->setTable($tableName);
-        // $this->request->allowMethod(['post', 'delete']);
-
-        // if ($this->Tables->delete($entry)) {
-        //     $this->Flash->success(__('The table has been deleted.'));
-        // } else {
-        //     $this->Flash->error(__('The table could not be deleted. Please, try again.'));
-        // }
 		$this->Applications->drop($tableName);
         return $this->redirect(['action' => 'index']);
     }
 
 	public function createTable() {
 		$this->Tables->createTable();
-		echo "done";
+		 return $this->redirect(['action' => 'index']);
 	}
 }

@@ -1,5 +1,4 @@
-<div>
-
+<div class="stack">
 	<table>
 		<tr>
 			<th>Table</th>

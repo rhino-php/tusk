@@ -81,35 +81,6 @@
 				</ul>
 			</details>
 		</li>
-		<li class="nav-block__item">
-			<details>
-				<summary class="button button--icon">
-					<?= $this->svg("icon/folder.svg") ?>
-					<span>Funktionen 2</span>
-				</summary>
-				
-				<ul class="nav-block__list">
-					<li class="nav-block__item">
-						<a class="button button--icon" href="/">
-							<?= $this->svg("icon/book.svg") ?>
-							<span>option 1</span>
-						</a>
-					</li>
-					<li class="nav-block__item">
-						<a class="button button--icon" href="/">
-							<?= $this->svg("icon/book.svg") ?>
-							<span>option 2</span>
-						</a>
-					</li>
-					<li class="nav-block__item">
-						<a class="button button--icon" href="/">
-							<?= $this->svg("icon/book.svg") ?>
-							<span>option 3</span>
-						</a>
-					</li>
-				</ul>
-			</details>
-		</li>
 	</ul>
 </div>
 
@@ -171,7 +142,7 @@
 				
 				<ul class="nav-block__list">
 					<li class="nav-block__item">
-						<a class="button button--icon" href="<?= $this->Url->build(['controller' => 'Applications']) ?>">
+						<a class="button button--icon" href="<?= $this->Url->build(['controller' => 'Applications', "action" => "index"]) ?>">
 							<?= $this->svg("icon/book.svg") ?>
 							<span>Applikation-Manager</span>
 						</a>

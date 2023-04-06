@@ -2,6 +2,13 @@
 <?php
     echo $this->Form->create(Null, ["class" => "stack"]);
 	echo $this->Form->control("name");
-    echo $this->Form->button(__('Save Article'));
-    echo $this->Form->end();
 ?>
+
+<div class="cluster">
+	<?php
+		echo $this->Form->button('Save');
+		echo $this->Html->link("Back", $this->backLink(), ["class" => "button"]);
+	?>
+</div>
+
+<?= $this->Form->end(); ?>

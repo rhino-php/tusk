@@ -10,6 +10,7 @@
 
 <input type="text" name="oldName" value="<?= $data['oldName'] ?>" hidden>
 <?php
-    echo $this->Form->button(__('Save Article'));
+    echo $this->Form->button(__('Save'));
     echo $this->Form->end();
+	echo $this->Html->link("Back", $this->backLink(), ["class" => "button"]);
 ?>

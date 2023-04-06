@@ -1,4 +1,4 @@
-<div>
+<div class="stack">
 	<h1><?= $tableName ?></h1>
 
 	<table>
@@ -15,4 +15,7 @@
 			</tr>
 		<?php endforeach ?>
 	</table>
+
+	<?= $this->Html->link("Add Cloumn", ["controller" => "Fields", "action" => "add", $tableName], ["class" => "button"]) ?>
+	<?= $this->Html->link("Back", $this->backLink(), ["class" => "button"]); ?>
 </div>

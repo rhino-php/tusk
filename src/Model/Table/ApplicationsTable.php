@@ -3,12 +3,8 @@ declare(strict_types=1);
 
 namespace Tusk\Model\Table;
 
-use Cake\ORM\Query;
-use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
-use Cake\Validation\Validator;
-use Cake\Datasource\ConnectionManager;
-use Migrations\Table as MigTable;
+
 use Migrations\Migrations;
 use Migrations\AbstractMigration;
 
@@ -55,7 +51,7 @@ class ApplicationsTable extends Table
 	}
 
 	public function getColumns(string $tableName) {
-		// Protection against SQL Injection
+		// Protection against posible SQL Injection
 		if (!$this->hasTable($tableName)) {
 			return;
 		}
