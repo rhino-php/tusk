@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace Tusk\Controller;
 
 use Tusk\Controller\AppController;
+use Tusk\Model\Table\NavGroupsTable;
+use Tusk\Model\ApplicationTrait;
 
 /**
  * Tables Controller
@@ -12,6 +14,13 @@ use Tusk\Controller\AppController;
  */
 class ApplicationsController extends AppController
 {
+	use ApplicationTrait;
+
+	public function initialize(): void {
+		parent::initialize();
+		$this->Groups = new NavGroupsTable();
+    }
+
     /**
      * Index method
      *
@@ -19,27 +28,20 @@ class ApplicationsController extends AppController
      */
     public function index()
     {
-        $applications = $this->Applications->getList();
-        $this->set(compact('applications'));
-    }
+		$groups = $this->Groups->find('all')->contain(['Applications'])->all()->toArray();
 
-    /**
-     * View method
-     *
-     * @param string|null $id Table id.
-     * @return \Cake\Http\Response|null|void Renders view
-     * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
-     */
-    public function view($tableName = null)
-    {
-		$columns = $this->Applications->getColumns($tableName);
-		$rows = ["Field", "Type", "Null", "Key", "Default", "Extra"];
+        $applications = $this->Applications->find()->where(
+			function ($exp) {
+				return $exp->isNull("nav_group_id");
+			}
+		)->all();
+			
+		$groups[] = [
+			"name" => "Ungrouped",
+			"applications" => $applications
+		];
 
-        $this->set([
-			"tableName" => $tableName, 
-			"columns" => $columns,
-			"rows" => $rows
-		]);
+        $this->set(compact('groups'));
     }
 
     /**
@@ -70,7 +72,7 @@ class ApplicationsController extends AppController
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function edit($tableName = null)
+    public function rename($tableName = null)
     {
 		$this->set([
 			'data' => [
@@ -85,6 +87,67 @@ class ApplicationsController extends AppController
 			return $this->redirect(['action' => 'index']);
         }
     }
+
+	public function edit($tableName) {
+		$groups = $this->Groups->getGroups();
+		$query = $this->Applications->find()->where(['Applications.name' => $tableName]);
+		
+		if ($query->isEmpty()) {
+			$entry = $this->Applications->newEmptyEntity();
+		} else {
+			$entry = $query->first();
+		}
+		
+        if ($this->request->is(['patch', 'post', 'put'])) {
+			$application = $this->Applications->patchEntity($entry, $this->request->getData());
+            
+			if ($this->Applications->save($application)) {
+				$this->Flash->success(__('The table has been saved.'));
+                return $this->redirect(['action' => 'index']);
+            }
+
+            $this->Flash->error(__('The table could not be saved. Please, try again.'));
+        }
+		
+		$this->set([
+			"tableName" => $tableName,
+			'entry' => $entry,
+			'groups' => $this->addEmptyOption($groups)
+		]);
+	}
+
+	public function newGroup() {
+        if ($this->request->is(['patch', 'post', 'put'])) {
+			$entry = $this->Groups->newEmptyEntity();
+            $group = $this->Groups->patchEntity($entry, $this->request->getData());
+            
+			if ($this->Groups->save($group)) {
+                $this->Flash->success(__('The table has been saved.'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+
+            $this->Flash->error(__('The table could not be saved. Please, try again.'));
+        }
+	}
+	
+	public function renameGroup($id) {
+		$entry = $this->Groups->find()->where(['id' => $id])->first();
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $group = $this->Groups->patchEntity($entry, $this->request->getData());
+            
+			if ($this->Groups->save($group)) {
+                $this->Flash->success(__('The table has been saved.'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+
+            $this->Flash->error(__('The table could not be saved. Please, try again.'));
+        }
+
+		$this->set(['entity' => $entry]);
+	}
 
     /**
      * Delete method

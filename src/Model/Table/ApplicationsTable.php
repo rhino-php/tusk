@@ -23,6 +23,12 @@ class ApplicationsTable extends Table
      */
     public function initialize(array $config): void
     {
+		parent::initialize($config);
+
+        $this->setTable('applications');
+		$this->setDisplayField('id');
+        $this->setPrimaryKey('id');
+
 		// Create Abstact to start Database Operations
 		$migrations = new Migrations;
 		$migrations->setInput($migrations->getInput('Seed', [], []));
@@ -48,18 +54,6 @@ class ApplicationsTable extends Table
 		}
 
 		return $tables;
-	}
-
-	public function getColumns(string $tableName) {
-		// Protection against posible SQL Injection
-		if (!$this->hasTable($tableName)) {
-			return;
-		}
-
-		$query = "describe " . $tableName;
-		$columns = $this->abstract->query($query)->fetchAll();
-
-		return $columns;
 	}
 
 	public function hasTable(string $tableName) : bool {
