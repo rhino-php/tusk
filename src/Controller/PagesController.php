@@ -30,36 +30,25 @@ use Tusk\Controller\AppController as BaseController;
  *
  * @link https://book.cakephp.org/4/en/controllers/pages-controller.html
  */
-class PagesController extends BaseController
-{
-    /**
-     * Displays a view
-     *
-     * @param string ...$path Path segments.
-     * @return \Cake\Http\Response|null
-     * @throws \Cake\Http\Exception\ForbiddenException When a directory traversal attempt.
-     * @throws \Cake\View\Exception\MissingTemplateException When the view file could not
-     *   be found and in debug mode.
-     * @throws \Cake\Http\Exception\NotFoundException When the view file could not
-     *   be found and not in debug mode.
-     * @throws \Cake\View\Exception\MissingTemplateException In debug mode.
-     */
-    public function display(string ...$path): ?Response
-    {
-        if (!$path) {
-            return $this->redirect('/tusk');
-        }
-        if (in_array('..', $path, true) || in_array('.', $path, true)) {
-            throw new ForbiddenException();
+class PagesController extends BaseController {
+    public function index() {
+		$pages = $this->Pages->find('all');
+		$this->set(['pages' => $pages]);
+	}
+
+	public function change(int $id = null) {
+		$entry = $this->Pages->getEntry($id);
+
+		 if ($this->request->is('post')) {
+            $table = $this->Pages->patchEntity($entry, $this->request->getData());
+            if ($this->Pages->save($entry)) {
+                $this->Flash->success(__('The table has been saved.'));
+                return $this->redirect(['action' => 'index']);
+            }
+
+            $this->Flash->error(__('The table could not be saved. Please, try again.'));
         }
 
-        try {
-            return $this->render(implode('/', $path));
-        } catch (MissingTemplateException $exception) {
-            if (Configure::read('debug')) {
-                throw $exception;
-            }
-            throw new NotFoundException();
-        }
-    }
+		$this->set(['entry' => $entry]);
+	}
 }

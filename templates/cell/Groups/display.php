@@ -15,7 +15,7 @@
 					<li class="nav-block__item">
 						<a class="button button--icon" href="<?= $this->Url->build(['controller' => 'Tables', "action" => "view", $app['name']]) ?>">
 							<?= $this->svg("icon/book.svg") ?>
-							<span><?= $app["name"] ?></span>
+							<span><?= isset($app['alias']) ? $app['alias'] : $app["name"] ?></span>
 						</a>
 					</li>
 					<?php endforeach ?>

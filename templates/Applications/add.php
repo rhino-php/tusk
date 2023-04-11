@@ -2,6 +2,7 @@
 <?php
     echo $this->Form->create(Null, ["class" => "stack"]);
 	echo $this->Form->control("name");
+	echo $this->Form->control("alias");
 ?>
 
 <div class="cluster">

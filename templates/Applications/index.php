@@ -1,14 +1,13 @@
 <div class="stack">
 	<table>
 		<tr>
-			<th>Table</th>
-			<th></th>
+			<th colspan="3">Table</th>
 			<th>Actions</th>
 		</tr>
 
 		<?php foreach ($groups as $group) : ?>
 		<tr>
-			<td colspan="2"><b><?= $group['name'] ?></b></td>
+			<td colspan="3"><b><?= $group['name'] ?></b></td>
 			<td>
 				<?php if (isset($group['id'])) : ?>
 				<?= $this->Html->link("rename", ["action" => 'renameGroup', $group['id']]) ?>
@@ -19,6 +18,7 @@
 			<?php foreach ($group['applications'] as $table) : ?>
 			<tr>
 				<td></td>
+				<td><?= isset($table['alias']) ? $table['alias'] : "" ?></td>
 				<td><?= $table['name'] ?></td>
 				<td>
 					<?= $this->Html->link("view", ["controller" => "Tables", "action" => 'view', $table['name']]) ?>

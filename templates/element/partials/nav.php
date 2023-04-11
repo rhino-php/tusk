@@ -1,23 +1,15 @@
-<!-- <nav>
-	<ul>
-		<li><?= $this->Html->link('Pages', ['controller' => 'Pages', 'action' => 'display','home'], ['class' => 'button']) ?></li>
-		<li><?= $this->Html->link('Tables', ['controller' => 'Tables'], ['class' => 'button']) ?></li>
-		<?= $this->Url->build(['controller' => 'Tables']) ?>
-	</ul>
-</nav> -->
-
-<a id="home" href="<?= $this->Url->build(['controller' => 'Pages', 'action' => 'display', 'home']) ?>">
-				<div class="logo">
-					<?= $this->svg("icon/logo-big.svg") ?>
-				</div>
-				<span class="sr-only">Rhino</span>
-			</a>
+<a id="home" href="<?= $this->Url->build(['controller' => 'Overview', 'action' => 'display', 'home']) ?>">
+	<div class="logo">
+		<?= $this->svg("icon/logo-big.svg") ?>
+	</div>
+	<span class="sr-only">Rhino</span>
+</a>
 
 <div class="nav-block">
 	<p class="nav-block__label">Angemeldet als Carsten Coull</p>
 	<ul class="nav-block__list">
 		<li class="nav-block__item">
-			<a aria-current="page" class="button button--icon" href="<?= $this->Url->build(['controller' => 'Pages', 'action' => 'display', 'home']) ?>">
+			<a aria-current="page" class="button button--icon" href="<?= $this->Url->build(['controller' => 'Overview', 'action' => 'display', 'home']) ?>">
 				<?= $this->svg("icon/home.svg") ?>
 				<span>Dashboard</span>
 			</a>
@@ -29,7 +21,7 @@
 	<p class="nav-block__label">Standartfunktionen</p>
 	<ul class="nav-block__list">
 		<li class="nav-block__item">
-			<a class="button button--icon" href="/">
+			<a class="button button--icon" href="<?= $this->Url->build(['controller' => 'Pages', 'action' => 'index']) ?>">
 				<?= $this->svg("icon/file.svg") ?>
 				<span>Seiten</span>
 			</a>

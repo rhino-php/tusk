@@ -2,6 +2,8 @@
 	<h1>Settings for <?= $tableName ?></h1>
 	
 	<?= $this->Form->create($entry, ["class" => "stack"]); ?>
+		<?= $this->Form->control('alias') ?>
+
 		<?= $this->Form->control('tusk_group_id', [
 			"type" => "select",
 			"options" => $groups

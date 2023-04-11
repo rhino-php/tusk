@@ -91,5 +91,29 @@ class TuskInit extends AbstractMigration
 				'update' => 'CURRENT_TIMESTAMP'
 			])
 			->create();
+
+		$this->table('tusk_pages')
+			->addColumn('name', 'string', [
+				'default' => null,
+				'limit' => 100,
+				'null' => false,
+			])
+			->addColumn('active', 'boolean', [
+				'default' => 1,
+			])
+			->addColumn('type', 'int', [
+				'default' => 0,
+			])
+			->addColumn('parent', 'int', [
+				'default' => 0,
+			])
+			->addColumn('created', 'timestamp', [
+				'default' => 'CURRENT_TIMESTAMP'
+			])
+			->addColumn('modified', 'timestamp', [
+				'default' => 'CURRENT_TIMESTAMP',
+				'update' => 'CURRENT_TIMESTAMP'
+			])
+			->create();
     }
 }

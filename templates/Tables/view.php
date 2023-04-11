@@ -9,7 +9,6 @@
 	<h3><?= __(ucfirst($tableName)) ?></h3>
 
 	<div class="cluster">
-		<?= $this->Html->link(__('back'), ['action' => 'index'], ['class' => 'button']) ?>
 		<?= $this->Html->link(__('new'), ['action' => 'add', $tableName], ['class' => 'button']) ?>
 	</div>
 	
