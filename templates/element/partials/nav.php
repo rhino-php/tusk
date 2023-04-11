@@ -49,7 +49,7 @@
 	</ul>
 </div>
 
-<?= $this->cell('Tusk.NavGroups'); ?>
+<?= $this->cell('Tusk.Groups'); ?>
 
 <div class="nav-block">
 	<p class="nav-block__label">Einstellungen</p>

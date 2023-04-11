@@ -5,6 +5,7 @@ namespace Tusk\Controller;
 
 use Tusk\Controller\AppController;
 use Cake\Database\Schema\TableSchema;
+use Tusk\Model\Table\FieldsTable;
 
 /**
  * Tables Controller
@@ -13,6 +14,11 @@ use Cake\Database\Schema\TableSchema;
  */
 class TablesController extends AppController
 {
+	public function initialize(): void {
+		parent::initialize();
+		$this->Fields = new FieldsTable();
+    }
+
     /**
      * Index method
      *
@@ -34,12 +40,12 @@ class TablesController extends AppController
     public function view($tableName = null)
     {
         $this->Tables->setTable($tableName);
-		$schema = $this->Tables->getSchema($tableName);
+		$columns = $this->Fields->listColumns($tableName);
 		$data = $this->paginate($this->Tables);
 
         $this->set([
 			'data' => $data,
-			'columns' => $schema->columns(),
+			'columns' => $columns,
 			'tableName' => $tableName
 		]);
     }
@@ -52,8 +58,8 @@ class TablesController extends AppController
     public function add($tableName = null)
     {
 		$this->Tables->setTable($tableName);
-		$schema = $this->Tables->getSchema($tableName);
         $entry = $this->Tables->newEmptyEntity();
+
         if ($this->request->is('post')) {
             $table = $this->Tables->patchEntity($entry, $this->request->getData());
             if ($this->Tables->save($entry)) {
@@ -63,9 +69,9 @@ class TablesController extends AppController
             }
             $this->Flash->error(__('The table could not be saved. Please, try again.'));
         }
+
 		$this->set([
-			'entry' => $entry,
-			'columns' => $schema->columns()
+			'entry' => $entry
 		]);
     }
 
@@ -79,10 +85,7 @@ class TablesController extends AppController
     public function edit($tableName = null, $id = null)
     {
 		$this->Tables->setTable($tableName);
-		$schema = $this->Tables->getSchema($tableName);
-        $entry = $this->Tables->get($id, [
-            'contain' => [],
-        ]);
+        $entry = $this->Tables->get($id);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
             $table = $this->Tables->patchEntity($entry, $this->request->getData());
@@ -93,9 +96,9 @@ class TablesController extends AppController
             }
             $this->Flash->error(__('The table could not be saved. Please, try again.'));
         }
+		
         $this->set([
-			'entry' => $entry,
-			'columns' => $schema->columns()
+			'entry' => $entry
 		]);
     }
 

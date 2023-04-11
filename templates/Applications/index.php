@@ -31,12 +31,6 @@
 			<?php endforeach ?>
 		<?php endforeach ?>
 	</table>
-
-	<ul>
-		<?php foreach ($groups as $group) {
-			echo $group['name'];
-		} ?>
-	</ul>
 	
 	<?= $this->Html->link("Create new Table", ["action" => "add"], ["class" => "button"]) ?>
 	<?= $this->Html->link("Create new Group", ["action" => "newGroup"], ["class" => "button"]) ?>

@@ -8,7 +8,7 @@ use Cake\View\Cell;
 /**
  * Sidebar cell
  */
-class NavGroupsCell extends Cell {
+class GroupsCell extends Cell {
     /**
      * List of valid options that can be passed into this
      * cell's constructor.
@@ -23,7 +23,7 @@ class NavGroupsCell extends Cell {
      * @return void
      */
     public function initialize(): void {
-		$this->NavGroups = $this->fetchTable('Tusk.NavGroups');
+		$this->Groups = $this->fetchTable('Tusk.Groups');
     }
 
     /**
@@ -32,7 +32,7 @@ class NavGroupsCell extends Cell {
      * @return void
      */
     public function display() {
-		$NavGroups = $this->NavGroups->find('all')->contain(['Applications'])->all();
-		$this->set(["groups" => $NavGroups]);
+		$Groups = $this->Groups->find('all')->contain(['Applications'])->all();
+		$this->set(["groups" => $Groups]);
     }
 }

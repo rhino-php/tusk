@@ -41,16 +41,16 @@ class UsersTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('users');
+        $this->setTable('tusk_users');
         $this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
         $this->addBehavior('Timestamp');
 
-        $this->hasMany('Articles', [
-            'foreignKey' => 'user_id',
-            'className' => 'Tusk.Articles',
-        ]);
+        // $this->hasMany('Articles', [
+        //     'foreignKey' => 'user_id',
+        //     'className' => 'Tusk.Articles',
+        // ]);
     }
 
     /**
@@ -71,6 +71,9 @@ class UsersTable extends Table
             ->maxLength('password', 255)
             ->requirePresence('password', 'create')
             ->notEmptyString('password');
+
+		$validator
+            ->notEmptyString('name');
 
         return $validator;
     }

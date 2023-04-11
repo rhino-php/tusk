@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Tusk\Controller;
 
 use Tusk\Controller\AppController;
-use Tusk\Model\Table\NavGroupsTable;
+use Tusk\Model\Table\GroupsTable;
 use Tusk\Model\ApplicationTrait;
 
 /**
@@ -18,7 +18,7 @@ class ApplicationsController extends AppController
 
 	public function initialize(): void {
 		parent::initialize();
-		$this->Groups = new NavGroupsTable();
+		$this->Groups = new GroupsTable();
     }
 
     /**
@@ -30,16 +30,20 @@ class ApplicationsController extends AppController
     {
 		$groups = $this->Groups->find('all')->contain(['Applications'])->all()->toArray();
 
-        $applications = $this->Applications->find()->where(
+        $apps = $this->Applications->find()->where(
 			function ($exp) {
-				return $exp->isNull("nav_group_id");
+				return $exp->isNotNull("tusk_group_id");
 			}
-		)->all();
-			
-		$groups[] = [
-			"name" => "Ungrouped",
-			"applications" => $applications
-		];
+		)->all()->toArray();
+
+		$ungrouped = $this->Applications->getList(array_column($apps, 'name'));
+		
+		if (!empty($ungrouped)) {
+			$groups[] = [
+				"name" => "Ungrouped",
+				"applications" => $ungrouped
+			];
+		}
 
         $this->set(compact('groups'));
     }

@@ -2,12 +2,12 @@
 	<h1>Settings for <?= $tableName ?></h1>
 	
 	<?= $this->Form->create($entry, ["class" => "stack"]); ?>
-		<?= $this->Form->control('nav_group_id', [
+		<?= $this->Form->control('tusk_group_id', [
 			"type" => "select",
 			"options" => $groups
 		]); ?>
 
-		<?= $this->Form->control('visible', ["type" => "checkbox"]) ?>
+		<?= $this->Form->control('active', ["type" => "checkbox"]) ?>
 		<?= $this->Form->hidden('name', ["value" => $tableName]) ?>
 	
 		<div class="cluster">

@@ -8,7 +8,7 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
-class NavGroupsTable extends Table
+class GroupsTable extends Table
 {
     /**
      * Initialize method
@@ -20,7 +20,7 @@ class NavGroupsTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('navGroups');
+        $this->setTable('tusk_groups');
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 

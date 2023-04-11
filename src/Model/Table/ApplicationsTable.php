@@ -11,8 +11,11 @@ use Migrations\AbstractMigration;
 class ApplicationsTable extends Table
 {
 	private $tableBlackList = [
+		'tusk_apps',
+		'tusk_groups',
+		"tusk_phinxlog",
 		"phinxlog",
-		"users"
+		'tusk_users'
 	];
 
     /**
@@ -25,7 +28,7 @@ class ApplicationsTable extends Table
     {
 		parent::initialize($config);
 
-        $this->setTable('applications');
+        $this->setTable('tusk_apps');
 		$this->setDisplayField('id');
         $this->setPrimaryKey('id');
 
@@ -41,16 +44,17 @@ class ApplicationsTable extends Table
 		$this->abstract->setAdapter($env->getAdapter());
     }
 
-	public function getList() {
+	public function getList(array $filter = []) {
+		$balcklist = array_merge($this->tableBlackList, $filter);
 		$_tables = $this->abstract->query("show tables")->fetchAll();
 
 		$tables = [];
 		foreach ($_tables as $table) {
 			$tableName = $table[0];
-			if (in_array($tableName, $this->tableBlackList)) {
+			if (in_array($tableName, $balcklist)) {
 				continue;
 			}
-			$tables[] = $tableName;
+			$tables[]['name'] = $tableName;
 		}
 
 		return $tables;
