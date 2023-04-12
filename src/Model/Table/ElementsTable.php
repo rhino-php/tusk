@@ -8,7 +8,7 @@ use Cake\ORM\RulesChecker;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
-class PagesTable extends Table {
+class ElementsTable extends Table {
     /**
      * Initialize method
      *
@@ -18,13 +18,12 @@ class PagesTable extends Table {
     public function initialize(array $config): void {
         parent::initialize($config);
 
-        $this->setTable('tusk_pages');
+        $this->setTable('tusk_elements');
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
-		$this->hasMany('Tusk.Contents');
-		$this->hasOne('Tusk.Pages');
-		$this->hasOne('Tusk.Layouts');
+		$this->belongsToMany('Tusk.Layouts');
+		$this->belongsToMany('Tusk.Contents');
     }
 		
 	public function getEntry(int $id = null): object {

@@ -28,7 +28,7 @@ class ApplicationsController extends AppController
      */
     public function index()
     {
-		$groups = $this->Groups->find('all')->contain(['Applications'])->all()->toArray();
+		$groups = $this->Groups->find()->contain(['Applications'])->all()->toArray();
 
         $apps = $this->Applications->find()->where(
 			function ($exp) {
@@ -136,7 +136,7 @@ class ApplicationsController extends AppController
 	}
 	
 	public function renameGroup($id) {
-		$entry = $this->Groups->find()->where(['id' => $id])->first();
+		$entry = $this->Groups->get($id);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
             $group = $this->Groups->patchEntity($entry, $this->request->getData());
@@ -151,6 +151,18 @@ class ApplicationsController extends AppController
         }
 
 		$this->set(['entity' => $entry]);
+	}
+
+	public function deleteGroup($id) {
+		$entry = $this->Groups->get($id);
+
+		if ($this->Groups->delete($entry)) {
+            $this->Flash->success(__('The user has been deleted.'));
+        } else {
+            $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+        }
+
+        return $this->redirect(['action' => 'index']);
 	}
 
     /**

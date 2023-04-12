@@ -23,8 +23,6 @@ use Cake\Http\Response;
 use Cake\View\Exception\MissingTemplateException;
 use Tusk\Controller\AppController as BaseController;
 
-use Tusk\Model\Table\ContentsTable;
-
 /**
  * Static content controller
  *
@@ -32,56 +30,9 @@ use Tusk\Model\Table\ContentsTable;
  *
  * @link https://book.cakephp.org/4/en/controllers/pages-controller.html
  */
-class PagesController extends BaseController {
+class ContentsController extends BaseController {
 
-	private $root = [0 => 'Root'];
-
-	public function initialize(): void {
-		parent::initialize();
-		$this->Contents = new ContentsTable();
-    }
-
-    public function index() {
-		$pages = $this->Pages->find('all');
-		$this->set(['pages' => $pages]);
-	}
-
-	public function change(int $id = null) {
-		$entry = $this->Pages->getEntry($id);
-
-		if ($this->request->is(['patch', 'post', 'put'])) {
-			$page = $this->Pages->patchEntity($entry, $this->request->getData());
-            
-			if ($this->Pages->save($page)) {
-				$this->Flash->success(__('The table has been saved.'));
-                return $this->redirect(['action' => 'index']);
-            }
-			
-            $this->Flash->error(__('The table could not be saved. Please, try again.'));
-        }
-		
-		$filter = !empty($id) ? ['id !=' => $id] : Null;
-		$layouts = $this->Pages->Layouts->find('list')->all();
-		$pages = $this->Pages->find('list')->where($filter)->all();
-		$pages = $this->root + $pages->toArray();
-
-		$this->set([
-			'entry' => $entry,
-			'pages' => $pages,
-			'layouts' => $layouts
-		]);
-	}
-
-	public function edit(int $id) {
-		$page = $this->Pages->getEntry($id);
-
-		$this->set([
-			'page' => $page,
-		]);
-	}
-
-	public function addContent(int $id) {
-		$page = $this->Pages->getEntry($id);
+	public function change(int $pageId, int $id = null) {
 		$entry = $this->Contents->newEmptyEntity();
 
 		if ($this->request->is(['patch', 'post', 'put'])) {

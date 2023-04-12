@@ -101,10 +101,13 @@ class TuskInit extends AbstractMigration
 			->addColumn('active', 'boolean', [
 				'default' => 1,
 			])
-			->addColumn('type', 'int', [
+			->addColumn('type', 'integer', [
 				'default' => 0,
 			])
-			->addColumn('parent', 'int', [
+			->addColumn('parent', 'integer', [
+				'default' => 0,
+			])
+			->addColumn('layout_id', 'integer', [
 				'default' => 0,
 			])
 			->addColumn('created', 'timestamp', [
@@ -115,5 +118,79 @@ class TuskInit extends AbstractMigration
 				'update' => 'CURRENT_TIMESTAMP'
 			])
 			->create();
+
+		$this->table('tusk_layouts')
+			->addColumn('name', 'string', [
+				'default' => null,
+				'limit' => 100,
+				'null' => false,
+			])
+			->addColumn('layout', 'string', [
+				'default' => null,
+			])
+			->addColumn('active', 'boolean', [
+				'default' => 1,
+			])
+			->addColumn('created', 'timestamp', [
+				'default' => 'CURRENT_TIMESTAMP'
+			])
+			->addColumn('modified', 'timestamp', [
+				'default' => 'CURRENT_TIMESTAMP',
+				'update' => 'CURRENT_TIMESTAMP'
+			])
+			->create();
+		
+		$this->table('tusk_elements')
+			->addColumn('name', 'string', [
+				'default' => null,
+				'limit' => 100,
+				'null' => false,
+			])
+			->addColumn('element', 'string', [
+				'default' => null,
+			])
+			->addColumn('active', 'boolean', [
+				'default' => 1,
+			])
+			->addColumn('created', 'timestamp', [
+				'default' => 'CURRENT_TIMESTAMP'
+			])
+			->addColumn('modified', 'timestamp', [
+				'default' => 'CURRENT_TIMESTAMP',
+				'update' => 'CURRENT_TIMESTAMP'
+			])
+			->create();
+		
+		$this->table('tusk_contents')
+			->addColumn('content', 'string', [
+				'default' => Null,
+			])
+			->addColumn('page_id', 'integer', [
+				'default' => Null,
+			])
+			->addColumn('element_id', 'integer', [
+				'default' => Null,
+			])
+			->addColumn('text', 'string', [
+				'default' => null,
+				'null' => true,
+			])
+			->addColumn('html', 'text', [
+				'default' => null,
+				'null' => true,
+			])
+			->addColumn('active', 'boolean', [
+				'default' => 1,
+			])
+			->addColumn('created', 'timestamp', [
+				'default' => 'CURRENT_TIMESTAMP'
+			])
+			->addColumn('modified', 'timestamp', [
+				'default' => 'CURRENT_TIMESTAMP',
+				'update' => 'CURRENT_TIMESTAMP'
+			])
+			->create();
+
+		
     }
 }

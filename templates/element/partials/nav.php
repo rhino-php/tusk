@@ -55,15 +55,15 @@
 				
 				<ul class="nav-block__list">
 					<li class="nav-block__item">
-						<a class="button button--icon" href="/">
+						<a class="button button--icon" href="<?= $this->Url->build(['controller' => 'Tables', 'action' => 'view', 'tusk_elements']) ?>">
 							<?= $this->svg("icon/book.svg") ?>
-							<span>Objekt Templates</span>
+							<span>Elemente</span>
 						</a>
 					</li>
 					<li class="nav-block__item">
-						<a class="button button--icon" href="/">
+						<a class="button button--icon" href="<?= $this->Url->build(['controller' => 'Tables', 'action' => 'view', 'tusk_layouts']) ?>">
 							<?= $this->svg("icon/book.svg") ?>
-							<span>Seiten Templates</span>
+							<span>Layouts</span>
 						</a>
 					</li>
 				</ul>
