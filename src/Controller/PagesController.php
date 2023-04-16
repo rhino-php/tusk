@@ -22,8 +22,10 @@ use Cake\Http\Exception\NotFoundException;
 use Cake\Http\Response;
 use Cake\View\Exception\MissingTemplateException;
 use Tusk\Controller\AppController as BaseController;
+use Tusk\Model\ApplicationTrait;
 
 use Tusk\Model\Table\ContentsTable;
+use Tusk\Model\Table\PagesTable;
 
 /**
  * Static content controller
@@ -33,13 +35,22 @@ use Tusk\Model\Table\ContentsTable;
  * @link https://book.cakephp.org/4/en/controllers/pages-controller.html
  */
 class PagesController extends BaseController {
-
+	use ApplicationTrait;
+	
 	private $root = [0 => 'Root'];
-
+	
 	public function initialize(): void {
 		parent::initialize();
 		$this->Contents = new ContentsTable();
     }
+
+	public function beforeFilter(\Cake\Event\EventInterface $event)
+	{
+		parent::beforeFilter($event);
+		// Configure the login action to not require authentication, preventing
+		// the infinite redirect loop issue
+		$this->Authentication->addUnauthenticatedActions(['display']);
+	}
 
     public function index() {
 		$pages = $this->Pages->find('all');
@@ -68,16 +79,27 @@ class PagesController extends BaseController {
 		$this->set([
 			'entry' => $entry,
 			'pages' => $pages,
-			'layouts' => $layouts
+			'layouts' => $this->addEmptyOption($layouts->toArray())
 		]);
 	}
 
 	public function edit(int $id) {
-		$page = $this->Pages->getEntry($id);
+		$this->setPlugin(null);
+		$this->viewBuilder()->setLayout('default');
+		$page = $this->Pages->get($id, ['contain' => ['Contents']]);
 
 		$this->set([
 			'page' => $page,
 		]);
+		 
+		try {
+            return $this->render('Tusk.edit');
+        } catch (MissingTemplateException $exception) {
+            if (Configure::read('debug')) {
+                throw $exception;
+            }
+            throw new NotFoundException();
+        }
 	}
 
 	public function addContent(int $id) {
@@ -99,5 +121,49 @@ class PagesController extends BaseController {
 			'entry' => $entry,
 			'page' => $page,
 		]);
+	}
+	/**
+     * Displays a view
+     *
+     * @param string ...$path Path segments.
+     * @return \Cake\Http\Response|null
+     * @throws \Cake\Http\Exception\ForbiddenException When a directory traversal attempt.
+     * @throws \Cake\View\Exception\MissingTemplateException When the view file could not
+     *   be found and in debug mode.
+     * @throws \Cake\Http\Exception\NotFoundException When the view file could not
+     *   be found and not in debug mode.
+     * @throws \Cake\View\Exception\MissingTemplateException In debug mode.
+     */
+    public function display(string ...$path): ?Response {
+			
+		if (in_array('..', $path, true) || in_array('.', $path, true)) {
+			throw new ForbiddenException();
+		}
+		
+		$slug = $subpage = null;
+		
+		if (!empty($path[0])) {
+			$slug = $path[0];
+		}
+		
+		if (!empty($path[1])) {
+			$lang = $path[1];
+		}
+		
+		$this->Pages = new PagesTable();
+		$page = $this->Pages->slug($slug);
+
+		$this->set('title', $page['alias']);
+		$this->viewBuilder()->setLayout('default');
+        $this->set(compact('page', 'subpage'));
+
+        try {
+            return $this->render('Tusk.display');
+        } catch (MissingTemplateException $exception) {
+            if (Configure::read('debug')) {
+                throw $exception;
+            }
+            throw new NotFoundException();
+        }
 	}
 }

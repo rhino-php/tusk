@@ -11,7 +11,7 @@ use Migrations\AbstractMigration;
 class ApplicationsTable extends Table
 {
 	private $tableBlackList = [
-		'tusk_apps',
+		// 'tusk_apps',
 		'tusk_groups',
 		"tusk_phinxlog",
 		"phinxlog",

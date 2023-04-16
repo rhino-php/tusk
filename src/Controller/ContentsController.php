@@ -22,6 +22,9 @@ use Cake\Http\Exception\NotFoundException;
 use Cake\Http\Response;
 use Cake\View\Exception\MissingTemplateException;
 use Tusk\Controller\AppController as BaseController;
+use Tusk\Model\ApplicationTrait;
+
+use Tusk\Model\Table\PagesTable;
 
 /**
  * Static content controller
@@ -31,16 +34,29 @@ use Tusk\Controller\AppController as BaseController;
  * @link https://book.cakephp.org/4/en/controllers/pages-controller.html
  */
 class ContentsController extends BaseController {
+	use ApplicationTrait;
+
+	public function initialize(): void {
+		parent::initialize();
+		$this->Pages = new PagesTable();
+    }
 
 	public function change(int $pageId, int $id = null) {
 		$entry = $this->Contents->newEmptyEntity();
+		$page = $this->Pages->get($pageId);
+		$pages = $this->Contents->Pages->find('list');
+		$elements = $this->Contents->Elements->find('list');
 
 		if ($this->request->is(['patch', 'post', 'put'])) {
 			$content = $this->Contents->patchEntity($entry, $this->request->getData());
             
-			if ($this->Pages->save($content)) {
+			if ($this->Contents->save($content)) {
 				$this->Flash->success(__('The table has been saved.'));
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect([
+					'controller' => 'Pages',
+					'action' => 'edit',
+					$page['id']
+				]);
             }
 			
             $this->Flash->error(__('The table could not be saved. Please, try again.'));
@@ -49,6 +65,7 @@ class ContentsController extends BaseController {
 		$this->set([
 			'entry' => $entry,
 			'page' => $page,
+			'elements' => $elements,
 		]);
 	}
 }

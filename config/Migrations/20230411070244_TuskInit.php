@@ -59,6 +59,11 @@ class TuskInit extends AbstractMigration
 				'limit' => 100,
 				'null' => false,
 			])
+			->addColumn('alias', 'string', [
+				'default' => null,
+				'limit' => 100,
+				'null' => false,
+			])
 			->addColumn('active', 'boolean', [
 				'default' => 1,
 			])

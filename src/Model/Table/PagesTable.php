@@ -22,7 +22,10 @@ class PagesTable extends Table {
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
-		$this->hasMany('Tusk.Contents');
+		$this->hasMany('Tusk.Contents')
+			->setForeignKey('page_id')
+            ->setDependent(true);
+
 		$this->hasOne('Tusk.Pages');
 		$this->hasOne('Tusk.Layouts');
     }
@@ -33,5 +36,9 @@ class PagesTable extends Table {
 		}
 		
 		return $this->newEmptyEntity();
+	}
+
+	public function slug(string $slug) {
+		return $this->find()->where(["name" => $slug])->contain(['Contents' => ['Elements']])->first();
 	}
 }

@@ -23,7 +23,7 @@ class ContentsTable extends Table {
         $this->setPrimaryKey('id');
 
 		$this->belongsTo('Tusk.Pages');
-		$this->hasOne('Tusk.Elements');
+		$this->belongsTo('Tusk.Elements');
     }
 		
 	public function getEntry(int $id = null): object {
