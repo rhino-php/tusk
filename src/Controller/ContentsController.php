@@ -42,7 +42,7 @@ class ContentsController extends BaseController {
     }
 
 	public function change(int $pageId, int $id = null) {
-		$entry = $this->Contents->newEmptyEntity();
+		$entry = $this->Contents->getEntry($id);
 		$page = $this->Pages->get($pageId);
 		$pages = $this->Contents->Pages->find('list');
 		$elements = $this->Contents->Elements->find('list');
