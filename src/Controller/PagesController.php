@@ -86,7 +86,7 @@ class PagesController extends BaseController {
 	public function edit(int $id) {
 		$this->setPlugin(null);
 		$this->viewBuilder()->setLayout('default');
-		$page = $this->Pages->get($id, ['contain' => ['Contents']]);
+		$page = $this->Pages->get($id, ['contain' => ['Contents' => ['Elements']]]);
 
 		$this->set([
 			'page' => $page,

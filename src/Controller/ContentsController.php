@@ -68,4 +68,16 @@ class ContentsController extends BaseController {
 			'elements' => $elements,
 		]);
 	}
+
+	public function delete($id) {
+        $this->request->allowMethod(['post', 'delete']);
+        $entry = $this->Contents->get($id);
+        if ($this->Contents->delete($entry)) {
+            $this->Flash->success(__('The table has been deleted.'));
+        } else {
+            $this->Flash->error(__('The table could not be deleted. Please, try again.'));
+        }
+
+        return $this->redirect($_SERVER['HTTP_REFERER']);
+    }
 }
