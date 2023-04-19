@@ -53,7 +53,9 @@ class PagesController extends BaseController {
 	}
 
     public function index() {
-		$pages = $this->Pages->find('all');
+		$_pages = $this->Pages->find('all')->toArray();
+		$pages = $this->Pages->getChildren(0, $_pages);
+
 		$this->set(['pages' => $pages]);
 	}
 

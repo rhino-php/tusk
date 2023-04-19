@@ -41,4 +41,19 @@ class PagesTable extends Table {
 	public function slug(string $slug) {
 		return $this->find()->where(["name" => $slug])->contain(['Contents' => ['Elements']])->first();
 	}
+	
+	public function getChildren($parentId, $pages) {
+		$children = [];
+
+		foreach ($pages as $page) {
+			if ($page['parent'] != $parentId) {
+				continue;
+			}
+		
+			$page['children'] = $this->getChildren($page['id'], $pages);
+			$children[] = $page;
+		}
+
+		return $children;
+	}
 }
