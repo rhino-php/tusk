@@ -1,4 +1,3 @@
-
 <?php foreach ($page["contents"] as $content) : ?>
 	<?php if (!$content['active']) 	continue; ?>
 		<div>
