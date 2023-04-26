@@ -118,24 +118,3 @@ img {
 	color: var(--contrast-color);
 }
 
-table {
-	width: 100%;
-
-	th {
-		color: var(--contrast-color);
-		background-color: var(--primary-color);
-	}
-
-	td {
-		text-align: center;
-		width: min-content;
-	}
-
-	td:nth-child(2) {
-		width: auto;
-	}
-
-	tr:nth-child(2n + 1) {
-		background-color: var(--primary-color-100);
-	}
-}

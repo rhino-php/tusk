@@ -106,6 +106,9 @@ class TuskInit extends AbstractMigration
 			->addColumn('active', 'boolean', [
 				'default' => 1,
 			])
+			->addColumn('is_homepage', 'boolean', [
+				'default' => 0,
+			])
 			->addColumn('type', 'integer', [
 				'default' => 0,
 			])

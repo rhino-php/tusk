@@ -1,3 +1,7 @@
+<?php 
+$this->assign('title', $page["name"]); 
+?>
+
 <?php foreach ($page["contents"] as $content) : ?>
 	<?php 
 		if (!$content['active']) {

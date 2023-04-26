@@ -81,7 +81,7 @@ class PagesController extends BaseController {
 		$this->set([
 			'entry' => $entry,
 			'pages' => $pages,
-			'layouts' => $this->addEmptyOption($layouts->toArray())
+			'layouts' => $layouts
 		]);
 	}
 
@@ -155,7 +155,6 @@ class PagesController extends BaseController {
 		$this->Pages = new PagesTable();
 		$page = $this->Pages->slug($slug);
 
-		$this->set('title', $page['alias']);
 		$this->viewBuilder()->setLayout('default');
         $this->set(compact('page', 'subpage'));
 
