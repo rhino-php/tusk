@@ -3,6 +3,6 @@
 
 <ul>
 	<?= $this->element('Pages/page_item', [
-		'page' => $pages['0']
+		'pages' => $pages
 	]) ?>
 </ul>
