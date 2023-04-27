@@ -4,26 +4,26 @@
 	position: relative;
 	max-width: 100%;
 	// overflow-x: auto;
-}
 
-table {
-	// table-layout: fixed;
-	width: 100%;
-	border-collapse: collapse;
-	
-	overscroll-behavior: contain;
+	table {
+		width: 100%;
+		border-collapse: collapse;
+		
+		overscroll-behavior: contain;
+	}
 
 	thead {
 		overflow-x: auto;
 		position: sticky;
 		top: 0;
+		z-index: 200;
 	}
 
 	th,
 	td,
 	caption {
 		padding: 0.1rem 0.75rem;
-		text-align: left !important;
+		text-align: left;
 	}
 
 	th,
@@ -33,24 +33,84 @@ table {
 	}
 	
 	caption {
-		padding-bottom: var(--margin-400);
+		padding: var(--margin-300) var(--margin-300);
+		background-color: var(--primary-color);
+		color: var(--contrast-color);
+		font-weight: 800;
 		@include type-setting(600);
 	}
 
 	th {
+		background-color: var(--primary-color-200);
 		color: var(--contrast-color);
-		background-color: var(--primary-color);
+		font-weight: 800;
 	}
 
-	td {
-		min-width: max-content;
-	}
-
-	td:last-of-type {
-		max-width: min-content;
+	tr {
+		background-color: var(--contrast-color-300);
 	}
 
 	tr:nth-of-type(2n + 2) {
 		background-color: var(--contrast-color-400);
+	}
+
+	td {
+		min-width: max-content;
+		color: var(--color);
+		font-weight: var(--font-weight);
+		font-size: var(--font-size);
+	}
+
+	[data-cell="Id"] {
+		opacity: 0.5;
+	}
+
+	[data-cell="Actions"] {
+		text-align: right;
+		width: min-content;
+		
+		.cluster {
+			flex-wrap: nowrap;
+			justify-content: right;
+		}
+	}
+
+	// @include for-size(tablet-portrait-down) {
+	@include for-size(desktop-down) {
+		$padding: var(--margin-300);
+
+		caption {
+			overflow-x: auto;
+			position: sticky;
+			top: 0;
+			z-index: 200;
+		}
+
+		th {
+			display: none;
+		}
+
+		td {
+			width: 100%;
+			display: grid;
+			justify-content: space-between;
+			grid-template-columns: 15ch auto;
+			
+			&::before {
+				content: attr(data-cell) ": ";
+				font-weight: 800;
+			}
+
+			padding-left: $padding;
+			padding-right: $padding;
+		}
+
+		td:first-child {
+			padding-top: $padding;
+		}
+
+		td:last-child {
+			padding-bottom: $padding;
+		}
 	}
 }

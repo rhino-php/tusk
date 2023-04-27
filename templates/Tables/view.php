@@ -12,28 +12,33 @@
 			<thead>
 				<tr>
 					<?php foreach($columns as $column) : ?>
-						<th><?= $this->Paginator->sort($column) ?></th>
+						<th data-cell="<?= h(ucfirst($column)) ?>"><?= $this->Paginator->sort($column) ?></th>
 					<?php endforeach ?>
-
-					<th class="actions"><?= __('Actions') ?></th>
+						
+					<th data-cell="Actions"><?= __('Actions') ?></th>
 				</tr>
 			</thead>
-
+			
 			<tbody>
-				<?php foreach (range(0, 12) as $number): ?>
-					<?php foreach ($data as $entry): ?>
+				<?php foreach ($data as $entry): ?>
 				<tr>
 					<?php foreach($columns as $column) : ?>
-						<td><?= h($entry->{$column}) ?></td>
+						<td data-cell="<?= h(ucfirst($column)) ?>"><?= h($entry->{$column}) ?></td>
 					<?php endforeach ?>
-					<td class="actions">
-						<?= $this->Html->link(__('Edit'), ['action' => 'edit', $tableName, $entry->id]) ?>
-						<?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $tableName, $entry->id], ['confirm' => __('Are you sure you want to delete # {0}?', $entry->id)]) ?>
+					<td class="actions" data-cell="Actions">
+						<div class="cluster">
+							<?= $this->Html->link(__('Edit'),
+								['action' => 'edit', $tableName, $entry->id],
+								['class' => 'button']
+							) ?>
+							<?= $this->Form->postLink(__('Delete'),
+								['action' => 'delete', $tableName, $entry->id],
+								['confirm' => __('Are you sure you want to delete # {0}?', $entry->id), 'class' => 'button']
+							) ?>
+						</div>
 					</td>
 				</tr>
 				<?php endforeach; ?>
-				<?php endforeach; ?>
-
 			</tbody>
 		</table>
 	</div>
