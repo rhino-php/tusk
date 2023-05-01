@@ -1,12 +1,8 @@
 <?php 
 $this->assign('title', $page["name"]); 
-?>
-
-<?php foreach ($page["contents"] as $content) : ?>
-	<?php 
-		if (!$content['active']) {
-			continue;
+foreach ($page["contents"] as $content) { 
+		if ($content['active']) {
+			echo $this->element($content['element']['element'], $content->toArray());
 		}
-
-		echo $this->element($content['element']['element'], $content->toArray()) ?>
-<?php endforeach ?>
+	}
+?>

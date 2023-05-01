@@ -41,7 +41,7 @@ class PagesTable extends Table {
 			->toArray();
 		
 		array_walk($pages, function ($page) use($entity) {
-			if ($page["id"] == $entity["id"]) {
+			if ($page["id"] == $entity["id"] || !$page["is_homepage"]) {
 				return;
 			}
 
@@ -59,7 +59,7 @@ class PagesTable extends Table {
 	}
 
 	public function slug(string $slug = null) {
-		$contain = ['Contents' => ['Elements']];
+		$contain = ['Contents' => ['Elements', 'sort' => ['Contents.position' => 'ASC']]];
 		$where = ["name" => $slug];
 
 		if (!$slug) {

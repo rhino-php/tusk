@@ -107,7 +107,8 @@ var settings = {
 		srcMain: [
 			src + "css/main.scss",
 			src + "css/webfonts.scss",
-			src + "css/pico.scss"
+			src + "css/pico.scss",
+			src + "css/layout.scss"
 			// './src/css/email.scss',
 			// You can add more files here that will be built seperately,
 			// f.e. newsletter.scss
@@ -131,6 +132,7 @@ var settings = {
 		src: src + "js/**/*.js",
 		srcMain: [
 			src + "js/main.js",
+			src + "js/layout.js",
 			// You can add more files here that will be built seperately,
 			// f.e. newsletter.js
 		],

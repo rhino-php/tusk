@@ -85,17 +85,26 @@ class PagesController extends BaseController {
 		]);
 	}
 
-	public function edit(int $id) {
+	public function layout(int $id) {
 		$this->setPlugin(null);
 		$this->viewBuilder()->setLayout('default');
-		$page = $this->Pages->get($id, ['contain' => ['Contents' => ['Elements']]]);
+		$page = $this->Pages->get($id, [
+			'contain' => [
+				'Contents' => [
+					'Elements',
+					'sort' => [
+						'Contents.position' => 'ASC'
+					]
+				]
+			]
+		]);
 
 		$this->set([
 			'page' => $page,
 		]);
 		 
 		try {
-            return $this->render('Tusk.edit');
+            return $this->render('Tusk.layout');
         } catch (MissingTemplateException $exception) {
             if (Configure::read('debug')) {
                 throw $exception;

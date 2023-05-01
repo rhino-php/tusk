@@ -22,4 +22,32 @@ trait TuskView
 	public function backLink() : string {
 		return isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : "#";
 	}
+
+	public function getCurrent(mixed $args) : ?string {
+		if (is_string($args)) {
+			if ($args != $this->request->getEnv("REQUEST_URI")) {
+				return null;
+			}
+		}
+
+		if (is_array($args)) {
+			foreach ($args as $key => $arg) {
+				if (empty($key)) {
+					$key = 'pass';
+				}
+				
+				$value = $this->request->getParam((string)$key);
+
+				if (is_array($value)) {
+					$value = $value[0];
+				}
+
+				if ($arg != $value) {
+					return null;
+				}
+			}
+		}
+
+		return 'aria-current="page"';
+	}
 }

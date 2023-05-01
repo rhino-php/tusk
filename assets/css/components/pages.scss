@@ -1,0 +1,13 @@
+.pages {
+	.page-list {
+		list-style: none;
+		
+		&:nth-child(2n) {
+			background-color: var(--primary-color-200);
+		}
+	}
+}
+
+.layout-element {
+	border: solid 4px var(--primary-color) !important;
+}

@@ -170,9 +170,6 @@ class TuskInit extends AbstractMigration
 			->create();
 		
 		$this->table('tusk_contents')
-			->addColumn('content', 'string', [
-				'default' => Null,
-			])
 			->addColumn('page_id', 'integer', [
 				'default' => Null,
 			])
@@ -189,6 +186,9 @@ class TuskInit extends AbstractMigration
 			])
 			->addColumn('active', 'boolean', [
 				'default' => 1,
+			])
+			->addColumn('position', 'boolean', [
+				'default' => 0,
 			])
 			->addColumn('created', 'timestamp', [
 				'default' => 'CURRENT_TIMESTAMP'

@@ -23,6 +23,7 @@ use Cake\Http\Response;
 use Cake\View\Exception\MissingTemplateException;
 use Tusk\Controller\AppController as BaseController;
 use Tusk\Model\ApplicationTrait;
+use Cake\Datasource\Exception\RecordNotFoundException;
 
 use Tusk\Model\Table\PagesTable;
 
@@ -41,43 +42,133 @@ class ContentsController extends BaseController {
 		$this->Pages = new PagesTable();
     }
 
-	public function change(int $pageId, int $id = null) {
+	public function edit(int $id) {
 		$entry = $this->Contents->getEntry($id);
-		$page = $this->Pages->get($pageId);
-		$pages = $this->Contents->Pages->find('list');
 		$elements = $this->Contents->Elements->find('list');
 
 		if ($this->request->is(['patch', 'post', 'put'])) {
 			$content = $this->Contents->patchEntity($entry, $this->request->getData());
             
 			if ($this->Contents->save($content)) {
-				$this->Flash->success(__('The table has been saved.'));
-                return $this->redirect([
-					'controller' => 'Pages',
-					'action' => 'edit',
-					$page['id']
-				]);
+				// $this->Flash->success(__('The table has been saved.'));
+				// If you want a json response
+				$response = $this->response->withType('application/json')
+					->withStringBody(json_encode([
+						'status' => 200,
+						'message' => __('The table has been saved.')
+				]));
+				return $response;
             }
 			
-            $this->Flash->error(__('The table could not be saved. Please, try again.'));
+            // $this->Flash->error(__('The table could not be saved. Please, try again.'));
+			$response = $this->response->withType('application/json')
+				->withStringBody(json_encode([
+					'status' => 500,
+					'message' => __('The table could not be saved. Please, try again.')
+			]));
+			return $response;
         }
 		
 		$this->set([
 			'entry' => $entry,
-			'page' => $page,
 			'elements' => $elements,
 		]);
 	}
 
-	public function delete($id) {
-        $this->request->allowMethod(['post', 'delete']);
-        $entry = $this->Contents->get($id);
-        if ($this->Contents->delete($entry)) {
-            $this->Flash->success(__('The table has been deleted.'));
-        } else {
-            $this->Flash->error(__('The table could not be deleted. Please, try again.'));
-        }
+	public function new(int $pageId) {
+		$entry = $this->Contents->getEntry();
+		$elements = $this->Contents->Elements->find('list');
 
-        return $this->redirect($_SERVER['HTTP_REFERER']);
+		if ($this->request->is(['patch', 'post', 'put'])) {
+			$content = $this->Contents->patchEntity($entry, $this->request->getData());
+            $content['position'] = $this->Contents->find()->where(['page_id' => $pageId])->all()->count();
+			if ($this->Contents->save($content)) {
+				// $this->Flash->success(__('The table has been saved.'));
+				// If you want a json response
+				$response = $this->response->withType('application/json')
+					->withStringBody(json_encode([
+						'status' => 200,
+						'message' => __('The table has been saved.')
+				]));
+				return $response;
+            }
+			
+            // $this->Flash->error(__('The table could not be saved. Please, try again.'));
+			$response = $this->response->withType('application/json')
+				->withStringBody(json_encode([
+					'status' => 500,
+					'message' => __('The table could not be saved. Please, try again.')
+			]));
+			return $response;
+        }
+		
+		$this->set([
+			'entry' => $entry,
+			'elements' => $elements,
+			'pageId' => $pageId,
+		]);
+	}
+
+	public function change($id) {
+		$params = $this->request->getParam('?');
+		$entry = $this->Contents->get($id);
+
+		$entry[$params['key']] = $params['value'];
+		$this->Contents->save($entry);
+
+		if ($this->request->is(['ajax'])) {
+			$response = $this->response->withType('application/json')
+				->withStringBody(json_encode([
+					'status' => 200,
+					'message' => __('The entry has been changed.')
+			]));
+			return $response;
+		}
+
+		$referer = $this->request->getEnv('HTTP_REFERER');
+		return $this->redirect($referer);
+	}
+
+	public function delete($id) {
+		$entry = $this->Contents->get($id, ['contain' => 'Elements']);
+		if ($this->request->is(['patch', 'post', 'put', 'delete'])) {
+			if ($this->Contents->delete($entry)) {
+				// $this->Flash->success(__('The table has been deleted.'));
+				$response = $this->response->withType('application/json')
+					->withStringBody(json_encode([
+						'status' => 200,
+						'message' => __('The table has been deleted.')
+				]));
+				return $response;
+			} else {
+				// $this->Flash->error(__('The table could not be deleted. Please, try again.'));
+				$response = $this->response->withType('application/json')
+					->withStringBody(json_encode([
+						'status' => 500,
+						'message' => __('The table could not be deleted. Please, try again.')
+				]));
+				return $response;
+			}
+		}
+		$this->set(['entry' => $entry]);
     }
+
+	public function element($id) {
+		$this->setPlugin(null);
+		try {
+			$entry = $this->Contents->get($id, ['contain' => 'Elements']);
+			$this->set(['entry' => $entry]);
+		} catch(RecordNotFoundException $e) {
+			exit();
+		}
+
+		try {
+            return $this->render('Tusk.element');
+        } catch (MissingTemplateException $exception) {
+            if (Configure::read('debug')) {
+                throw $exception;
+            }
+            throw new NotFoundException();
+        }
+	}
 }

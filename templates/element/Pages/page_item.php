@@ -2,7 +2,7 @@
 	<li style="padding-left: 1rem">
 		<?= $page['name'] ?>
 		<?= $this->Html->link('edit', ['action' => 'change', $page['id']]) ?>
-		<?= $this->Html->link('layout', ['action' => 'edit', $page['id']]) ?>
+		<?= $this->Html->link('layout', ['action' => 'layout', $page['id']]) ?>
 		
 		<?php if (!empty($page['children'])) : ?>
 			<ul>
