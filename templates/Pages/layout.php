@@ -1,6 +1,7 @@
 <?php 
 	$this->append('css', $this->Html->css('Tusk.layout')); 
 	$this->append('script', $this->Html->script(['Tusk.layout'], ["type" => "module"]));
+	$this->append('script', $this->Html->script(['Tusk.vendor/editor']));
 	$this->assign('title', $page["name"]); 
 	$this->assign('Tusk', $this->element('Tusk.layout-menu')); 
 ?>

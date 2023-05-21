@@ -15,7 +15,7 @@
 	<!--  $this->Html->css(['Tusk.webfonts', 'Tusk.main', 'Tusk.vendor/pico.min']) ?> -->
 
 		<!-- Load main javascript -->
-	<?= $this->Html->script(['Tusk.main'], ["type" => "module"]) ?>
+		<?= $this->Html->script(['Tusk.main'], ["type" => "module"]) ?>
 
 	<?= $this->fetch('meta') ?>
 	<?= $this->fetch('css') ?>

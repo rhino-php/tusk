@@ -1,4 +1,5 @@
 import DragDrop from "/tusk/js/modules/dragdrop.js";
+import Editor from "/tusk/js/modules/editor.js";
 
 export default class LayoutElements {
 	constructor() {
@@ -8,7 +9,32 @@ export default class LayoutElements {
 	}
 
 	setModal(modal) {
+		modal.addEventListener('modalOpen', (event) => this.initForm(event));
 		modal.addEventListener('modalClosed', (event) => this.onDispatch(event));
+	}
+
+	initForm(event) {
+		let modal = event.detail;
+		let form = modal.modalMain.querySelector('form');
+
+		this.editor = new Editor('editor');
+
+		form.addEventListener('submit', (event) => {
+			// this.editor.destroy();
+			event.preventDefault();
+			fetch(form.getAttribute('action'), {
+				method: 'POST',
+				body: new FormData(form)
+			}).then(response =>  response.json())
+			.then((json) => {
+				if (json.status != 200) {
+					throw new Exception('something went wrong');
+				}
+				console.log(json.message);
+				modal.closeModal()
+			})
+			.catch(err => console.log(err))
+		})
 	}
 
 	onDispatch(event) {

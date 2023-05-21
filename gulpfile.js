@@ -40,7 +40,8 @@ const $ = require('gulp-load-plugins')({
 	scope: ['devDependencies'],
 	rename: {
 		'fancy-log': 'log',
-		'sass': 'dartSass'
+		'sass': 'dartSass',
+		'gulp-typescript': 'ts'
 	}
 });
 
@@ -141,6 +142,11 @@ var settings = {
 		destFile: "main.js",
 	},
 
+	ts: {
+		src: src + "js/**/*.ts",
+		dest: dist + "js/",
+	},
+
 	jsModules: {
 		src: src + "js/modules/**/*.js",
 		dest: dist + "js/modules/",
@@ -150,6 +156,9 @@ var settings = {
 		src: [
 			src + "js/vendor/**/*.js",
 			src + "js/shapes/**/*.js",
+			"./node_modules/@editorjs/editorjs/dist/editor.js",
+			"./node_modules/@editorjs/header/dist/bundle.js",
+			// "./node_modules/@editorjs/list/dist/bundle.js"
 			// "./shapes/src/js/**/*.js",
 			// Add single vendor files here,
 			// they will be copied as is to `{prefix}/js/vendor/`,
@@ -280,6 +289,41 @@ function js() {
 	return stream;
 }
 
+function ts() {
+	$.log("Converting Typescript" + ((isProduction) ? " [production build]" : " [development build]"));
+	var tsProject = $.ts.createProject("tsconfig.json");
+	var stream = tsProject.src()
+		.pipe($.plumber({ errorHandler: $.notify.onError("Error: <%= error.message %>") }))
+		.pipe(tsProject())
+		.js
+		.pipe($.jsvalidate());
+
+	if (settings.js.concat) {
+		stream = stream.pipe($.concat(settings.js.destFile));
+	}
+
+	if (isProduction) {
+		stream = stream
+			.pipe($.terser({ compress: { drop_console: true } }))
+			.on('error', function (error) {
+				if (error.plugin !== "gulp-terser-js") {
+					console.log(error.message);
+				}
+				this.emit('end');
+			})
+			.pipe($.header(banner, { pkg: pkg }));
+	}
+
+	stream = stream
+		.pipe(gulp.dest(settings.ts.dest, {
+			sourcemaps: (!isProduction ? '.' : false)
+		}))
+		.pipe($.browserSync.stream());
+
+	return stream;
+}
+
+
 function jsModules() {
 	$.log("Building Javascript modules " + ((isProduction) ? " [production build]" : " [development build]"));
 
@@ -353,7 +397,6 @@ function templates(done) {
 	done();
 }
 
-
 /*
  * Default TASK: Watch SASS and JAVASCRIPT files for changes,
  * build CSS file and inject into browser
@@ -365,6 +408,7 @@ function gulpDefault(done) {
 	gulp.watch(settings.css.src, css);
 	gulp.watch(settings.jsModules.src, jsModules);
 	gulp.watch(settings.js.src, js);
+	gulp.watch(settings.ts.src, ts);
 
 	if (settings.templates.active) {
 		gulp.watch(settings.templates.src, templates);
@@ -429,7 +473,7 @@ function checkKey() {
 /*
  * Task: Build all
  */
-exports.build = series(cleanDist, js, jsModules, jsVendor, css, cssVendor, images, icons, fonts, favicon);
+exports.build = series(cleanDist, ts, js, jsModules, jsVendor, css, cssVendor, images, icons, fonts, favicon);
 
 exports.default = gulpDefault;
 exports.cleanDist = cleanDist;
@@ -443,3 +487,4 @@ exports.icons = icons;
 exports.favicon = favicon;
 exports.jsModules = jsModules;
 exports.templates = templates;
+exports.ts = ts;

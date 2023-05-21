@@ -1,7 +1,7 @@
 export default class Modal {
 	constructor() {
-		this.modal = document.createElement('div');
-		this.modalWrapper = document.createElement('div');
+		this.modal = document.createElement('dialog');
+		// this.modalWrapper = document.createElement('div');
 		this.modalHeader = document.createElement('header');
 		this.headline = document.createElement('p');
 		this.closeButton = document.createElement('button');
@@ -26,7 +26,6 @@ export default class Modal {
 	}
 	
 	addModal() {
-
 		this.closeButton.id = "close-modal";
 		this.closeButton.innerHTML = this.cross;
 
@@ -37,17 +36,20 @@ export default class Modal {
 		this.modalMain.classList.add('modal-main')
 
 		this.modal.classList.add('modal');
+		this.modal.setAttribute('closed', true);
 		this.modal.appendChild(this.modalHeader);
 		this.modal.appendChild(this.modalMain);
 		
-		this.modalWrapper.classList.add('modal-wrapper');
-		this.modalWrapper.appendChild(this.modal);
+		// this.modalWrapper.classList.add('modal-wrapper');
+		// this.modalWrapper.appendChild(this.modal);
 		
-		document.body.appendChild(this.modalWrapper);
+		// document.body.appendChild(this.modalWrapper);
+		document.body.appendChild(this.modal);
 	}
 
 	closeModal() {
-		this.modalWrapper.classList.remove('modal-wrapper--open');
+		// this.modalWrapper.classList.remove('modal-wrapper--open');
+		this.modal.close();
 		this.modalMain.innerHTML = '';
 		let dispatch = this.button.getAttribute('data-dispatch');
 
@@ -63,7 +65,8 @@ export default class Modal {
 	openModal(event) {
 		let target = event.target;
 		this.headline.innerHTML = target.name;
-		this.modalWrapper.classList.add('modal-wrapper--open');
+		this.modal.showModal();
+		// this.modalWrapper.classList.add('modal-wrapper--open');
 		
 		fetch(target.value, {
 			headers: {
@@ -77,27 +80,11 @@ export default class Modal {
 	
 	initModal(html) {
 		this.modalMain.innerHTML = html;
-		let form = this.modalMain.querySelector('form');
-		if  (form) {
-			this.initForm(form);
-		}
-	}
 
-	initForm(form) {
-		form.addEventListener('submit', (event) => {
-			event.preventDefault();
-			fetch(form.getAttribute('action'), {
-				method: 'POST',
-				body: new FormData(form)
-			}).then(response =>  response.json())
-			.then((json) => {
-				if (json.status != 200) {
-					throw new Exception('something went wrong');
-				}
-				console.log(json.message);
-				this.closeModal()
-			})
-			.catch(err => console.log(err))
-		})
+		let event = new CustomEvent("modalOpen", {
+			detail: this,
+		});
+
+		this.modal.dispatchEvent(event)
 	}
 }  
