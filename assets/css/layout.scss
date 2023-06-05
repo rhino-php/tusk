@@ -70,7 +70,7 @@ body {
 	.input {
 		display: flex;
 		flex-direction: column;
-		min-width: 28ex;
+		min-width: 32ex;
 		width: 100%;
 	}
 
@@ -87,5 +87,16 @@ body {
 		height: 1em;
 		accent-color: var(--tusk-primary-color);
 		margin-right: 0.5rem;
+	}
+}
+
+#editor {
+	box-shadow: 0 0 2rem #ddd;
+	border-radius: 0.5rem;
+	padding: 0 4rem 2rem;
+	min-height: 300px;
+
+	.codex-editor {
+		height: 100%;
 	}
 }

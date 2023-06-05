@@ -16,24 +16,32 @@ export default class LayoutElements {
 	initForm(event) {
 		let modal = event.detail;
 		let form = modal.modalMain.querySelector('form');
+		let html = form.querySelector('[name=html]');
 
-		this.editor = new Editor('editor');
+		console.log(html.value);
+
+		this.editor = new Editor('editor', html.value);
 
 		form.addEventListener('submit', (event) => {
-			// this.editor.destroy();
 			event.preventDefault();
-			fetch(form.getAttribute('action'), {
-				method: 'POST',
-				body: new FormData(form)
-			}).then(response =>  response.json())
-			.then((json) => {
-				if (json.status != 200) {
-					throw new Exception('something went wrong');
-				}
-				console.log(json.message);
-				modal.closeModal()
-			})
-			.catch(err => console.log(err))
+
+			this.editor.save().then((data) => {
+				html.value = JSON.stringify(data);
+				this.editor.destroy();
+	
+				fetch(form.getAttribute('action'), {
+					method: 'POST',
+					body: new FormData(form)
+				}).then(response =>  response.json())
+				.then((json) => {
+					if (json.status != 200) {
+						throw new Exception('something went wrong');
+					}
+					console.log(json.message);
+					modal.closeModal()
+				})
+				.catch(err => console.log(err))
+			});
 		})
 	}
 

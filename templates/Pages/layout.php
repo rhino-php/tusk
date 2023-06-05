@@ -2,6 +2,7 @@
 	$this->append('css', $this->Html->css('Tusk.layout')); 
 	$this->append('script', $this->Html->script(['Tusk.layout'], ["type" => "module"]));
 	$this->append('script', $this->Html->script(['Tusk.vendor/editor']));
+	$this->append('script', $this->Html->script(['Tusk.vendor/bundle']));
 	$this->assign('title', $page["name"]); 
 	$this->assign('Tusk', $this->element('Tusk.layout-menu')); 
 ?>

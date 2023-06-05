@@ -81,7 +81,9 @@ class ContentsController extends BaseController {
 
 		if ($this->request->is(['patch', 'post', 'put'])) {
 			$content = $this->Contents->patchEntity($entry, $this->request->getData());
+            $content['page_id'] = $pageId;
             $content['position'] = $this->Contents->find()->where(['page_id' => $pageId])->all()->count();
+	
 			if ($this->Contents->save($content)) {
 				// $this->Flash->success(__('The table has been saved.'));
 				// If you want a json response

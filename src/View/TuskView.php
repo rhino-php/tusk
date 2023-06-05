@@ -50,4 +50,26 @@ trait TuskView
 
 		return 'aria-current="page"';
 	}
+
+	public function parseEditor(string $json) : string {
+		$object = json_decode($json);
+
+		$content = '';
+		foreach ($object->blocks as $key => $block) {
+			$data = $block->data;
+
+			switch ($block->type) {
+				case 'header':
+					$level = 'h' . $data->level;
+					$content .= '<' . $level . '>' . $data->text . '</' . $level . '>';
+					break;
+				
+				default:
+					$content .= '<p>' . $data->text . '</p>';
+					break;
+			}
+		}
+
+		return $content;
+	}
 }
