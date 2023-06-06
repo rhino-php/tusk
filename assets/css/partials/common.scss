@@ -10,7 +10,7 @@
 
 html {
   scroll-behavior: smooth;
-//   @include shapes.scrollbars(var(--primary-color), var(--secondary-color), 1rem);
+//   @include shapes.scrollbars(var(--tusk-primary-color), var(--tusk-secondary-color), 1rem);
 }
 
 body {
@@ -24,13 +24,13 @@ body {
 	width: 100%;
 
 	& > *:first-of-type > *:first-child:not(.full-width) {
-		margin-top:  var(--header-height);
-		padding-top: var(--margin-400);
+		margin-top:  var(--tusk-header-height);
+		padding-top: var(--tusk-margin-400);
 	}
 	
 	h1, h2, h3, h4, h5, h6 {
 		& + .body-text {
-			margin-top: var(--margin-200);
+			margin-top: var(--tusk-margin-200);
 		}
 	}
 }
@@ -94,15 +94,15 @@ body {
 }
 
 .outer-bound {
-  @include shapes.bound(var(--outer-bound-width), var(--gutter));
+  @include shapes.bound(var(--tusk-outer-bound-width), var(--tusk-gutter));
 }
 
 .inner-bound {
-  @include shapes.bound(var(--inner-bound-width), var(--gutter));
+  @include shapes.bound(var(--tusk-inner-bound-width), var(--tusk-gutter));
 }
 
 .full-width {
-  @include shapes.full-width(var(--scrollbarWidth));
+  @include shapes.full-width(var(--tusk-scrollbarWidth));
 }
 
 .list-style-none {
@@ -114,7 +114,7 @@ img {
 }
 
 .background {
-	background-color: var(--background-color);
-	color: var(--contrast-color);
+	background-color: var(--tusk-background-color);
+	color: var(--tusk-contrast-color);
 }
 

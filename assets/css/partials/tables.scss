@@ -29,36 +29,36 @@
 	th,
 	caption {
 		font-weight: 600;
-		color: var(--text-color) !important;
+		color: var(--tusk-text-color) !important;
 	}
 	
 	caption {
-		padding: var(--margin-300) var(--margin-300);
-		background-color: var(--primary-color);
-		color: var(--contrast-color);
+		padding: var(--tusk-margin-300) var(--tusk-margin-300);
+		background-color: var(--tusk-primary-color);
+		color: var(--tusk-contrast-color);
 		font-weight: 800;
 		@include type-setting(600);
 	}
 
 	th {
-		background-color: var(--primary-color-200);
-		color: var(--contrast-color);
+		background-color: var(--tusk-primary-color-200);
+		color: var(--tusk-contrast-color);
 		font-weight: 800;
 	}
 
 	tr {
-		background-color: var(--contrast-color-300);
+		background-color: var(--tusk-contrast-color-300);
 	}
 
 	tr:nth-of-type(2n + 2) {
-		background-color: var(--contrast-color-400);
+		background-color: var(--tusk-contrast-color-400);
 	}
 
 	td {
 		min-width: max-content;
-		color: var(--color);
-		font-weight: var(--font-weight);
-		font-size: var(--font-size);
+		color: var(--tusk-color);
+		font-weight: var(--tusk-font-weight);
+		font-size: var(--tusk-font-size);
 	}
 
 	[data-cell="Id"] {
@@ -77,7 +77,7 @@
 
 	// @include for-size(tablet-portrait-down) {
 	@include for-size(desktop-down) {
-		$padding: var(--margin-300);
+		$padding: var(--tusk-margin-300);
 
 		caption {
 			overflow-x: auto;

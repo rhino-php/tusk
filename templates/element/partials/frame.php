@@ -1,7 +1,7 @@
 <div class="frame">
 	<!-- Main Sidebar -->
-	<nav class="frame__sidebar">
-		<?= $this->element('partials/nav') ?>
+	<nav id="main-nav" class="frame__sidebar">
+		<?= $this->cell('Tusk.Groups'); ?>
 	</nav>
 	
 	<!-- Main Content -->

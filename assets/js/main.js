@@ -97,11 +97,11 @@ class MAIN {
 		this.FlashMessages = new FlashMessages(this);
 
 		this.Overlay = new Overlay(this, {
-			closeButtonIcon: '/dist/icons/cross.svg',
+			closeButtonIcon: '/tusk/icon/cross.svg',
 			closeButtonTitle: 'Close Overlay'
 		});
 
-		this.Slider = new Slider(this);
+		// this.Slider = new Slider(this);
 		this.LightBox = new LightBox(this, {
 			selector: '#main img',
 			prevTitle: 'zum vorherigem Bild',

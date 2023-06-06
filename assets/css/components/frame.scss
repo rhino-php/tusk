@@ -14,8 +14,14 @@ body {
 	height: 100%;
 
 	&__sidebar {
-		background-color: var(--contrast-color-400);
+		max-width: 0;
+		
+		@include for-size(desktop-up) {
+			max-width: 32rem;
+		}
+		
 		display: flex;
+		background-color: var(--tusk-contrast-color-400);
 		flex-direction: column;
 		gap: 2rem;
 		// justify-content: space-between;
@@ -37,16 +43,22 @@ body {
 	}
 
 	&__content {
+		display: flex;
+		flex-direction: column;
 		overflow: auto;
 		max-height: 100vh;
 		position: relative;
 	}
 
 	.main-header {
-		background-color: var(--text-color);
-		color: var(--contrast-color);
+		background-color: var(--tusk-text-color);
+		color: var(--tusk-contrast-color);
 		padding: 1rem;
 	}
+}
+
+#main-nav.nav--open {
+	max-width: 32rem !important;
 }
 
 .nav-block {
@@ -59,7 +71,7 @@ body {
 		padding: 0 $padding;
 		font-weight: 600;
 		@include type-setting(300);
-		color: var(--background-color-300);
+		color: var(--tusk-background-color-300);
 	}
 
 	&__list {
@@ -73,7 +85,7 @@ body {
 		a, summary {
 			background-color: transparent;
 			border-color: transparent;
-			color: var(--text-color);
+			color: var(--tusk-text-color);
 			width: 100%;
 			padding: 0.75rem $padding;
 			
@@ -81,7 +93,7 @@ body {
 			font-weight: 600;
 			
 			&[aria-current]:hover {
-				color: var(--text-color);
+				color: var(--tusk-text-color);
 			}
 
 			&:hover {
@@ -90,11 +102,11 @@ body {
 		}
 
 		a[aria-current] {
-			background-color: var(--primary-color);
+			background-color: var(--tusk-primary-color);
 		}
 
 		summary[aria-current] {
-			background-color: var(--primary-color-200);
+			background-color: var(--tusk-primary-color-200);
 		}
 
 		summary::after {
@@ -107,7 +119,7 @@ body {
 
 		details[open] {
 			ul {
-				border-left: solid var(--primary-color-200) 1rem;
+				border-left: solid var(--tusk-primary-color-200) 1rem;
 				list-style: none;
 			}
 
@@ -116,8 +128,8 @@ body {
 			}
 
 			summary {
-				background-color: var(--primary-color-200);
-				color: var(--text-color);
+				background-color: var(--tusk-primary-color-200);
+				color: var(--tusk-text-color);
 			
 				&::after {
 					transform: rotate(180deg);
@@ -128,7 +140,7 @@ body {
 		.button--icon {
 			display: inline-flex;
 			flex-direction: row;
-			align-items: end;
+			align-items: flex-end;
 			gap: 0.75em;
 
 			svg {

@@ -21,14 +21,14 @@ $error-color: red;
   }
 	
   .message {
-	color: var(--text-color);
+	color: var(--tusk-text-color);
 	background-color: $info-color;
 	transition: 350ms ease-out;
 	transition-property: max-height, opacity;
 	max-height: 4rem;
 	overflow: hidden;
 
-	max-width: var(--outer-bound-width);
+	max-width: var(--tusk-outer-bound-width);
 	margin: auto;
 		
     .icon {
@@ -47,17 +47,17 @@ $error-color: red;
     }
 		
     &--error {
-      color: var(--background-color);
+      color: var(--tusk-background-color);
       background-color: $error-color;
     }
 
     &--warning {
-      color: var(--text-color);
+      color: var(--tusk-text-color);
       background-color: $warning-color;
     }
 
     &--success {
-      color: var(--background-color);
+      color: var(--tusk-background-color);
       background-color: $success-color;
     }
 

@@ -3,11 +3,11 @@
 		list-style: none;
 		
 		&:nth-child(2n) {
-			background-color: var(--primary-color-200);
+			background-color: var(--tusk-primary-color-200);
 		}
 	}
 }
 
 .layout-element {
-	border: solid 4px var(--primary-color) !important;
+	border: solid 4px var(--tusk-primary-color) !important;
 }

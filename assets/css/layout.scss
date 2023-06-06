@@ -3,21 +3,45 @@
 
 @use 'partials/root' with ($prefix: --tusk-);
 @forward 'components/modal';
+@forward 'partials/input';
 // @use 'partials/common';
 // @use 'partials/input';
 // @use 'partials/tables';
 
+$menu-size: 2rem;
+
 body {
-	padding-left: 300px;
+	// padding-left: 300px;
+	padding-top: $menu-size;
 }
 
 .layout-menu {
 	background-color: grey;
 	position: absolute;
 	top: 0;
-	bottom: 0;
 	left: 0;
-	width: 300px;
+	right: 0;
+	z-index: 200;
+	height: $menu-size;
+	// width: 300px;
+
+	&__button {
+		display: inline-block;
+		background-color: var(--tusk-primary-color);
+		color: var(--tusk-contrast-color);
+		font-weight: 800;
+		text-decoration: none;
+		border: none;
+		padding: 0 var(--tusk-margin-400);
+		
+		&:focus, &:hover {
+			background-color: var(--tusk-primary-color-500);
+		}
+
+		& + * {
+			margin-left: auto;
+		}
+	}
 }
 
 .layout-element {
@@ -70,16 +94,17 @@ body {
 	.input {
 		display: flex;
 		flex-direction: column;
-		min-width: 32ex;
+		min-width: 12ex;
 		width: 100%;
 	}
-
+	
 	input[type='text'], input[type='number'], select, textarea {
 		color: var(--tusk-text-color);
-		background-color: var(--tusk-contrast-color);
-		border: var(--tusk-border-width) var(--tusk-border-type) var(--tusk-background-color);
+		padding: var(--tusk-margin-200);
+		box-shadow: 0 0 2rem #ddd;
+		border-radius: 0.5rem;
 		border-radius: var(--tusk-border-radius);
-		padding: 0.5rem 0.25rem;
+		border: none;
 	}
 
 	input[type='checkbox'] {
@@ -87,16 +112,5 @@ body {
 		height: 1em;
 		accent-color: var(--tusk-primary-color);
 		margin-right: 0.5rem;
-	}
-}
-
-#editor {
-	box-shadow: 0 0 2rem #ddd;
-	border-radius: 0.5rem;
-	padding: 0 4rem 2rem;
-	min-height: 300px;
-
-	.codex-editor {
-		height: 100%;
 	}
 }

@@ -14,35 +14,44 @@ export default class LayoutElements {
 	}
 
 	initForm(event) {
-		let modal = event.detail;
-		let form = modal.modalMain.querySelector('form');
+		this.modal = event.detail;
+		let form = this.modal.modalMain.querySelector('form');
 		let html = form.querySelector('[name=html]');
 
-		console.log(html.value);
-
-		this.editor = new Editor('editor', html.value);
+		if (html) {
+			this.editor = new Editor('editor', html.value);
+		} else {
+			this.editor = null;
+		}
 
 		form.addEventListener('submit', (event) => {
 			event.preventDefault();
 
-			this.editor.save().then((data) => {
-				html.value = JSON.stringify(data);
-				this.editor.destroy();
-	
-				fetch(form.getAttribute('action'), {
-					method: 'POST',
-					body: new FormData(form)
-				}).then(response =>  response.json())
-				.then((json) => {
-					if (json.status != 200) {
-						throw new Exception('something went wrong');
-					}
-					console.log(json.message);
-					modal.closeModal()
-				})
-				.catch(err => console.log(err))
-			});
+			if (this.editor) {
+				this.editor.save().then((data) => {
+					html.value = JSON.stringify(data);
+					this.editor.destroy();
+					this.sendFrom(form);
+				});
+			} else {
+				this.sendFrom(form);
+			}
 		})
+	}
+
+	sendFrom(form) {
+		fetch(form.getAttribute('action'), {
+			method: 'POST',
+			body: new FormData(form)
+		})
+		.then(response => response.json())
+		.then((json) => {
+			if (json.status != 200) {
+				throw new Exception('something went wrong');
+			}
+			this.modal.closeModal();
+		})
+		.catch(err => console.log(err))
 	}
 
 	onDispatch(event) {

@@ -16,10 +16,10 @@ a, button, input, select, textarea {
 }
 
 input, textarea, select {
-	background-color: var(--contrast-color);
-	color: var(--text-color);
-	border: var(--border-width) var(--border-type) var(--border-color);
-	border-radius: var(--border-radius);
+	background-color: var(--tusk-contrast-color);
+	color: var(--tusk-text-color);
+	border: var(--tusk-border-width) var(--tusk-border-type) var(--tusk-border-color);
+	border-radius: var(--tusk-border-radius);
 	@include shapes.type-setting(400);
 	@include padding;
 }
@@ -47,10 +47,10 @@ label {
 
 .alt-button {
 	@include shapes.button(
-		$background-color: var(--secondary-color),
-		$border-color: var(--secondary-color),
-		$color-hover: var(--secondary-color),
-		$border-color-hover: var(--secondary-color)
+		$background-color: var(--tusk-secondary-color),
+		$border-color: var(--tusk-secondary-color),
+		$color-hover: var(--tusk-secondary-color),
+		$border-color-hover: var(--tusk-secondary-color)
 	);
 
 	font-weight: 600;
@@ -66,23 +66,34 @@ label {
 
 // Link
 .body-text a {
-	color: var(--primary-color);
+	color: var(--tusk-primary-color);
 	font-weight: 600;
 
 	&:hover, &:focus {
-		color: var(--primary-color-500);
+		color: var(--tusk-primary-color-500);
 	}
 
 	&:focus {
-		outline: 2px solid var(--primary-color-500);
+		outline: 2px solid var(--tusk-primary-color-500);
 		outline-offset: 2px;
 	}
 
 	&:active {
-		color: var(--primary-color-800);
+		color: var(--tusk-primary-color-800);
 	}
 }
 
 .skip-link {
 	@include shapes.skip-link;
+}
+
+.editor {
+	box-shadow: 0 0 2rem #ddd;
+	border-radius: var(--tusk-tusk-border-radius);
+	padding: var(--tusk-tusk-margin-200) var(--tusk-tusk-margin-500);
+	min-height: 300px;
+
+	.codex-editor {
+		height: 100%;
+	}
 }

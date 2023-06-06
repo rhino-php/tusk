@@ -1,12 +1,20 @@
 <div class="layout-menu">
-	<h1>hello</h1>
-
 	<div class="cluster">
-		<?= $this->Html->link('Back', ['action' => 'index'], ['class' => 'tusk-button']) ?>
+		<?= $this->Html->link('Back', [
+				'action' => 'index'
+			], [
+				'class' => 'layout-menu__button'
+			]) ?>
+		
+		<p>Editing: <?= $page['name'] ?></p>
+
 		<button
-				class="tusk-button open-modal"
+				class="layout-menu__button open-modal"
 				name="New Content"
-				value="<?= $this->Url->build(['controller' => 'Contents', 'action' => 'new',  $page['id']]) ?>"
+				value="<?= $this->Url->build([
+					'controller' => 'Contents',
+					'action' => 'new', 
+					$page['id']]) ?>"
 				data-dispatch="updateContent"
 				>
 				New

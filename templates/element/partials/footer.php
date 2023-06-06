@@ -1,4 +1,4 @@
-<footer class="main-footer box">
+<footer class="main-footer">
 	<div class="outer-bound inverted">
 		
 	</div>

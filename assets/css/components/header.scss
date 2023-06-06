@@ -7,8 +7,8 @@
 	padding-left: 0;
 	padding-right: 0;
 
-	background-color: var(--text-color);
-	color: var(--contrast-color);
+	background-color: var(--tusk-text-color);
+	color: var(--tusk-contrast-color);
 
 	&>div {
 		display: flex;
@@ -25,10 +25,10 @@
 }
 
 .logo {
-	height: calc(var(--header-height) - #{$gutter * 2});
+	height: calc(var(--tusk-header-height) - #{$gutter * 2});
 	display: inline-flex;
 	justify-content: center;
-	gap: var(--margin-200);
+	gap: var(--tusk-margin-200);
 	
 	svg {
 		height: 100%;
@@ -38,7 +38,7 @@
 	span {
 		display: inline-block;
 		font: inherit;
-		font-size: calc(var(--header-height) - #{$gutter * 2});
+		font-size: calc(var(--tusk-header-height) - #{$gutter * 2});
 		line-height: 1;
 		text-decoration: none;
 		font-weight: 900;
@@ -54,8 +54,8 @@
 
 			--header-background: transparent;
 
-			color: var(--text-color);
-			background-color: var(--header-background);
+			color: var(--tusk-text-color);
+			background-color: var(--tusk-header-background);
 		}
 	}
 
@@ -65,7 +65,7 @@
 		}
 
 		.main-content>.element-hero:first-of-type {
-			color: var(--contrast-color);
+			color: var(--tusk-contrast-color);
 		}
 	}
 }

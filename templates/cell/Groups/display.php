@@ -1,7 +1,13 @@
+<a id="home" href="<?= $this->Url->build(['controller' => 'Overview', 'action' => 'display', 'home']) ?>">
+	<div class="logo">
+		<?= $this->svg("icon/logo-big.svg") ?>
+	</div>
+	<span class="sr-only">Rhino</span>
+</a>
+
 <?php foreach ($navs as $nav): ?>
 	<?php
-		if (isset($nav['content'])) {
-			echo $nav['content'];
+		if (empty($nav['buttons'])) {
 			continue;
 		}
 	?>
