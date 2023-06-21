@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Tusk\View;
 
+use Tusk\Model\Table\PagesTable;
+
 trait TuskView
 {
 	public function classSave($string): string {
@@ -71,5 +73,17 @@ trait TuskView
 		}
 
 		return $content;
+	}
+
+	public function getPages(int $baseId = 0) : array {
+		$this->Pages = new PagesTable();
+		$_pages = $this->Pages->find('all')->toArray();
+		return $this->Pages->getChildren($baseId, $_pages);
+	}
+
+	public function pageLink(int $id) : string {
+		$this->Pages = new PagesTable();
+		$page = $this->Pages->get($id);
+		return $this->Html->link($page["name"], ['controller' => 'Pages', 'action' => 'display', $page["name"]]);
 	}
 }
