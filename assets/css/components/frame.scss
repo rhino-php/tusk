@@ -7,29 +7,25 @@ body {
 }
 
 .frame {
-	display: grid;
-	grid-template-columns: max-content auto;
-	grid-template-rows: 100%;
-	width: 100%;
-	height: 100%;
+	display: flex;
+	// grid-template-columns: max-content auto;
+	// grid-template-rows: 100%;
+	// width: 100%;
+	// height: 100%;
 
 	&__sidebar {
-		max-width: 0;
-		
-		@include for-size(desktop-up) {
-			max-width: 32rem;
-		}
-		
+		flex: 0 0 auto;	
 		display: flex;
 		background-color: var(--tusk-contrast-color-400);
 		flex-direction: column;
 		gap: 2rem;
-		// justify-content: space-between;
 		box-shadow: 0px 3px 6px #00000029;
+		max-height: 100vh;
+		
 		position: relative;
 		z-index: 800;
-		overflow: auto;
-		max-height: 100vh;
+		overflow-y: auto;
+		overflow-x: hidden;
 
 		.logo {
 			margin: 6rem 3rem;
@@ -43,6 +39,7 @@ body {
 	}
 
 	&__content {
+		flex: 1 1 auto;
 		display: flex;
 		flex-direction: column;
 		overflow: auto;
@@ -50,15 +47,6 @@ body {
 		position: relative;
 	}
 
-	.main-header {
-		background-color: var(--tusk-text-color);
-		color: var(--tusk-contrast-color);
-		padding: 1rem;
-	}
-}
-
-#main-nav.nav--open {
-	max-width: 32rem !important;
 }
 
 .nav-block {

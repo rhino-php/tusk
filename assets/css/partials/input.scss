@@ -36,8 +36,8 @@ label {
 }
 
 .icon-button {
-	@include shapes.icon;
 	@include shapes.button-reset;
+	height: 2.7em;
 }
 
 .button, button {

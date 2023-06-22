@@ -18,7 +18,7 @@ https://xd.adobe.com/view/ee0ba304-8907-40aa-918f-b787c5dc5926-bb58/screen/a86c4
 
 #### Next Steps
 
-- [ ] Fix Nav
+- [X] Fix Nav
 - [ ] Add Field Types
 - [ ] Add Media
 - [ ] Add Widgets
@@ -32,5 +32,6 @@ https://xd.adobe.com/view/ee0ba304-8907-40aa-918f-b787c5dc5926-bb58/screen/a86c4
 
 #### Longterm
 
-- [ ] Get Debug to Work
-- [ ] Fix Authentikation
+- [X] Get Debug to Work
+- [X] Fix Authentikation
+- [ ] Implement Autherazation

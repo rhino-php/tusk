@@ -76,7 +76,18 @@ body {
 }
 
 .icon {
-  @include shapes.icon;
+	display: inline-block;
+	height: 100%;
+	
+	svg {
+		display: inline-block;
+		height: 100%;
+		width: auto;
+		vertical-align: text-top;
+
+		margin: 1px;
+		overflow: visible;
+	}
 }
 
 .with-icon {

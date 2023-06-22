@@ -21,5 +21,7 @@ class AppController extends BaseController
 		if (!empty($user)) {
 			$this->set(['user' => $user]);
 		}
+
+		$this->Authorization->skipAuthorization();
 	}
 }
