@@ -61,22 +61,31 @@
 		font-size: var(--tusk-font-size);
 	}
 
+	[align=center] {
+		text-align: center;
+	}
+
+	[align=right] {
+		text-align: right;
+	}
+
+	[align=left] {
+		text-align: left;
+	}
+
 	[data-cell="Id"] {
 		opacity: 0.5;
 	}
 
-	[data-cell="Actions"] {
-		text-align: right;
-		width: min-content;
-		
+	[data-cell="Actions"] {		
 		.cluster {
 			flex-wrap: nowrap;
 			justify-content: right;
 		}
 	}
 
-	// @include for-size(tablet-portrait-down) {
-	@include for-size(desktop-down) {
+	@include for-size(tablet-landscape-down) {
+	// @include for-size(desktop-down) {
 		$padding: var(--tusk-margin-300);
 
 		caption {

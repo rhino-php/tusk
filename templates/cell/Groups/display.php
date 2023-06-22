@@ -27,18 +27,17 @@
 
 				<?php if (isset($button['buttons'])): ?>
 					<?php 
-						$current = null;
+						$check = false;
 						foreach ($button['buttons'] as $item) {
 							$check = $this->getCurrent($item['link']);
 
 							if ($check) {
-								$current = 'aria-current="page"';
 								break;
 							}
 						}	
 					?>
-					<details>
-						<summary <?= $current ?> class="button button--icon">
+					<details <?= $check ? 'open' : '' ?> >
+						<summary <?= $check ? 'aria-current="page"' : '' ?> class="button button--icon">
 							<?= $this->svg($button['icon'] ?: "icon/folder.svg") ?>
 							<span><?= $button['name'] ?></span>
 						</summary>

@@ -36,8 +36,12 @@ class ApplicationsController extends AppController
 			}
 		)->all()->toArray();
 
-		$ungrouped = $this->Applications->getList(array_column($apps, 'name'));
-		
+		$_ungrouped = $this->Applications->getList(array_column($apps, 'name'));
+		$ungrouped = [];
+		foreach ($_ungrouped as $key => $value) {
+			$ungrouped[] = ['name' => $value];
+		}
+
 		if (!empty($ungrouped)) {
 			$groups[] = [
 				"name" => "Ungrouped",
@@ -55,6 +59,11 @@ class ApplicationsController extends AppController
      */
     public function add()
     {
+		$groups = $this->Groups->getGroups();
+		$this->set([
+			'groups' => $this->addEmptyOption($groups)
+		]);
+
         if ($this->request->is('post')) {
 			$data = $this->request->getData();
 			$applications = $this->Applications->getList();
@@ -65,8 +74,16 @@ class ApplicationsController extends AppController
 			}
 
 			$this->Applications->create($data["name"]);
-			return $this->redirect(['action' => 'index']);
+			$entry = $this->Applications->newEntity($data);
+			
+			if ($this->Applications->save($entry)) {
+				$this->Flash->success(__('The table has been saved.'));
+				return $this->redirect(['action' => 'index']);
+			}
+
+			$this->Flash->error(__('The table could not be saved. Please, try again.'));
         }
+
     }
 
     /**
@@ -76,35 +93,23 @@ class ApplicationsController extends AppController
      * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function rename($tableName = null)
-    {
-		$this->set([
-			'data' => [
-				"newName" => $tableName,
-				"oldName" => $tableName,
-			]
-		]);
-
-		if ($this->request->is('post')) {
-			$data = $this->request->getData();
-			$this->Applications->rename($data["oldName"], $data["newName"]);
-			return $this->redirect(['action' => 'index']);
-        }
-    }
-
 	public function edit($tableName) {
 		$groups = $this->Groups->getGroups();
-		$query = $this->Applications->find()->where(['Applications.name' => $tableName]);
+		$entry = $this->Applications->getByName($tableName);
 		
-		if ($query->isEmpty()) {
+		if (!$entry) {
 			$entry = $this->Applications->newEmptyEntity();
-		} else {
-			$entry = $query->first();
+			$entry['name'] = $tableName;
 		}
 		
         if ($this->request->is(['patch', 'post', 'put'])) {
-			$application = $this->Applications->patchEntity($entry, $this->request->getData());
+			$data = $this->request->getData();
+			$application = $this->Applications->patchEntity($entry, $data);
             
+			if ($data['name'] != $data['currentName']) {
+				$this->Applications->rename($data["currentName"], $data["name"]);
+			}
+
 			if ($this->Applications->save($application)) {
 				$this->Flash->success(__('The table has been saved.'));
                 return $this->redirect(['action' => 'index']);
@@ -174,6 +179,10 @@ class ApplicationsController extends AppController
      */
     public function delete(string $tableName)
     {
+		$entry = $this->Applications->getByName($tableName);
+		if ($entry) {
+			$this->Applications->delete($entry);
+		}
 		$this->Applications->drop($tableName);
         return $this->redirect(['action' => 'index']);
     }

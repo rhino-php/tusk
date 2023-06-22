@@ -15,7 +15,7 @@
 						<th data-cell="<?= h(ucfirst($column)) ?>"><?= $this->Paginator->sort($column) ?></th>
 					<?php endforeach ?>
 						
-					<th data-cell="Actions"><?= __('Actions') ?></th>
+					<th align="right" data-cell="Actions"><?= __('Actions') ?></th>
 				</tr>
 			</thead>
 			
@@ -47,14 +47,5 @@
 		<?= $this->Html->link(__('new'), ['action' => 'add', $tableName], ['class' => 'button']) ?>
 	</div>
 
-    <div class="paginator stack">
-		<p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
-        <ul class="pagination cluster list-style-none">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
-        </ul>
-    </div>
+    <?= $this->element('pagination') ?>
 </div>

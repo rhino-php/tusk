@@ -45,7 +45,7 @@ $prefix: -- !default;
 
 	#{$prefix}gutter: 1rem;
 	#{$prefix}vertical-unit: #{$vertical-unit};
-
+	
 	#{$prefix}outer-bound: #{2 * $gutter};
 	#{$prefix}inner-bound-width: #{$inner-bound-width};
 	#{$prefix}outer-bound-width: #{$outer-bound-width};

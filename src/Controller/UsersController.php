@@ -70,18 +70,30 @@ class UsersController extends AppController
      */
     public function edit($id = null)
     {
-        $user = $this->Users->get($id, [
-            'contain' => [],
-        ]);
-        if ($this->request->is(['patch', 'post', 'put'])) {
-            $user = $this->Users->patchEntity($user, $this->request->getData());
-            if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+        $user = $this->Users->get($id);
 
-                return $this->redirect(['action' => 'index']);
-            }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
+        if ($this->request->is(['patch', 'post', 'put'])) {
+			$data = $this->request->getData();
+
+			if ($data['newPassword'] === $data['repeatPassword']) {
+				if (!empty($data['newPassword'])) {
+					$data['password'] = $data['newPassword'];
+				}
+
+				$user = $this->Users->patchEntity($user, $data);
+
+
+				if ($this->Users->save($user)) {
+					$this->Flash->success(__('The user has been saved.'));
+					return $this->redirect(['action' => 'index']);
+				}
+				
+				$this->Flash->error(__('The user could not be saved. Please, try again.'));
+			} else {
+				$this->Flash->error(__('Password does not match.'));
+			}
         }
+
         $this->set(compact('user'));
     }
 
@@ -117,10 +129,6 @@ class UsersController extends AppController
 	{
 		$this->Authorization->skipAuthorization();
 
-		$this->title = 'Login';
-		$this->set('title', 'View Active Users');
-
-		// $this->viewBuilder()->assign('title', 'Login');
 		$this->viewBuilder()->setLayout('blank');
 		
 		$this->request->allowMethod(['get', 'post']);
@@ -140,8 +148,6 @@ class UsersController extends AppController
 		if ($this->request->is('post') && !$result->isValid()) {
 			$this->Flash->error(__('Invalid username or password'));
 		}
-
-		$this->set(["title" => 'Login']);
 	}
 
 	public function logout()

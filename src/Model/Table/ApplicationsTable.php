@@ -11,11 +11,15 @@ use Migrations\AbstractMigration;
 class ApplicationsTable extends Table
 {
 	private $tableBlackList = [
-		// 'tusk_apps',
-		'tusk_groups',
-		"tusk_phinxlog",
 		"phinxlog",
-		'tusk_users'
+		"tusk_phinxlog",
+		'tusk_users',
+		'tusk_groups',
+		'tusk_apps',
+		'tusk_pages',
+		'tusk_layouts',
+		'tusk_elements',
+		'tusk_contents',
 	];
 
     /**
@@ -44,6 +48,16 @@ class ApplicationsTable extends Table
 		$this->abstract->setAdapter($env->getAdapter());
     }
 
+	public function getByName($tableName) {
+		$query = $this->find()->where(['Applications.name' => $tableName]);
+		
+		if ($query->isEmpty()) {
+			return false;
+		}
+
+		return $query->first();
+	}
+
 	public function getList(array $filter = []) {
 		$balcklist = array_merge($this->tableBlackList, $filter);
 		$_tables = $this->abstract->query("show tables")->fetchAll();
@@ -54,7 +68,7 @@ class ApplicationsTable extends Table
 			if (in_array($tableName, $balcklist)) {
 				continue;
 			}
-			$tables[]['name'] = $tableName;
+			$tables[] = $tableName;
 		}
 
 		return $tables;

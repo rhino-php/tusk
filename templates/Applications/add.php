@@ -1,15 +1,21 @@
-<h1>Create new Table in Database</h1>
-<?php
-    echo $this->Form->create(Null, ["class" => "stack"]);
-	echo $this->Form->control("name");
-	echo $this->Form->control("alias");
-?>
+<div>
+	<h1>Create new Table</i></h1>
 
-<div class="cluster">
-	<?php
-		echo $this->Form->button('Save');
-		echo $this->Html->link("Back", $this->backLink(), ["class" => "button"]);
-	?>
+	<?= $this->Form->create(null, ["class" => "stack"]); ?>
+	<?= $this->Form->control('name') ?>
+	<?= $this->Form->control('alias') ?>
+
+	<?= $this->Form->control('tusk_group_id', [
+		"type" => "select",
+		"options" => $groups
+	]); ?>
+
+	<?= $this->Form->control('active', ["type" => "checkbox", "checked" => true]) ?>
+
+	<div class="cluster">
+		<?= $this->Form->button('Save') ?>
+		<?= $this->Html->link("Back", ['action' => 'index'], ["class" => "button"]) ?>
+	</div>
+
+	<?= $this->Form->end(); ?>
 </div>
-
-<?= $this->Form->end(); ?>

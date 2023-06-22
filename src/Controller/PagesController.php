@@ -85,6 +85,20 @@ class PagesController extends BaseController {
 		]);
 	}
 
+	public function delete(int $id) {
+		$entry = $this->Pages->getEntry($id);
+		$this->request->allowMethod(['post', 'delete']);
+		$entry = $this->Pages->get($id);
+
+		if ($this->Pages->delete($entry)) {
+			$this->Flash->success(__('The Page has been deleted.'));
+		} else {
+			$this->Flash->error(__('The Page could not be deleted. Please, try again.'));
+		}
+
+		return $this->redirect(['action' => 'index']);
+	}
+
 	public function layout(int $id) {
 		$this->setPlugin(null);
 		$this->viewBuilder()->setLayout('default');

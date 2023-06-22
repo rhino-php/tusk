@@ -2,6 +2,10 @@
 @use "shapes" as *;
 
 .main-header {
+	// position: sticky;
+	// top: 0;
+	// z-index: 600;
+
 	background-color: var(--tusk-text-color);
 	color: var(--tusk-contrast-color);
 	padding: 1rem;

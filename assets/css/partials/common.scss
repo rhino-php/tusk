@@ -105,11 +105,11 @@ body {
 }
 
 .outer-bound {
-  @include shapes.bound(var(--tusk-outer-bound-width), var(--tusk-gutter));
+  @include shapes.bound(var(--tusk-outer-bound-width), var(--tusk-outer-bound));
 }
 
 .inner-bound {
-  @include shapes.bound(var(--tusk-inner-bound-width), var(--tusk-gutter));
+  @include shapes.bound(var(--tusk-inner-bound-width), var(--tusk-outer-bound));
 }
 
 .full-width {

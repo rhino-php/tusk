@@ -1,3 +1,5 @@
+<?php $this->assign('title', 'login') ?>
+
 <div class="box box--alt form stack">
 	<div class="center login-logo">
 		<?php include APP . "../plugins/Tusk/webroot/icon/logo-big.svg" ?>
