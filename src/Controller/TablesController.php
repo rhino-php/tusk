@@ -59,6 +59,7 @@ class TablesController extends AppController
     {
 		$this->Tables->setTable($tableName);
         $entry = $this->Tables->newEmptyEntity();
+		$fields = $this->Fields->getFields($tableName);
 
         if ($this->request->is('post')) {
             $table = $this->Tables->patchEntity($entry, $this->request->getData());
@@ -71,7 +72,8 @@ class TablesController extends AppController
         }
 
 		$this->set([
-			'entry' => $entry
+			'entry' => $entry,
+			'fields' => $fields
 		]);
     }
 
@@ -86,10 +88,11 @@ class TablesController extends AppController
     {
 		$this->Tables->setTable($tableName);
         $entry = $this->Tables->get($id);
+		$fields = $this->Fields->getFields($tableName);
 
         if ($this->request->is(['patch', 'post', 'put'])) {
             $table = $this->Tables->patchEntity($entry, $this->request->getData());
-            if ($this->Tables->save($entry)) {
+            if ($this->Tables->save($table)) {
                 $this->Flash->success(__('The entry has been saved.'));
 
                 return $this->redirect(['action' => 'view', $tableName]);
@@ -98,7 +101,8 @@ class TablesController extends AppController
         }
 		
         $this->set([
-			'entry' => $entry
+			'entry' => $entry,
+			'fields' => $fields
 		]);
     }
 

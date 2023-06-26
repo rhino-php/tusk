@@ -24,6 +24,10 @@ input, textarea, select {
 	@include padding;
 }
 
+input[type=text], textarea {
+	cursor: text;
+}
+
 label {
 	font-weight: 600;
 }

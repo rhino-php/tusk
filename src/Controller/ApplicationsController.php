@@ -73,8 +73,8 @@ class ApplicationsController extends AppController
 				return;
 			}
 
-			$this->Applications->create($data["name"]);
 			$entry = $this->Applications->newEntity($data);
+			$this->Applications->create($data["name"]);
 			
 			if ($this->Applications->save($entry)) {
 				$this->Flash->success(__('The table has been saved.'));

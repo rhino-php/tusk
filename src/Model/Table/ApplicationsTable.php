@@ -16,6 +16,7 @@ class ApplicationsTable extends Table
 		'tusk_users',
 		'tusk_groups',
 		'tusk_apps',
+		'tusk_fields',
 		'tusk_pages',
 		'tusk_layouts',
 		'tusk_elements',

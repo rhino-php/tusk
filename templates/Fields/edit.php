@@ -1,5 +1,5 @@
-<h1>Add Field to: <i><?= $tableName ?></i></h1>
-<?= $this->Form->create(Null, ["class" => "stack"]) ?>
+<h1>Edit Field <i><?= $entry->name ?></i> in Table: <i><?= $tableName ?></i></h1>
+<?= $this->Form->create($entry, ["class" => "stack"]); ?>
 
 <div class="stack--200">
 	<?= $this->Form->control("name", ["required"]) ?>
@@ -10,15 +10,15 @@
 </div>
 
 <div class="stack--200">
-	<?= $this->Form->control("position", ["value" => 0]) ?>
+	<?= $this->Form->control("position", ["value" => $entry->position ?: 0 ]) ?>
 </div>
 
 <div class="stack--200">
-	<?= $this->Form->control("active", ["value" => 1]) ?>
+	<?= $this->Form->control("active", ["value" => $entry->active ?: 1 ]) ?>
 </div>
 
 <div class="stack--200">
-	<?= $this->Form->control('type', ["type" => "select", "options" => $types, "required"]); ?>
+	<?= $this->Form->control('type', ["type" => "select", "options" => $types, "required", 'value' => $entry->Type]); ?>
 </div>
 
 <div class="stack--200">
@@ -96,5 +96,6 @@
 	<?= $this->Html->link("Back", ['action' => 'index', $tableName], ["class" => "button"]) ?>
 </div>
 
+<?= $this->Form->hidden('currentName', ["value" => $entry["name"]]) ?>
 <?= $this->Form->hidden('tableName', ["value" => $tableName]) ?>
 <?= $this->Form->end(); ?>

@@ -1,7 +1,9 @@
 export default class DragDrop {
 	loadElements(elements, callback) {
-		this.dropZone = elements[0].parentNode;
-		this.callback = callback;
+		if (elements.length > 0) {
+			this.dropZone = elements[0].parentNode;
+			this.callback = callback;
+		}
 
 		elements.forEach(element => {
 			element.addEventListener('dragstart', (event) => this.dragStart(event.target));

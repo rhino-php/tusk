@@ -46,6 +46,31 @@ class TuskInit extends AbstractMigration
 			])
 			->create();
 
+		$this->table('tusk_fields')
+			->addColumn('name', 'string', [
+				'default' => null,
+				'limit' => 100,
+				'null' => false,
+			])
+			->addColumn('alias', 'string', [
+				'default' => null,
+				'limit' => 100,
+				'null' => true,
+			])
+			->addColumn('tableName', 'string', [
+				'default' => null,
+				'limit' => 100,
+				'null' => false,
+			])
+			->addColumn('type', 'string', [
+				'default' => 'string',
+			])
+			->addColumn('description', 'text', [
+				'default' => null,
+				'null' => true,
+			])
+			->create();
+
 		$this->table('tusk_apps')
 			->addColumn('name', 'string', [
 				'default' => null,
@@ -169,10 +194,6 @@ class TuskInit extends AbstractMigration
 			->addColumn('element_id', 'integer', [
 				'default' => Null,
 			])
-			->addColumn('text', 'string', [
-				'default' => null,
-				'null' => true,
-			])
 			->addColumn('html', 'text', [
 				'default' => null,
 				'null' => true,
@@ -236,8 +257,7 @@ class TuskInit extends AbstractMigration
 					[
 						'page_id' => 1,
 						'element_id' => 1,
-						'text' => 'Welcome to Rhino 🦏',
-						'html' => '<p>The fast but stable Application-Framwork.<br/>Powered by <a href="https://cakephp.org/">CakePHP</a>.</p>'
+						'html' => '{"time":1687790356480,"blocks":[{"id":"BkMrFh55lD","type":"header","data":{"text":"Welcome to Rhino 🦏","level":2}},{"id":"R_LcFT6kwI","type":"paragraph","data":{"text":"The fast but stable Application-Framwork.<br>Powered by <a href=\"https://cakephp.org/\">CakePHP</a>."}}],"version":"2.26.5"}'
 					]
 				])
 				->saveData();
