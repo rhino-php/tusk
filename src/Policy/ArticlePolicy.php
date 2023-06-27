@@ -4,12 +4,12 @@ declare(strict_types=1);
 namespace Tusk\Policy;
 
 use Authorization\IdentityInterface;
-use Tusk\Model\Entity\Article;
+// use Tusk\Model\Entity\Article;
 
 /**
  * Article policy
  */
-class ArticlePolicy
+class AppPolicy
 {
     /**
      * Check if $user can add Article

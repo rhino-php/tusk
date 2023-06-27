@@ -21,10 +21,13 @@ https://xd.adobe.com/view/ee0ba304-8907-40aa-918f-b787c5dc5926-bb58/screen/a86c4
 - [X] Fix Nav
 - [ ] Add Field Types
 - [ ] Add Media
+  - [ ] Add File Chooser
+  - [ ] Add Multiselect from Table (with Positioning)
 - [ ] Add Widgets
 - [ ] Enhance Page overview
 - [ ] Extend Layoutmode
 - [ ] Add Overview Customasation
+  - [ ] PHP Info in Modal
 - [ ] Add Table Customasation
 - [ ] Rechte und rollen verwaltung erweitern
 - [ ] Mehrsprachigkeit
