@@ -26,7 +26,7 @@ class FieldsController extends AppController
 		
 			$entry = $this->Fields->newEntity($data);
 			$this->Fields->create($tableName, $data);
-
+			
 			if ($this->Fields->save($entry)) {
 				$this->Flash->success(__('The table has been saved.'));
 				return $this->redirect(['action' => 'index', $data['tableName']]);

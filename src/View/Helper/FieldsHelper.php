@@ -36,7 +36,10 @@ class FieldsHelper extends Helper {
 	}
 
 	private function getField($field, $value) {
+		
+		$field->alias = $field->alias ?: $field->name;
 		$params = $field->toArray();
+		
 		$params['value'] = $value;
 		$params['class'] = 'input';
 		$params['type'] = 'text';
