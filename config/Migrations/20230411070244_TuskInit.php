@@ -219,7 +219,7 @@ class TuskInit extends AbstractMigration
 					[
 						'name' => 'Rhino',
 						'email' => 'rhino@example.com',
-						'password' => '$2y$10$K3QWvKMgUII15BYrojErpuY8nfCFBZbH2/cp9byzq6iG8olEHCeb.'
+						'password' => '$2y$10$D6POTVNQcplsR2bvLXiS3.fnS310gKtaWkLC.82MxMuzRQPhxpv46'
 					]
 				])
 				->saveData();
