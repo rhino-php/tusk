@@ -13,6 +13,11 @@ class TuskInit extends AbstractMigration
      * @return void
      */
     public function change(): void {
+
+		echo '<pre>';
+		var_dump($_ENV);
+		die;
+
 		$userTable = 'tusk_users';
 		$layoutsTable = 'tusk_layouts';
 		$elementsTable = 'tusk_elements';
@@ -217,9 +222,9 @@ class TuskInit extends AbstractMigration
 			$this->table($userTable)
 				->insert([
 					[
-						'name' => 'Carsten Coull',
-						'email' => 'carsten.coull@swu.de',
-						'password' => '$2y$10$ir6eCGhZ/F9Ah0pSRDJ05.4z0hfHQaV.3W20XCqaqNqoY1T7wSxQK'
+						'name' => 'Rhino',
+						'email' => 'rhino@example.com',
+						'password' => '$2y$10$K3QWvKMgUII15BYrojErpuY8nfCFBZbH2/cp9byzq6iG8olEHCeb.'
 					]
 				])
 				->saveData();
