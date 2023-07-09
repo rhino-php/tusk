@@ -13,11 +13,6 @@ class TuskInit extends AbstractMigration
      * @return void
      */
     public function change(): void {
-
-		echo '<pre>';
-		var_dump($_ENV);
-		die;
-
 		$userTable = 'tusk_users';
 		$layoutsTable = 'tusk_layouts';
 		$elementsTable = 'tusk_elements';
