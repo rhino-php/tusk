@@ -177,7 +177,7 @@ class PagesController extends BaseController {
 		}
 		
 		$this->Pages = new PagesTable();
-		$page = $this->Pages->slug(urldecode($slug));
+		$page = $this->Pages->slug(urldecode($slug ?: ""));
 
         $this->set(compact('page', 'subpage'));
 		
