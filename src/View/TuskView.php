@@ -84,6 +84,6 @@ trait TuskView
 	public function pageLink(int $id, array $options = []) : string {
 		$this->Pages = new PagesTable();
 		$page = $this->Pages->get($id);
-		return $this->Html->link($page["name"], ['plugin' => null, 'controller' => 'Pages', 'action' => 'display', $page["name"]], $options);
+		return $this->Html->link($page["name"], ['plugin' => null, 'controller' => 'Pages', 'action' => 'display', urlencode($page["name"])], $options);
 	}
 }
