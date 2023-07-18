@@ -73,7 +73,7 @@ class TablesController extends AppController
 
 		$this->set([
 			'entry' => $entry,
-			'fields' => $fields["fields"]
+			'fields' => $fields
 		]);
     }
 
