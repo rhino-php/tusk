@@ -19,10 +19,11 @@ class LayoutsTable extends Table {
         parent::initialize($config);
 
         $this->setTable('tusk_layouts');
-        $this->setDisplayField('name');
+        // $this->setDisplayField('name');
         $this->setPrimaryKey('id');
 
-		$this->hasMany('Tusk.Elements');
+		// $this->hasMany('Tusk.Elements');
+		// $this->hasMany('Tusk.Pages');
     }
 		
 	public function getEntry(int $id = null): object {

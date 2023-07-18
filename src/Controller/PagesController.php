@@ -101,7 +101,6 @@ class PagesController extends BaseController {
 
 	public function layout(int $id) {
 		$this->setPlugin(null);
-		$this->viewBuilder()->setLayout('default');
 		$page = $this->Pages->get($id, [
 			'contain' => [
 				'Contents' => [
@@ -109,13 +108,15 @@ class PagesController extends BaseController {
 					'sort' => [
 						'Contents.position' => 'ASC'
 					]
-				]
+				],
+				'Layouts'
 			]
 		]);
-
+			
 		$this->set([
 			'page' => $page,
 		]);
+		$this->viewBuilder()->setLayout($page->layout->layout);
 		 
 		try {
             return $this->render('Tusk.layout');
@@ -178,10 +179,10 @@ class PagesController extends BaseController {
 		$this->Pages = new PagesTable();
 		$page = $this->Pages->slug($slug);
 
-		$this->viewBuilder()->setLayout('default');
         $this->set(compact('page', 'subpage'));
-
+		
         try {
+			$this->viewBuilder()->setLayout($page->layout->layout);
             return $this->render('Tusk.display');
         } catch (MissingTemplateException $exception) {
             if (Configure::read('debug')) {

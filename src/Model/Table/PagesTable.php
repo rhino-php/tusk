@@ -27,7 +27,7 @@ class PagesTable extends Table {
             ->setDependent(true);
 
 		$this->hasOne('Tusk.Pages');
-		$this->hasOne('Tusk.Layouts');
+		$this->belongsTo('Tusk.Layouts');
     }
 
 	public function afterSave($event, $entity, $options) {
@@ -59,17 +59,27 @@ class PagesTable extends Table {
 	}
 
 	public function slug(string $slug = null) {
-		$contain = ['Contents' => ['Elements', 'sort' => ['Contents.position' => 'ASC']]];
-		$where = ["name" => $slug];
+		$contain = [
+			'Contents' => [
+				'Elements', 
+				'sort' => [
+					'Contents.position' => 'ASC'
+				]
+			],
+			'Layouts'
+		];
+
+		$where = ["Pages.name" => $slug];
 
 		if (!$slug) {
 			$where = ["is_homepage" => 1];
 		}
 
-		return $this->find()
+		$query = $this->find()
 				->where($where)
-				->contain($contain)
-				->first();
+				->contain($contain);
+
+		return $query->first();
 	}
 	
 	public function getChildren($parentId, $pages) {
