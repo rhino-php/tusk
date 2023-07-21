@@ -32,5 +32,5 @@
 			"Cake\\Test\\": "vendor/cakephp/cakephp/tests/"
 		}
 	},
-	"minimum-stability": "dev",
+	"minimum-stability": "dev"
 }
