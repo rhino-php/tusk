@@ -34,6 +34,7 @@ class GroupsCell extends Cell {
     public function display() {
 		$user = $this->request->getAttribute('authentication')->getIdentity();
 
+		// ToDo: Contain bricks new installs?
 		$_groups = $this->Groups->find('all')->contain(['Applications'])->all();
 		$groups = [];
 
