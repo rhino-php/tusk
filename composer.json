@@ -1,23 +1,40 @@
 {
-    "name": "coullc/rhino",
-    "description": "Rhino plugin for CakePHP",
-    "type": "cakephp-plugin",
-    "license": "MIT",
-    "require": {
-        "php": ">=7.4"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^8.5 || ^9.3"
-    },
-    "autoload": {
-        "psr-4": {
-            "Tusk\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Tusk\\Test\\": "tests/",
-            "Cake\\Test\\": "vendor/cakephp/cakephp/tests/"
-        }
-    }
+	"name": "coullc/rhino",
+	"description": "Rhino plugin for CakePHP",
+	"type": "cakephp-plugin",
+	"keywords": [
+		"cakephp",
+		"cms"
+	],
+	"homepage": "https://rhino.coull.dev",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Carsten Coull",
+			"homepage": "https://coull.dev",
+			"role": "Author"
+		}
+	],
+	"require": {
+		"php": ">=7.4"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "^8.5 || ^9.3"
+	},
+	"autoload": {
+		"psr-4": {
+			"Tusk\\": "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Tusk\\Test\\": "tests/",
+			"Cake\\Test\\": "vendor/cakephp/cakephp/tests/"
+		}
+	},
+	"scripts": {
+		"post-install-cmd": [
+			"pwd"
+		]
+	}
 }
