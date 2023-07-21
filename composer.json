@@ -35,7 +35,7 @@
 	"minimum-stability": "dev",
 	"scripts": {
 		"post-install-cmd": [
-			"pwd"
+			"cp -aR vendor/coullc/rhino/skeleton/**/* ."
 		]
 	}
 }
