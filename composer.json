@@ -1,6 +1,6 @@
 {
-	"name": "coullc/rhino",
-	"description": "Rhino plugin for CakePHP",
+	"name": "coullc/tusk",
+	"description": "Tusk, a CMS and Application-Framework plugin for CakePHP",
 	"type": "cakephp-plugin",
 	"keywords": [
 		"cakephp",
@@ -33,9 +33,4 @@
 		}
 	},
 	"minimum-stability": "dev",
-	"scripts": {
-		"post-install-cmd": [
-			"cp -aR vendor/coullc/rhino/skeleton/**/* ."
-		]
-	}
 }
