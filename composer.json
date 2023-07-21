@@ -1,6 +1,6 @@
 {
-    "name": "rhino/tusk",
-    "description": "Tusk plugin for CakePHP",
+    "name": "coullc/rhino",
+    "description": "Rhino plugin for CakePHP",
     "type": "cakephp-plugin",
     "license": "MIT",
     "require": {
