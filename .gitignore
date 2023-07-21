@@ -7,9 +7,4 @@
 /vendor/
 /.idea/
 node_modules
-webroot/css
-webroot/js
-webroot/icon
-webroot/img
-webroot/font
 .history/
