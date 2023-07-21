@@ -32,6 +32,7 @@
 			"Cake\\Test\\": "vendor/cakephp/cakephp/tests/"
 		}
 	},
+	"minimum-stability": "dev",
 	"scripts": {
 		"post-install-cmd": [
 			"pwd"
