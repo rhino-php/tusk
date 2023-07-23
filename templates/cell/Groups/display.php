@@ -1,6 +1,6 @@
 <a id="home" href="<?= $this->Url->build(['controller' => 'Overview', 'action' => 'display', 'home']) ?>">
 	<div class="logo">
-		<?= $this->svg("icon/logo-big.svg") ?>
+		<?= $this->svg("Tusk.logo-big") ?>
 	</div>
 	<span class="sr-only">Rhino</span>
 </a>
@@ -38,7 +38,7 @@
 					?>
 					<details <?= $check ? 'open' : '' ?> >
 						<summary <?= $check ? 'aria-current="page"' : '' ?> class="button button--icon">
-							<?= $this->svg($button['icon'] ?: "icon/folder.svg") ?>
+							<?= $this->svg($button['icon'] ?: "Tusk.folder") ?>
 							<span><?= $button['name'] ?></span>
 						</summary>
 						
@@ -46,7 +46,7 @@
 							<?php foreach ($button['buttons'] as $item): ?>
 								<li class="nav-block__item">
 									<a <?= $this->getCurrent($item['link']) ?> class="button button--icon" href="<?= $this->Url->build($item['link']) ?>">
-										<?= $this->svg($item['icon'] ?: "icon/folder.svg") ?>
+										<?= $this->svg($item['icon'] ?: "Tusk.folder") ?>
 										<span><?= $item['name'] ?></span>
 									</a>
 								</li>

@@ -4,21 +4,43 @@ declare(strict_types=1);
 namespace Tusk\View;
 
 use Tusk\Model\Table\PagesTable;
+use Cake\View\Exception\MissingLayoutException;
+use Cake\Core\Plugin;
 
 trait TuskView
 {
+	public $svgFolder = "webroot/icon";
+	public $svgExtension = ".svg";
+
 	public function classSave($string): string {
 		$_string = urlencode(str_replace(" ", "-", strtolower($string)));
 		return $_string;
 	}
 
-	public function svg($string): string {
-		$path = $this->pathToWebroot() . $string;
-		return file_get_contents($path);
+	public function svg($filename) {
+		$filePath = $this->getSvgFilePath($filename);
+	
+		if (file_exists($filePath)) {
+			$svgContent = file_get_contents($filePath);
+			return $svgContent;
+		}
+
+		return '';
 	}
 
-	public function pathToWebroot(): string {
-		return \Cake\Core\App::path('plugins')[0] . "Tusk" . DS . "webroot" . DS;
+	private function getSvgFilePath($filename) {
+		$pluginDotNotation = explode('.', $filename, 2);
+
+		if (count($pluginDotNotation) === 2) {
+			list($plugin, $filename) = $pluginDotNotation;
+			$filePath = Plugin::path($plugin);
+		} else {
+			$filePath = ROOT . DS;
+		}
+
+		$filePath .= $this->svgFolder . DS . $filename . $this->svgExtension;
+
+		return $filePath;
 	}
 
 	public function backLink() : string {

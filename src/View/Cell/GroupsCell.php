@@ -62,7 +62,7 @@ class GroupsCell extends Cell {
 					[
 						'name' => 'Dashboard',
 						'link' => ['controller' => 'Overview', 'action' => 'display', 'home'],
-						'icon' => "icon/home.svg"
+						'icon' => "Tusk.home"
 					]
 				]
 			],
@@ -72,17 +72,17 @@ class GroupsCell extends Cell {
 					[
 						'name' => 'Seiten',
 						'link' => ['controller' => 'Pages', 'action' => 'index'],
-						'icon' => "icon/file.svg"
+						'icon' => "Tusk.file"
 					],
 					[
 						'name' => 'Medien',
 						'link' => ['controller' => 'Media', 'action' => 'index'],
-						'icon' => "icon/image.svg"
+						'icon' => "Tusk.image"
 					],
 					[
 						'name' => 'Widgets',
 						'link' => ['controller' => 'Widgets', 'action' => 'index'],
-						'icon' => "icon/sidebar.svg"
+						'icon' => "Tusk.sidebar"
 					]
 				]
 			],
@@ -95,59 +95,59 @@ class GroupsCell extends Cell {
 				"buttons" => [
 					[
 						'name' => 'Templates',
-						'icon' => "icon/table.svg",
+						'icon' => "Tusk.table",
 						'buttons' => [
 							[
 								'name' => 'Elements',
-								'icon' => "icon/book.svg",
+								'icon' => "Tusk.book",
 								'link' => ['controller' => 'Tables', 'action' => 'view', 'tusk_elements']
 							],
 							[
 								'name' => 'Layouts',
-								'icon' => "icon/book.svg",
+								'icon' => "Tusk.book",
 								'link' => ['controller' => 'Tables', 'action' => 'view', 'tusk_layouts']
 							]
 						]
 					],
 					[
 						'name' => 'Benutzerverwaltung',
-						'icon' => "icon/users.svg",
+						'icon' => "Tusk.users",
 						'buttons' => [
 							[
 								'name' => 'Nutzerverwaltung',
-								'icon' => "icon/users.svg",
+								'icon' => "Tusk.users",
 								'link' => ['controller' => 'Users']
 							],
 							[
 								'name' => 'Rechteverwaltung',
-								'icon' => "icon/lock.svg",
+								'icon' => "Tusk.lock",
 								'link' => '/'
 							]
 						]
 					],
 					[
 						'name' => 'Admin',
-						'icon' => "icon/settings.svg",
+						'icon' => "Tusk.settings",
 						'buttons' => [
 							[
 								'name' => 'Applikation-Manager',
-								'icon' => "icon/book.svg",
+								'icon' => "Tusk.book",
 								'link' => ['controller' => 'Applications', "action" => "index"]
 							]
 						]
 					],
 					[
 						'name' => 'Profil',
-						'icon' => "icon/user.svg",
+						'icon' => "Tusk.user",
 						'buttons' => [
 							[
 								'name' => 'Profil bearbeiten',
-								'icon' => "icon/edit.svg",
+								'icon' => "Tusk.edit",
 								'link' => ["controller" => "Users", "action" => "edit", $user->id]
 							],
 							[
 								'name' => 'log-out',
-								'icon' => "icon/log-out.svg",
+								'icon' => "Tusk.log-out",
 								'link' => ["controller" => "Users", "action" => "logout"]
 							]
 						]

@@ -4,7 +4,7 @@
 	</div>
 	<button id="menu-button" class="icon-button">
 		<span class="sr-only">Toggle menu</span>
-		<span class="icon menu"><?= $this->svg('/icon/menu.svg') ?></span>
-		<span class="icon cross"><?= $this->svg('/icon/x.svg') ?></span>
+		<span class="icon menu"><?= $this->svg('Tusk.menu') ?></span>
+		<span class="icon cross"><?= $this->svg('Tusk.x') ?></span>
 	</button>
 </header>
