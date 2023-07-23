@@ -32,9 +32,9 @@ bin/cake migrations migrate -p Tusk
 
 You find the Login under `/tusk`
 
-Email: rhino.example.com
+Email: 		rhino@example.com
 
-Password: #tusk
+Password: 	#tusk
 
 ---
 
