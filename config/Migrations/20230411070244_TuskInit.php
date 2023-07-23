@@ -18,8 +18,11 @@ class TuskInit extends AbstractMigration
 		$elementsTable = 'tusk_elements';
 		$contentsTable = 'tusk_contents';
 		$pagesTable = 'tusk_pages';
+		$options = [
+			"collation" => 'utf8mb4_unicode_ci'
+		];
 
-		$this->table($userTable)
+		$this->table($userTable, $options)
 			->addColumn('name', 'string', [
 				'default' => null,
 				'limit' => 100,
@@ -46,7 +49,7 @@ class TuskInit extends AbstractMigration
 			])
 			->create();
 
-		$this->table('tusk_fields')
+		$this->table('tusk_fields', $options)
 			->addColumn('name', 'string', [
 				'default' => null,
 				'limit' => 100,
@@ -71,7 +74,7 @@ class TuskInit extends AbstractMigration
 			])
 			->create();
 
-		$this->table('tusk_apps')
+		$this->table('tusk_apps', $options)
 			->addColumn('name', 'string', [
 				'default' => null,
 				'limit' => 100,
@@ -97,7 +100,7 @@ class TuskInit extends AbstractMigration
 			])
 			->create();
 
-		$this->table('tusk_groups')
+		$this->table('tusk_groups', $options)
 			->addColumn('name', 'string', [
 				'default' => null,
 				'limit' => 100,
@@ -115,7 +118,7 @@ class TuskInit extends AbstractMigration
 			])
 			->create();
 
-		$this->table('tusk_pages')
+		$this->table('tusk_pages', $options)
 			->addColumn('name', 'string', [
 				'default' => null,
 				'limit' => 100,
@@ -145,7 +148,7 @@ class TuskInit extends AbstractMigration
 			])
 			->create();
 
-		$this->table($layoutsTable)
+		$this->table($layoutsTable, $options)
 			->addColumn('name', 'string', [
 				'default' => null,
 				'limit' => 100,
@@ -166,7 +169,7 @@ class TuskInit extends AbstractMigration
 			])
 			->create();
 		
-		$this->table($elementsTable)
+		$this->table($elementsTable, $options)
 			->addColumn('name', 'string', [
 				'default' => null,
 				'limit' => 100,
@@ -187,7 +190,7 @@ class TuskInit extends AbstractMigration
 			])
 			->create();
 		
-		$this->table($contentsTable)
+		$this->table($contentsTable, $options)
 			->addColumn('page_id', 'integer', [
 				'default' => Null,
 			])
@@ -257,7 +260,7 @@ class TuskInit extends AbstractMigration
 					[
 						'page_id' => 1,
 						'element_id' => 1,
-						'html' => '{"time":1687790356480,"blocks":[{"id":"BkMrFh55lD","type":"header","data":{"text":"Welcome to Rhino 🦏","level":2}},{"id":"R_LcFT6kwI","type":"paragraph","data":{"text":"The fast but stable Application-Framwork.<br>Powered by <a href=\"https://cakephp.org/\">CakePHP</a>."}}],"version":"2.26.5"}'
+						'html' => '{"time":1690121834854,"blocks":[{"id":"BkMrFh55lD","type":"header","data":{"text":"Welcome to Rhino &#x1F98F;","level":1}},{"id":"R_LcFT6kwI","type":"paragraph","data":{"text":"The fast but stable Application-Framwork.<br>Powered by <a href=\"https://cakephp.org/\">CakePHP</a>."}}],"version":"2.26.5"}'
 					]
 				])
 				->saveData();
