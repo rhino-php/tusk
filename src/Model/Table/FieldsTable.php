@@ -8,6 +8,8 @@ use Cake\ORM\Table;
 use Migrations\Migrations;
 use Migrations\AbstractMigration;
 
+use Tusk\Handlers\FieldTypeHandler;
+
 class FieldsTable extends Table {
 
 	public $rows = [
@@ -19,49 +21,10 @@ class FieldsTable extends Table {
 		"Extra"
 	];
 
-	public $commonTypes = [
-		"string" => "varchar(255)", 
-		"text",
-		"integer" => "int(11) unsigned",
-		"boolean" => "tinyint(1) unsigned",
-		"float",
-		"date",
-		"datetime",
-		"time",
-		"timestamp",
-	];
-
-	public $types = [
-		"binary",
-		"bit",
-		"biginteger",
-		"blob",
-		"char",
-		"decimal",
-		"double",
-		"enum",
-		"json",
-		"set",
-		"smallinteger",
-		"uuid"
-	];
-
-	private $fieldValues = [
-		"limit",
-		"comment",
-		"default",
-		"null",
-		"after",
-		"signed",
-		"precision",
-		"scale",
-		"values",
-		"update",
-		"timezone"
-	];
-
     public function initialize(array $config): void {
 		parent::initialize($config);
+
+		$this->FieldTypes = new FieldTypeHandler();
 
 		$this->setTable('tusk_fields');
 		$this->setDisplayField('id');
@@ -125,7 +88,7 @@ class FieldsTable extends Table {
 
 		foreach ($fields as $key => $field) {
 			$column = $this->getColumn($tableName, $field->name);
-			$column['Type'] = $this->translateType($column['Type']);
+			$column['Type'] = $this->FieldTypes->translateType($column['Type']);
 			$field->set($column);
 			$handledFields[] = $field->name;
 		}
@@ -143,7 +106,7 @@ class FieldsTable extends Table {
 
 	public function create(string $tableName, array $data) : void {
 		$table = $this->abstract->table($tableName);
-		$table->addColumn($data['name'], $data['type'], $this->prepareFieldOptions($data));
+		$table->addColumn($data['name'], $data['type'], $this->FieldTypes->prepareFieldOptions($data));
 		$table->save();
 	}
 
@@ -174,63 +137,18 @@ class FieldsTable extends Table {
 		return $entry;
 	}
 
-	public function translateType(string $type) : string {
-		$types = array_merge($this->commonTypes, $this->types);
-		
-		foreach ($types as $key => $value) {
-			if ( is_string($key) && $type === $value) {
-				return $key;
-			}
-		}
-		
-		return $type;
+	public function update($tableName, $fieldName, $data) {
+		$type = $this->FieldTypes->getType($data["type"]);
+		$table = $this->abstract->table($tableName);
+		$table->changeColumn($fieldName, $type, $this->FieldTypes->prepareFieldOptions($data));
+		$table->update();
+	}
+
+	public function translateType(string $type): string {
+		return $this->FieldTypes->translateType($type);
 	}
 
 	public function getTypes() {
-		return [
-			"Common Types" => $this->prepareForSelect($this->commonTypes),
-			"All Types" => $this->prepareForSelect($this->types)
-		];
-	}
-
-	private function prepareForSelect($values) {
-		$selectOptions = [];
-
-		foreach ($values as $key => $value) {
-			if (is_string($key)) {
-				$value =  $key;
-			}
-
-			$selectOptions[$value] = $value;
-		}
-
-		return $selectOptions;
-	}
-
-	private function prepareFieldOptions($data) {
-		$options = [];
-
-		foreach ($this->fieldValues as $value) {
-			// $foo !== "" insted of !empty($foo) to allow 0 as default
-			if (isset($data[$value]) && $data[$value] !== "") {
-				$options[$value] = $data[$value];
-			}
-		}
-
-		if ($data["current_time"]) {
-			$options["default"] = "CURRENT_TIMESTAMP";
-		}
-
-		if ($data["update"]) {
-			$options["update"] = "CURRENT_TIMESTAMP";
-		}
-
-		return $options;
-	}
-
-	public function update($tableName, $fieldName, $data) {
-		$table = $this->abstract->table($tableName);
-		$table->changeColumn($fieldName, $data['type'], $this->prepareFieldOptions($data));
-		$table->update();
+		return $this->FieldTypes->getTypes();
 	}
 }

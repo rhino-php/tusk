@@ -38,7 +38,32 @@ Password: 	#tusk
 
 ---
 
+## Development
+
+See [rhino](https://github.com/Tyqo/rhino).
+Clone Rhino, then Clone Tusk in the Plugins folder.
+
 [mokup](https://xd.adobe.com/view/ee0ba304-8907-40aa-918f-b787c5dc5926-bb58/screen/a86c465f-e104-44b2-aea7-96f0ec6d08a2/specs/)
+
+### Currently working on: Fieldtypes
+
+Trying to implement custom field types, such as `upload`.
+Started on the `FieldTypeHandler` to store the Information of custom types.
+Also started on the `FieldViewHelper` to take care of the templates.
+View needed for:
+
+- edit
+- overview
+- readonly
+
+It's also important to keep in mind, that Tusk should always be able to work with native fields that are not in it's Tables.
+
+### Next Up: Layoutmode Enhancment
+
+Currently there is only an HTML input field.
+Depending on the Layoutelement the displayed input fields should update.
+
+Also, after en Edit, the newly loaded element is not page aware.
 
 ## ToDos:
 

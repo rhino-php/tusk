@@ -216,6 +216,18 @@ class TuskInit extends AbstractMigration
 			])
 			->create();
 
+		$this->table('tusk_media', $options)
+			->addColumn('filename', 'string')
+			->addColumn('filetype', 'string')
+			->addColumn('created', 'timestamp', [
+				'default' => 'CURRENT_TIMESTAMP'
+			])
+			->addColumn('modified', 'timestamp', [
+				'default' => 'CURRENT_TIMESTAMP',
+				'update' => 'CURRENT_TIMESTAMP'
+			])
+			->create();
+
 		if ($this->isMigratingUp()) {
 			$this->table($userTable)
 				->insert([
