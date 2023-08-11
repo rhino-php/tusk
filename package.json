@@ -4,7 +4,9 @@
   "description": "",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "watch": "tsc --watch"
   },
   "repository": {
     "type": "git",
@@ -34,10 +36,12 @@
     "gulp-sass": "^5.1.0",
     "gulp-svgstore": "^9.0.0",
     "gulp-terser": "^2.1.0",
-	"gulp-typescript": "^6.0.0-alpha.1",
+    "gulp-typescript": "^6.0.0-alpha.1",
     "moment": "^2.29.1",
     "sass": "^1.49.8",
-	"typescript": "^5.0.4",
+    "typescript": "^5.0.4",
+    "webpack": "^5.88.2",
+    "webpack-cli": "^5.1.4",
     "yargs": "^17.3.1"
   },
   "project_settings": {
