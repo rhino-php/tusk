@@ -70,8 +70,6 @@ class FieldsController extends AppController
 			$this->Flash->error(__('The field could not be saved. Please, try again.'));
         }
 
-		$entry->Type = $this->Fields->translateType($entry->Type);
-
 		$columns = $this->prepareSelect(
 			$this->Fields->listColumns($tableName)
 		);

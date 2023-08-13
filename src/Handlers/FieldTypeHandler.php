@@ -8,7 +8,7 @@ class FieldTypeHandler {
 		"upload" => [
 			"alias" => "Upload",
 			"type" => "string"
-		]	
+		]
 	];
 
 	public $commonTypes = [
@@ -113,6 +113,13 @@ class FieldTypeHandler {
 			}
 		}
 
+		return $type;
+	}
+
+	public function getDatabaseType($type) {
+		if (isset($this->customTypes[$type])) {
+			return $this->customTypes[$type]["type"];
+		}
 		return $type;
 	}
 }

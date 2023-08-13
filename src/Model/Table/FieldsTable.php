@@ -57,6 +57,12 @@ class FieldsTable extends Table {
 			foreach ($this->rows as $row) {
 				$column[$row] = $fields[$row];
 			}
+
+			$entry = $this->checkForEntry($column['Field'], $tableName);
+			if (!empty($entry)) {
+				$column['Type'] = $entry['type'];
+			}
+
 			$columns[] = $column;
 		};
 
@@ -106,6 +112,9 @@ class FieldsTable extends Table {
 
 	public function create(string $tableName, array $data) : void {
 		$table = $this->abstract->table($tableName);
+
+		$data['type'] = $this->FieldTypes->getDatabaseType($data['type']);
+
 		$table->addColumn($data['name'], $data['type'], $this->FieldTypes->prepareFieldOptions($data));
 		$table->save();
 	}
@@ -121,20 +130,24 @@ class FieldsTable extends Table {
 	}
 
 	public function getByName($fieldName, $tableName) {
-		$query = $this->find()->where(['name' => $fieldName, 'tableName' => $tableName]);
-		$column = $this->getColumn($tableName, $fieldName);
+		$entry = $this->checkForEntry($fieldName, $tableName);
 
-		if ($query->isEmpty()) {
+		if (empty($entry)) {
 			$entry = $this->newEmptyEntity();
 			$entry->name = $fieldName;
 			$entry->tableName = $tableName;
-		} else {
-			$entry = $query->first();
 		}
 
-		$entry->set($column);
-
 		return $entry;
+	}
+
+	public function checkForEntry($fieldName, $tableName) {
+		$query = $this->find()->where(['name' => $fieldName, 'tableName' => $tableName]);
+		if (!$query->isEmpty()) {
+			return $query->first();
+		}
+	
+		return null;
 	}
 
 	public function update($tableName, $fieldName, $data) {
