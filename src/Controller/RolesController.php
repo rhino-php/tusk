@@ -27,6 +27,8 @@ class RolesController extends AppController {
 	}
 
 	public function compose($entry, $params) {
+		$applications = $this->Roles->Applications->getList(["phinxlog", "tusk_phinxlog"], false);
+
 		if ($this->request->is(['patch', 'post', 'put'])) {
 			$data = $this->request->getData();
 			$table = $this->Roles->patchEntity($entry, $data);
@@ -40,7 +42,9 @@ class RolesController extends AppController {
 		}
 
 		$this->set(array_merge([
-			'entry' => $entry
+			'entry' => $entry,
+			'accessTypes' => $this->Roles->accessTypes,
+			'applications' => $applications
 		], $params));
 
 		try {

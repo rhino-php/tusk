@@ -13,7 +13,8 @@ class TuskInit extends AbstractMigration
      * @return void
      */
     public function change(): void {
-		$userTable = 'tusk_users';
+		$usersTable = 'tusk_users';
+		$rolesTable = 'tusk_roles';
 		$layoutsTable = 'tusk_layouts';
 		$elementsTable = 'tusk_elements';
 		$contentsTable = 'tusk_contents';
@@ -22,7 +23,7 @@ class TuskInit extends AbstractMigration
 			"collation" => 'utf8mb4_unicode_ci'
 		];
 
-		$this->table($userTable, $options)
+		$this->table($usersTable, $options)
 			->addColumn('name', 'string', [
 				'default' => null,
 				'limit' => 100,
@@ -34,7 +35,7 @@ class TuskInit extends AbstractMigration
 				'null' => false,
 			])
 			->addColumn('role_id', 'string', [
-				'default' => '0',
+				'default' => 1,
 				'null' => false,
 			])
 			->addColumn('theme', 'string', [
@@ -57,7 +58,7 @@ class TuskInit extends AbstractMigration
 			])
 			->create();
 
-		$this->table('tusk_roles', $options)
+		$this->table($rolesTable, $options)
 			->addColumn('name', 'string', [
 				'default' => null,
 				'limit' => 100,
@@ -264,14 +265,31 @@ class TuskInit extends AbstractMigration
 			->create();
 
 		if ($this->isMigratingUp()) {
-			$this->table($userTable)
+			$this->table($usersTable)
 				->insert([
 					[
 						'name' => 'Rhino',
 						'email' => 'rhino@example.com',
 						'password' => '$2y$10$D6POTVNQcplsR2bvLXiS3.fnS310gKtaWkLC.82MxMuzRQPhxpv46',
 						'theme' => 'tusk',
-						'role_id' => '0'
+						'role_id' => 1
+					]
+				])
+				->saveData();
+				
+			$this->table($rolesTable)
+				->insert([
+					[
+						'name' => 'Admin',
+						'access' => ''
+					],
+					[
+						'name' => 'Redakteur',
+						'access' => ''
+					],
+					[
+						'name' => 'User',
+						'access' => ''
 					]
 				])
 				->saveData();

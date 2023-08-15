@@ -47,10 +47,6 @@ class User extends Entity
         'password',
     ];
 
-	// protected $_virtual = [
-	// 	'theme'
-	// ];
-
 	// Add this method
     protected function _setPassword(string $password) : ?string
     {
@@ -59,7 +55,11 @@ class User extends Entity
         }
     }
 
-	// protected function _getTheme() {
-	// 	return 'swu';
-	// }
+	protected function _getTheme($theme) {
+		if (empty($theme)) {
+			return 'tusk';
+		}
+
+		return $theme;
+	}
 }

@@ -116,12 +116,12 @@ class GroupsCell extends Cell {
 							[
 								'name' => 'Nutzerverwaltung',
 								'icon' => "Tusk.users",
-								'link' => ['controller' => 'Users']
+								'link' => ['controller' => 'Users', 'action' => 'index']
 							],
 							[
 								'name' => 'Rechteverwaltung',
 								'icon' => "Tusk.lock",
-								'link' => ['controller' => 'Roles']
+								'link' => ['controller' =>'Roles', 'action' => 'index']
 							]
 						]
 					],

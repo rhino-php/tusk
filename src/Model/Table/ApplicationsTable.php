@@ -59,8 +59,11 @@ class ApplicationsTable extends Table
 		return $query->first();
 	}
 
-	public function getList(array $filter = []) {
-		$balcklist = array_merge($this->tableBlackList, $filter);
+	public function getList(array $filter = [], bool $filtered = true) {
+		$balcklist = $filter;
+		if ($filtered) {
+			$balcklist = array_merge($this->tableBlackList, $filter);
+		}
 		$_tables = $this->abstract->query("show tables")->fetchAll();
 
 		$tables = [];
