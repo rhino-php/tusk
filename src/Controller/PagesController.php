@@ -66,11 +66,11 @@ class PagesController extends BaseController {
 			$page = $this->Pages->patchEntity($entry, $this->request->getData());
             
 			if ($this->Pages->save($page)) {
-				$this->Flash->success(__('The table has been saved.'));
+				$this->Flash->success(__('The table has been saved.'), ['plugin' => 'Tusk']);
                 return $this->redirect(['action' => 'index']);
             }
 			
-            $this->Flash->error(__('The table could not be saved. Please, try again.'));
+            $this->Flash->error(__('The table could not be saved. Please, try again.'), ['plugin' => 'Tusk']);
         }
 		
 		$filter = !empty($id) ? ['id !=' => $id] : Null;
@@ -91,9 +91,9 @@ class PagesController extends BaseController {
 		$entry = $this->Pages->get($id);
 
 		if ($this->Pages->delete($entry)) {
-			$this->Flash->success(__('The Page has been deleted.'));
+			$this->Flash->success(__('The Page has been deleted.'), ['plugin' => 'Tusk']);
 		} else {
-			$this->Flash->error(__('The Page could not be deleted. Please, try again.'));
+			$this->Flash->error(__('The Page could not be deleted. Please, try again.'), ['plugin' => 'Tusk']);
 		}
 
 		return $this->redirect(['action' => 'index']);
@@ -136,11 +136,11 @@ class PagesController extends BaseController {
 			$content = $this->Contents->patchEntity($entry, $this->request->getData());
             
 			if ($this->Pages->save($content)) {
-				$this->Flash->success(__('The table has been saved.'));
+				$this->Flash->success(__('The table has been saved.'), ['plugin' => 'Tusk']);
                 return $this->redirect(['action' => 'index']);
             }
 			
-            $this->Flash->error(__('The table could not be saved. Please, try again.'));
+            $this->Flash->error(__('The table could not be saved. Please, try again.'), ['plugin' => 'Tusk']);
         }
 		
 		$this->set([

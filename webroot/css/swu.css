@@ -229,35 +229,35 @@ body {
  * @version 2020-11-09
  */
 :root {
-  --tusk-primary-color: #4ADCB1;
+  --tusk-primary-color: #39ca40;
   --tusk-primary-color-100: white;
-  --tusk-primary-color-200: #b5f1df;
-  --tusk-primary-color-300: #75e4c3;
-  --tusk-primary-color-400: #4ADCB1;
-  --tusk-primary-color-500: #27cc9b;
-  --tusk-primary-color-600: #1fa17b;
-  --tusk-primary-color-700: #17765a;
-  --tusk-primary-color-800: #0f4b3a;
+  --tusk-primary-color-200: #9ee5a1;
+  --tusk-primary-color-300: #61d567;
+  --tusk-primary-color-400: #39ca40;
+  --tusk-primary-color-500: #2ca432;
+  --tusk-primary-color-600: #217c26;
+  --tusk-primary-color-700: #165419;
+  --tusk-primary-color-800: #0c2b0d;
   --tusk-primary-color-900: black;
-  --tusk-secondary-color: #89a4ef;
-  --tusk-secondary-color-100: white;
-  --tusk-secondary-color-200: #f9fbfe;
-  --tusk-secondary-color-300: #b6c7f5;
-  --tusk-secondary-color-400: #89a4ef;
-  --tusk-secondary-color-500: #5c81e9;
-  --tusk-secondary-color-600: #2f5fe3;
-  --tusk-secondary-color-700: #1b48c4;
-  --tusk-secondary-color-800: #153797;
-  --tusk-secondary-color-900: #08163e;
-  --tusk-background-color: #837c7c;
-  --tusk-background-color-100: white;
-  --tusk-background-color-200: #c1bebe;
-  --tusk-background-color-300: #9c9696;
-  --tusk-background-color-400: #837c7c;
-  --tusk-background-color-500: #696363;
-  --tusk-background-color-600: #4f4a4a;
-  --tusk-background-color-700: #343232;
-  --tusk-background-color-800: #1a1919;
+  --tusk-secondary-color: #046a9e;
+  --tusk-secondary-color-100: #bde8fd;
+  --tusk-secondary-color-200: #28b3fa;
+  --tusk-secondary-color-300: #058bd0;
+  --tusk-secondary-color-400: #046a9e;
+  --tusk-secondary-color-500: #03496c;
+  --tusk-secondary-color-600: #01273b;
+  --tusk-secondary-color-700: #000609;
+  --tusk-secondary-color-800: black;
+  --tusk-secondary-color-900: black;
+  --tusk-background-color: #046a9e;
+  --tusk-background-color-100: #bde8fd;
+  --tusk-background-color-200: #28b3fa;
+  --tusk-background-color-300: #058bd0;
+  --tusk-background-color-400: #046a9e;
+  --tusk-background-color-500: #03496c;
+  --tusk-background-color-600: #01273b;
+  --tusk-background-color-700: #000609;
+  --tusk-background-color-800: black;
   --tusk-background-color-900: black;
   --tusk-contrast-color: #F9F9F9;
   --tusk-contrast-color-100: white;
@@ -587,12 +587,12 @@ body {
 .box--inverted {
   /* ↓ Padding set to the first point on the modular scale */
   padding: 2rem;
-  border: 0 #837c7c solid;
+  border: 0 color("background") solid;
   /* ↓ Always apply the transparent outline, for high contrast mode */
   outline: 0 transparent;
   outline-offset: calc(0 * -1);
-  color: #837c7c;
-  background-color: #89a4ef;
+  color: color("background");
+  background-color: color("secondary");
   border-radius: var(--tusk-border-radius);
 }
 .box--inverted * {
@@ -602,11 +602,11 @@ body {
 }
 
 .inverted {
-  --primary-color: #89a4ef;
-  --secondary-color: #4ADCB1;
-  --background-color: #F9F9F9;
-  --text-color: #837c7c;
-  --contrast-color: #0c0e26;
+  --primary-color: color("secondary");
+  --secondary-color: color("primary");
+  --background-color: color("contrast");
+  --text-color: color("background");
+  --contrast-color: color("text");
 }
 
 .cluster {
@@ -733,7 +733,7 @@ a:focus, button:focus, input:focus, select:focus, textarea:focus {
   outline: none;
 }
 
-input, textarea, select {
+input, textarea, select, input[type=file] {
   background-color: var(--tusk-contrast-color);
   color: var(--tusk-text-color);
   border: var(--tusk-border-width) var(--tusk-border-type) var(--tusk-border-color);
@@ -748,6 +748,11 @@ input[type=text], textarea {
   cursor: text;
 }
 
+input[type=checkbox] {
+  width: auto;
+  display: inline-block;
+}
+
 label {
   font-weight: 600;
 }
@@ -758,6 +763,13 @@ label {
   min-width: 28ex;
   width: -moz-fit-content;
   width: fit-content;
+  align-items: flex-start;
+  gap: 0.25rem;
+}
+
+.checkbox {
+  display: flex;
+  gap: 1rem;
 }
 
 .icon-button {
@@ -1435,42 +1447,21 @@ body.is-loading .loading-screen__animation {
 .flash-messages .message {
   color: var(--tusk-text-color);
   background-color: skyblue;
-  transition: 350ms ease-out;
-  transition-property: max-height, opacity;
-  max-height: 4rem;
-  overflow: hidden;
-  max-width: var(--tusk-outer-bound-width);
-  margin: auto;
 }
 .flash-messages .message .icon {
   font-size: 2rem;
 }
-.flash-messages .message__wrapper {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  padding: 1rem;
+.flash-messages .message.success {
+  color: var(--tusk-contrast-color);
+  background-color: green;
 }
-.flash-messages .message__dismiss {
-  font-size: 1.6018066406rem;
-  line-height: 1.451486054em;
-  margin-bottom: 0rem;
-}
-.flash-messages .message--error {
+.flash-messages .message.error {
   color: var(--tusk-background-color);
   background-color: red;
 }
-.flash-messages .message--warning {
+.flash-messages .message.warning {
   color: var(--tusk-text-color);
   background-color: yellow;
-}
-.flash-messages .message--success {
-  color: var(--tusk-background-color);
-  background-color: green;
-}
-.flash-messages .message--dismissed {
-  pointer-events: none;
-  max-height: 0;
 }
 
 .hero {
@@ -1763,14 +1754,23 @@ body {
   gap: 2rem;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.1607843137);
   max-height: 100vh;
+  min-width: 19rem;
   position: relative;
   z-index: 800;
   overflow-y: auto;
   overflow-x: hidden;
 }
 .frame__sidebar .logo {
-  margin: 6rem 3rem;
-  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  margin: 3rem 3rem;
+  margin-bottom: 0;
+  height: 12rem;
+}
+.frame__sidebar .logo svg {
+  margin: auto;
+  width: 12rem;
+  height: auto;
 }
 .frame__sidebar > *:last-child {
   margin-top: auto;
@@ -2018,4 +2018,4 @@ body {
 /**
  * main.scss
  */
-/*# sourceMappingURL=main.css.map */
+/*# sourceMappingURL=swu.css.map */

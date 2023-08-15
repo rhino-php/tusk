@@ -13,6 +13,8 @@
 	<?php
 		echo $this->Form->control('name');
 		echo $this->Form->control('email');
+		echo $this->Form->control('theme');
+		echo $this->Form->control('role_id');
 		echo $this->Form->control('newPassword', ['type' => 'text', 'value' => '', 'required' => false]);
 		echo $this->Form->control('repeatPassword', ['type' => 'text', 'value' => '', 'required' => false]);
 	?>

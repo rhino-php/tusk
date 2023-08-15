@@ -31,6 +31,7 @@ class User extends Entity
     protected $_accessible = [
         'name' => true,
         'email' => true,
+        'theme' => true,
         'password' => true,
         'created' => true,
         'modified' => true,
@@ -46,6 +47,10 @@ class User extends Entity
         'password',
     ];
 
+	// protected $_virtual = [
+	// 	'theme'
+	// ];
+
 	// Add this method
     protected function _setPassword(string $password) : ?string
     {
@@ -53,4 +58,8 @@ class User extends Entity
             return (new DefaultPasswordHasher())->hash($password);
         }
     }
+
+	// protected function _getTheme() {
+	// 	return 'swu';
+	// }
 }

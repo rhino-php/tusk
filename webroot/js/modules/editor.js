@@ -2,6 +2,9 @@
 // import * as Header from '/tusk/js/vendor/bundle.js';
 // import List from '@editorjs/list';
 
+// Todo: Implement:
+// https://codesandbox.io/s/editor-js-data-parser-demo-forked-l1v7v?file=/src/index.js
+
 export default class Editor {
 	constructor(selector, contents) {
 		let editorData = '';

@@ -1,12 +1,8 @@
-<h1>Edit</h1>
+<h1><?= $title ?></h1>
 <?php $this->loadHelper('Tusk.Fields'); ?>
 <?= $this->Form->create($entry, ["class" => "stack"]); ?>
 
-<?= $this->Fields->render($fields['fields'], $entry) ?>
-
-<?php foreach ($fields['columns'] as $column) {
-	echo $this->Form->control($column);
-} ?>
+<?= $this->Fields->render($fields, $entry) ?>
 
 <div class="cluster">
 	<?= $this->Form->button(__('Save Entry')); ?>

@@ -33,12 +33,39 @@ class TuskInit extends AbstractMigration
 				'limit' => 100,
 				'null' => false,
 			])
+			->addColumn('role_id', 'string', [
+				'default' => '0',
+				'null' => false,
+			])
+			->addColumn('theme', 'string', [
+				'default' => 'tusk',
+				'null' => false,
+			])
 			->addColumn('password', 'string', [
 				'default' => null,
 				'null' => false,
 			])
 			->addColumn('active', 'boolean', [
 				'default' => 1,
+			])
+			->addColumn('created', 'timestamp', [
+				'default' => 'CURRENT_TIMESTAMP'
+			])
+			->addColumn('modified', 'timestamp', [
+				'default' => 'CURRENT_TIMESTAMP',
+				'update' => 'CURRENT_TIMESTAMP'
+			])
+			->create();
+
+		$this->table('tusk_roles', $options)
+			->addColumn('name', 'string', [
+				'default' => null,
+				'limit' => 100,
+				'null' => false,
+			])
+			->addColumn('access', 'text', [
+				'default' => null,
+				'null' => false,
 			])
 			->addColumn('created', 'timestamp', [
 				'default' => 'CURRENT_TIMESTAMP'
@@ -69,6 +96,14 @@ class TuskInit extends AbstractMigration
 				'default' => 'string',
 			])
 			->addColumn('description', 'text', [
+				'default' => null,
+				'null' => true,
+			])
+			->addColumn('standard', 'string', [ // default as column name throws errors
+				'default' => null,
+				'null' => true,
+			])
+			->addColumn('settings', 'text', [
 				'default' => null,
 				'null' => true,
 			])
@@ -234,7 +269,9 @@ class TuskInit extends AbstractMigration
 					[
 						'name' => 'Rhino',
 						'email' => 'rhino@example.com',
-						'password' => '$2y$10$D6POTVNQcplsR2bvLXiS3.fnS310gKtaWkLC.82MxMuzRQPhxpv46'
+						'password' => '$2y$10$D6POTVNQcplsR2bvLXiS3.fnS310gKtaWkLC.82MxMuzRQPhxpv46',
+						'theme' => 'tusk',
+						'role_id' => '0'
 					]
 				])
 				->saveData();

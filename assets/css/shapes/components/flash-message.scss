@@ -13,8 +13,6 @@ $error-color: red;
   z-index: 10;
 
   font-weight: 800;
-//   margin-bottom: -$gutter;
-  // transform: translateY(-100%);
 	
   & + * {
 		margin-top: 0;
@@ -23,47 +21,24 @@ $error-color: red;
   .message {
 	color: var(--tusk-text-color);
 	background-color: $info-color;
-	transition: 350ms ease-out;
-	transition-property: max-height, opacity;
-	max-height: 4rem;
-	overflow: hidden;
-
-	max-width: var(--tusk-outer-bound-width);
-	margin: auto;
 		
     .icon {
-			font-size: 2rem;
+		font-size: 2rem;
     }
+
+	&.success {
+		color: var(--tusk-contrast-color);
+		background-color: $success-color;
+	}
 		
-    &__wrapper {
-			display: flex;
-      width: 100%;
-      justify-content: space-between;
-			padding: $gutter;
-    }
-		
-    &__dismiss {
-			@include shapes.type-setting(800);
-    }
-		
-    &--error {
+    &.error {
       color: var(--tusk-background-color);
       background-color: $error-color;
     }
 
-    &--warning {
+    &.warning {
       color: var(--tusk-text-color);
       background-color: $warning-color;
     }
-
-    &--success {
-      color: var(--tusk-background-color);
-      background-color: $success-color;
-    }
-
-		&--dismissed {
-			pointer-events: none;
-			max-height: 0;
-		}
   }
 }

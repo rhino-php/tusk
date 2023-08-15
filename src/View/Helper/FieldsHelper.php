@@ -3,25 +3,12 @@
 namespace Tusk\View\Helper;
 
 use Cake\View\Helper;
-use Cake\View\View;
-
-use Cake\View\StringTemplateTrait;
+use Tusk\Handlers\FieldHandler;
 
 class FieldsHelper extends Helper {
-	use StringTemplateTrait;
-
-	protected $_defaultConfig = [
-		'errorClass' => 'error',
-		'templates' => [
-			'wrapper' => '<div class="{{class}}"><label for="{{name}}">{{alias}}</label>{{content}}</div>',
-			'input' => '<input type="{{type}}" name="{{name}}" id="{{name}}" value="{{value}}">',
-			'text' => '<textarea name="{{name}}" id="{{name}}">{{value}}</textarea>',
-			'checkbox' => '<input type="checkbox" {{checked}} name="{{name}}" id="{{name}}" value="{{value}}">',
-		],
-	];
-
 
 	public function initialize(array $config): void {
+		$this->FieldHandler = new FieldHandler();
 	}
 
 	public function render($fields, $values) {
@@ -41,28 +28,14 @@ class FieldsHelper extends Helper {
 		$params = $field->toArray();
 		
 		$params['value'] = $value;
-		$params['class'] = 'input';
-		$params['type'] = 'text';
-
-		$template = 'input';
-
-		switch ($field['Type']) {
-
-			case 'boolean':
-				$params['checked'] = $value ? 'checked' : '';
-				$template = 'checkbox';
-				break;
-
-			case 'integer':
-				$params['type'] = 'number';
-				break;
-
-			case 'text':
-				$template = 'text';
-				break;
+		if (!empty($field->settings)) {
+			$params['settings'] = json_decode($field->settings, true);
 		}
 
-		$params['content'] = $this->formatTemplate($template, $params);
-		return $this->formatTemplate('wrapper', $params);
+		if (in_array($field['type'], $this->FieldHandler->types)) {
+			return $this->_View->element('Fieldtypes' . DS . 'default', ['params' => $params]);
+		}
+
+		return $this->_View->element('Fieldtypes' . DS . $field['type'], ['params' => $params]);
 	}
 }

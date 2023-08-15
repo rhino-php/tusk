@@ -1,6 +1,6 @@
 <a id="home" href="<?= $this->Url->build(['controller' => 'Overview', 'action' => 'display', 'home']) ?>">
 	<div class="logo">
-		<?= $this->svg("Tusk.logo-big") ?>
+		<?= $this->svg("Tusk." . $user->theme . "-big") ?>
 	</div>
 	<span class="sr-only">Rhino</span>
 </a>

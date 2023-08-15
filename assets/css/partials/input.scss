@@ -15,7 +15,7 @@ a, button, input, select, textarea {
 	}
 }
 
-input, textarea, select {
+input, textarea, select, input[type=file] {
 	background-color: var(--tusk-contrast-color);
 	color: var(--tusk-text-color);
 	border: var(--tusk-border-width) var(--tusk-border-type) var(--tusk-border-color);
@@ -28,6 +28,11 @@ input[type=text], textarea {
 	cursor: text;
 }
 
+input[type=checkbox] {
+	width: auto;
+	display: inline-block;
+}
+
 label {
 	font-weight: 600;
 }
@@ -37,6 +42,13 @@ label {
 	flex-direction: column;
 	min-width: 28ex;
 	width: fit-content;
+	align-items: flex-start;
+	gap: 0.25rem;
+}
+
+.checkbox {
+	display: flex;
+	gap: 1rem;
 }
 
 .icon-button {

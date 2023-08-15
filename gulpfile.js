@@ -106,7 +106,8 @@ var settings = {
 		src: src + "css/**/*.scss",
 		dest: dist + "css/",
 		srcMain: [
-			src + "css/main.scss",
+			src + "css/tusk.scss",
+			src + "css/swu.scss",
 			src + "css/webfonts.scss",
 			src + "css/pico.scss",
 			src + "css/layout.scss"

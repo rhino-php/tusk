@@ -3,6 +3,18 @@
 @use "shapes";
 
 $prefix: -- !default;
+$colors: (
+	primary: #4ADCB1,
+	secondary: #89a4ef,
+	background: #837c7c,
+	contrast: #F9F9F9,
+	// color-for-bg(var(--primary-color), var(--background-color), $text-color)
+	text: #0c0e26 // #333
+) !default;
+
+@function color($key) {
+	@return map.get($colors, $key);
+}
 
 :root {
 	@each $color,

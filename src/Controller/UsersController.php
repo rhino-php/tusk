@@ -52,11 +52,11 @@ class UsersController extends AppController
         if ($this->request->is('post')) {
             $user = $this->Users->patchEntity($user, $this->request->getData());
             if ($this->Users->save($user)) {
-                $this->Flash->success(__('The user has been saved.'));
+                $this->Flash->success(__('The user has been saved.'), ['plugin' => 'Tusk']);
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The user could not be saved. Please, try again.'));
+            $this->Flash->error(__('The user could not be saved. Please, try again.'), ['plugin' => 'Tusk']);
         }
         $this->set(compact('user'));
     }
@@ -70,7 +70,15 @@ class UsersController extends AppController
      */
     public function edit($id = null)
     {
-        $user = $this->Users->get($id);
+        $user = $this->Users->get($id, [
+			'contain' => ['Roles']
+		]);
+
+		$roles = [];
+		$_roles = $this->Users->Roles->find()->select(['id', 'name'])->all();
+		foreach ($_roles as $role) {
+			$roles[$role['id']] = $role['name'];
+		}
 
         if ($this->request->is(['patch', 'post', 'put'])) {
 			$data = $this->request->getData();
@@ -84,17 +92,17 @@ class UsersController extends AppController
 
 
 				if ($this->Users->save($user)) {
-					$this->Flash->success(__('The user has been saved.'));
+					$this->Flash->success(__('The user has been saved.'), ['plugin' => 'Tusk']);
 					return $this->redirect(['action' => 'index']);
 				}
 				
-				$this->Flash->error(__('The user could not be saved. Please, try again.'));
+				$this->Flash->error(__('The user could not be saved. Please, try again.'), ['plugin' => 'Tusk']);
 			} else {
-				$this->Flash->error(__('Password does not match.'));
+				$this->Flash->error(__('Password does not match.'), ['plugin' => 'Tusk']);
 			}
         }
 
-        $this->set(compact('user'));
+        $this->set(compact('user', 'roles'));
     }
 
     /**
@@ -109,9 +117,9 @@ class UsersController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $user = $this->Users->get($id);
         if ($this->Users->delete($user)) {
-            $this->Flash->success(__('The user has been deleted.'));
+            $this->Flash->success(__('The user has been deleted.'), ['plugin' => 'Tusk']);
         } else {
-            $this->Flash->error(__('The user could not be deleted. Please, try again.'));
+            $this->Flash->error(__('The user could not be deleted. Please, try again.'), ['plugin' => 'Tusk']);
         }
 
         return $this->redirect(['action' => 'index']);
@@ -146,7 +154,7 @@ class UsersController extends AppController
 		}
 		// display error if user submitted and authentication failed
 		if ($this->request->is('post') && !$result->isValid()) {
-			$this->Flash->error(__('Invalid username or password'));
+			$this->Flash->error(__('Invalid username or password'), ['plugin' => 'Tusk']);
 		}
 	}
 

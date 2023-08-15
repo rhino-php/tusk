@@ -121,7 +121,7 @@ class GroupsCell extends Cell {
 							[
 								'name' => 'Rechteverwaltung',
 								'icon' => "Tusk.lock",
-								'link' => '/'
+								'link' => ['controller' => 'Roles']
 							]
 						]
 					],
@@ -156,6 +156,9 @@ class GroupsCell extends Cell {
 			]
 		];
 
-		$this->set(["navs" => $navs]);
+		$this->set([
+			"navs" => $navs,
+			"user" => $user
+		]);
     }
 }

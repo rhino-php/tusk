@@ -47,10 +47,7 @@ class UsersTable extends Table
 
         $this->addBehavior('Timestamp');
 
-        // $this->hasMany('Articles', [
-        //     'foreignKey' => 'user_id',
-        //     'className' => 'Tusk.Articles',
-        // ]);
+        $this->belongsTo('Roles', ['className' => 'Tusk.Roles']);
     }
 
     /**

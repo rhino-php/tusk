@@ -17,7 +17,7 @@ class AppController extends BaseController
     }
 	
 	private function bootstrap() {
-		$user = ($this->Authentication->getIdentity());
+		$user = $this->Authentication->getIdentity();
 		
 		if (!empty($user)) {
 			$this->set(['user' => $user]);

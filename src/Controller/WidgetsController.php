@@ -52,11 +52,11 @@ class WidgetsController extends AppController
         if ($this->request->is('post')) {
             $widget = $this->Widgets->patchEntity($widget, $this->request->getData());
             if ($this->Widgets->save($widget)) {
-                $this->Flash->success(__('The widget has been saved.'));
+                $this->Flash->success(__('The widget has been saved.'), ['plugin' => 'Tusk']);
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The widget could not be saved. Please, try again.'));
+            $this->Flash->error(__('The widget could not be saved. Please, try again.'), ['plugin' => 'Tusk']);
         }
         $this->set(compact('widget'));
     }
@@ -76,11 +76,11 @@ class WidgetsController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $widget = $this->Widgets->patchEntity($widget, $this->request->getData());
             if ($this->Widgets->save($widget)) {
-                $this->Flash->success(__('The widget has been saved.'));
+                $this->Flash->success(__('The widget has been saved.'), ['plugin' => 'Tusk']);
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The widget could not be saved. Please, try again.'));
+            $this->Flash->error(__('The widget could not be saved. Please, try again.'), ['plugin' => 'Tusk']);
         }
         $this->set(compact('widget'));
     }
@@ -97,9 +97,9 @@ class WidgetsController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $widget = $this->Widgets->get($id);
         if ($this->Widgets->delete($widget)) {
-            $this->Flash->success(__('The widget has been deleted.'));
+            $this->Flash->success(__('The widget has been deleted.'), ['plugin' => 'Tusk']);
         } else {
-            $this->Flash->error(__('The widget could not be deleted. Please, try again.'));
+            $this->Flash->error(__('The widget could not be deleted. Please, try again.'), ['plugin' => 'Tusk']);
         }
 
         return $this->redirect(['action' => 'index']);

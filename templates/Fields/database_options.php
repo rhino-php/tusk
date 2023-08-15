@@ -1,41 +1,5 @@
-<h1>Add Field to: <i><?= $tableName ?></i></h1>
-<?= $this->Form->create(Null, ["class" => "stack"]) ?>
-
-<div class="stack--200">
-	<?= $this->Form->control("name", ["required"]) ?>
-</div>
-
-<div class="stack--200">
-	<?= $this->Form->control("alias") ?>
-</div>
-
-<div class="stack--200">
-	<?= $this->Form->control("position", ["value" => 0]) ?>
-</div>
-
-<div class="stack--200">
-	<?= $this->Form->control("active", ["value" => 1]) ?>
-</div>
-
-<div class="stack--200">
-	<?= $this->Form->control('type', ["type" => "select", "options" => $types, "required"]); ?>
-</div>
-
-<div class="stack--200">
-	<?= $this->Form->control('description', ["type" => "textarea"]); ?>
-</div>
-
-
-
-<details class="stack--200">
-	<summary>More options</summary>
-
 	<div class="stack--200">
 		<?= $this->Form->control('comment', ["type" => "textarea"]); ?>
-	</div>
-
-	<div class="stack--200">
-		<?= $this->Form->control('null', ["type" => "checkbox"]); ?>
 	</div>
 
 	<div class="stack--200">
@@ -89,12 +53,3 @@
 			<?= $this->Form->control('timezone'); ?>
 		</div>
 	</details>
-</details>
-
-<div class="cluster">
-	<?= $this->Form->button('Save') ?>
-	<?= $this->Html->link("Back", ['action' => 'index', $tableName], ["class" => "button"]) ?>
-</div>
-
-<?= $this->Form->hidden('tableName', ["value" => $tableName]) ?>
-<?= $this->Form->end(); ?>
