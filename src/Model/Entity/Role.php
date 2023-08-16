@@ -6,21 +6,15 @@ use Cake\ORM\Entity;
 
 class Role extends Entity
 {
-	// protected $_virtual = [
-	// 	// 'access'
-	// ];
+	protected $_virtual = [
+		'accessData'
+	];
 
-	// protected function _getAccess($access) {
-	// 	echo '<pre>';
-	// 	var_dump($this);
-	// 	die;
-	// 	return json_decode($access, true);
-	// }
-
-	// protected function _setAccess() {
-	// 	echo '<pre>';
-	// 	var_dump($this);
-	// 	die;
-	// 	return json_encode($this->access);
-	// }
+	protected function _getAccessData() {
+		if (empty($this->access)) {
+			return null;
+		}
+		
+		return json_decode($this->access, true);
+	}
 }

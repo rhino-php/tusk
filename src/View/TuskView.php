@@ -18,6 +18,10 @@ trait TuskView
 	}
 
 	public function svg($filename) {
+		if (empty($filename)) {
+			return '';
+		}
+
 		$filePath = $this->getSvgFilePath($filename);
 	
 		if (file_exists($filePath)) {

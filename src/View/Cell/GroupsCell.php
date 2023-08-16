@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Tusk\View\Cell;
@@ -9,35 +10,38 @@ use Cake\View\Cell;
  * Sidebar cell
  */
 class GroupsCell extends Cell {
-    /**
-     * List of valid options that can be passed into this
-     * cell's constructor.
-     *
-     * @var array<string, mixed>
-     */
-    protected $_validCellOptions = [];
+	/**
+	 * List of valid options that can be passed into this
+	 * cell's constructor.
+	 *
+	 * @var array<string, mixed>
+	 */
+	protected $_validCellOptions = [];
 
-    /**
-     * Initialization logic run at the end of object construction.
-     *
-     * @return void
-     */
-    public function initialize(): void {
+	/**
+	 * Initialization logic run at the end of object construction.
+	 *
+	 * @return void
+	 */
+	public function initialize(): void {
 		$this->Groups = $this->fetchTable('Tusk.Groups');
-    }
+		$this->Roles = $this->fetchTable('Tusk.Roles');
+	}
 
-    /**
-     * Default display method.
-     *
-     * @return void
-     */
-    public function display() {
-		$user = $this->request->getAttribute('authentication')->getIdentity();
+	/**
+	 * Default display method.
+	 *
+	 * @return void
+	 */
+	public function display() {
+		$this->user = $this->request->getAttribute('authentication')->getIdentity();
 
 		// ToDo: Contain bricks new installs?
 		$_groups = $this->Groups->find('all')->contain(['Applications'])->all();
+		$_apps = $this->Groups->Applications->find('all')->toArray();
 		$groups = [];
 
+		$handledApps = [];
 		foreach ($_groups as $group) {
 			$apps = [];
 			foreach ($group['applications'] as $app) {
@@ -45,7 +49,9 @@ class GroupsCell extends Cell {
 					'name' => isset($app['alias']) ? $app['alias'] : $app["name"],
 					'icon' => null,
 					'link' => ['controller' => 'Tables', "action" => "view", $app['name']],
-				]; 
+					'rights' => $app['name']
+				];
+				$handledApps[] = $app['name'];
 			}
 
 			$groups[] = [
@@ -55,9 +61,22 @@ class GroupsCell extends Cell {
 			];
 		}
 
+		foreach ($_apps as $app) {
+			if (in_array($app['name'], $handledApps)) {
+				continue;
+			}
+
+			$groups[] = [
+				'name' => isset($app['alias']) ? $app['alias'] : $app["name"],
+				'icon' => null,
+				'link' => ['controller' => 'Tables', "action" => "view", $app['name']],
+				'rights' => $app['name']
+			];
+		}
+
 		$navs = [
 			[
-				'heading' => 'Angemeldet als ' . $user->name,
+				'heading' => 'Angemeldet als ' . $this->user->name,
 				"buttons" => [
 					[
 						'name' => 'Dashboard',
@@ -72,22 +91,25 @@ class GroupsCell extends Cell {
 					[
 						'name' => 'Seiten',
 						'link' => ['controller' => 'Pages', 'action' => 'index'],
-						'icon' => "Tusk.file"
+						'icon' => "Tusk.file",
+						'rights' => 'tusk_pages'
 					],
 					[
 						'name' => 'Medien',
 						'link' => ['controller' => 'Media', 'action' => 'index'],
-						'icon' => "Tusk.image"
+						'icon' => "Tusk.image",
+						'rights' => 'tusk_media'
 					],
 					[
 						'name' => 'Widgets',
 						'link' => ['controller' => 'Widgets', 'action' => 'index'],
-						'icon' => "Tusk.sidebar"
+						'icon' => "Tusk.sidebar",
+						'rights' => 'tusk_widgets'
 					]
 				]
 			],
 			[
-				'heading' => 'Standartfunktionen',
+				'heading' => 'Zusatzfunktionen',
 				'buttons' => $groups
 			],
 			[
@@ -100,28 +122,14 @@ class GroupsCell extends Cell {
 							[
 								'name' => 'Elements',
 								'icon' => "Tusk.book",
-								'link' => ['controller' => 'Tables', 'action' => 'view', 'tusk_elements']
+								'link' => ['controller' => 'Tables', 'action' => 'view', 'tusk_elements'],
+								'rights' => 'tusk_elements'
 							],
 							[
 								'name' => 'Layouts',
 								'icon' => "Tusk.book",
-								'link' => ['controller' => 'Tables', 'action' => 'view', 'tusk_layouts']
-							]
-						]
-					],
-					[
-						'name' => 'Benutzerverwaltung',
-						'icon' => "Tusk.users",
-						'buttons' => [
-							[
-								'name' => 'Nutzerverwaltung',
-								'icon' => "Tusk.users",
-								'link' => ['controller' => 'Users', 'action' => 'index']
-							],
-							[
-								'name' => 'Rechteverwaltung',
-								'icon' => "Tusk.lock",
-								'link' => ['controller' =>'Roles', 'action' => 'index']
+								'link' => ['controller' => 'Tables', 'action' => 'view', 'tusk_layouts'],
+								'rights' => 'tusk_layouts'
 							]
 						]
 					],
@@ -130,9 +138,22 @@ class GroupsCell extends Cell {
 						'icon' => "Tusk.settings",
 						'buttons' => [
 							[
+								'name' => 'Nutzerverwaltung',
+								'icon' => "Tusk.users",
+								'link' => ['controller' => 'Users', 'action' => 'index'],
+								'rights' => 'tusk_users'
+							],
+							[
+								'name' => 'Rechteverwaltung',
+								'icon' => "Tusk.lock",
+								'link' => ['controller' => 'Roles', 'action' => 'index'],
+								'rights' => 'tusk_roles'
+							],
+							[
 								'name' => 'Applikation-Manager',
 								'icon' => "Tusk.book",
-								'link' => ['controller' => 'Applications', "action" => "index"]
+								'link' => ['controller' => 'Applications', "action" => "index"],
+								'rights' => 'tusk_apps'
 							]
 						]
 					],
@@ -143,7 +164,7 @@ class GroupsCell extends Cell {
 							[
 								'name' => 'Profil bearbeiten',
 								'icon' => "Tusk.edit",
-								'link' => ["controller" => "Users", "action" => "edit", $user->id]
+								'link' => ["controller" => "Users", "action" => "edit", $this->user->id]
 							],
 							[
 								'name' => 'log-out',
@@ -156,9 +177,55 @@ class GroupsCell extends Cell {
 			]
 		];
 
+
 		$this->set([
-			"navs" => $navs,
-			"user" => $user
+			"navs" => $this->cleanNav($navs),
+			"user" => $this->user
 		]);
-    }
+	}
+
+	private function cleanNav($navs) {
+		$checkRights = function ($button) {
+			if (!isset($button['rights'])) {
+				return $button;
+			}
+
+			$access = $this->Roles->checkGroupRights($this->user->role_id, $button['rights'], 'view');
+			if (!$access) {
+				return;
+			}
+
+			return $button;
+		};
+
+		$isEmpty = function ($group) {
+			if (isset($group['buttons'])) {
+				$values = array_filter($group['buttons']);
+				if (empty($values)) {
+					return;
+				}
+			}
+
+			return $group;
+		};
+
+		$navs = array_map(function ($nav) use ($checkRights, $isEmpty) {
+			$nav['buttons'] = array_map(function ($group) use ($checkRights) {
+				if (isset($group['buttons'])) {
+					$group['buttons'] = array_map($checkRights, $group['buttons']);
+				}
+
+				return $group;
+			}, $nav['buttons']);
+
+			$nav['buttons'] = array_map($checkRights, $nav['buttons']);
+			$nav['buttons'] = array_map($isEmpty, $nav['buttons']);
+
+			return $nav;
+		}, $navs);
+
+		$navs = array_map($isEmpty, $navs);
+		$navs = array_filter($navs);
+		return $navs;
+	}
 }

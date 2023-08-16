@@ -37,7 +37,7 @@ class WidgetsTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('widgets');
+        $this->setTable('tusk_widgets');
         $this->setDisplayField('name');
         $this->setPrimaryKey('id');
     }

@@ -14,6 +14,7 @@ class ApplicationsTable extends Table
 		"phinxlog",
 		"tusk_phinxlog",
 		'tusk_users',
+		'tusk_roles',
 		'tusk_groups',
 		'tusk_apps',
 		'tusk_fields',
@@ -21,6 +22,8 @@ class ApplicationsTable extends Table
 		'tusk_layouts',
 		'tusk_elements',
 		'tusk_contents',
+		'tusk_media',
+		'tusk_widgets',
 	];
 
     /**

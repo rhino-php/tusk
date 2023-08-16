@@ -264,6 +264,17 @@ class TuskInit extends AbstractMigration
 			])
 			->create();
 
+		$this->table('tusk_widgets', $options)
+			->addColumn('name', 'string')
+			->addColumn('created', 'timestamp', [
+				'default' => 'CURRENT_TIMESTAMP'
+			])
+			->addColumn('modified', 'timestamp', [
+				'default' => 'CURRENT_TIMESTAMP',
+				'update' => 'CURRENT_TIMESTAMP'
+			])
+			->create();
+
 		if ($this->isMigratingUp()) {
 			$this->table($usersTable)
 				->insert([
