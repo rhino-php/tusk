@@ -18,9 +18,11 @@ class AppController extends BaseController
 		$this->bootstrap();
 
 		$this->FieldHandler = new FieldHandler();
-
+		$this->useTable = false;
+		
 		try {
 			$this->Table = $this->fetchTable();
+			$this->useTable = true;
 		} catch (\Throwable $th) {}
     }
 	
@@ -60,13 +62,9 @@ class AppController extends BaseController
 			}
 		}
 
-		$tableName = $this->Table->getTable();
-		$fields = $this->FieldHandler->getFields($tableName);
-
 		$this->set([
 			$params['entity'] => $entry,
 			'action' => $action,
-			'fields' => $fields
 		]);
 
 		try {
@@ -104,11 +102,15 @@ class AppController extends BaseController
 
 	public function render(?string $template = null, ?string $layout = null): Response {
 		$this->viewBuilder()->addHelper('Tusk.Fields');
-		$tableName = $this->Table->getTable();
-		$fields = $this->FieldHandler->getFields($tableName);
-		$this->set([
-			'fields' => $fields
-		]);
+
+		if ($this->useTable) {
+			$tableName = $this->Table->getTable();
+			$fields = $this->FieldHandler->getFields($tableName);
+			$this->set([
+				'fields' => $fields
+			]);
+		}
+
 		return parent::render($template, $layout);
 	}
 }
