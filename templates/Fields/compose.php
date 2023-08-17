@@ -44,6 +44,7 @@
 
 <?= $this->Form->hidden('currentName', ["value" => $entry["name"]]) ?>
 <?= $this->Form->hidden('tableName', ["value" => $tableName]) ?>
+<?= $this->Form->hidden('id') ?>
 <?= $this->Form->end(); ?>
 
 <script>

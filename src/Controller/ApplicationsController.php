@@ -59,31 +59,13 @@ class ApplicationsController extends AppController
      */
     public function add()
     {
-		$groups = $this->Groups->getGroups();
-		$this->set([
-			'groups' => $this->addEmptyOption($groups)
+
+		$entry = $this->Applications->newEmptyEntity();
+
+		$this->compose($entry, [
+			'success' => __('The table has been saved.'),
+			'error' => __('The table could not be saved. Please, try again.')
 		]);
-
-        if ($this->request->is('post')) {
-			$data = $this->request->getData();
-			$applications = $this->Applications->getList();
-
-			if (in_array($data['name'], $applications)) {
-				$this->Flash->success(__('The table ' . $data['name'] . ' already exists.'), ['plugin' => 'Tusk']);
-				return;
-			}
-
-			$entry = $this->Applications->newEntity($data);
-			$this->Applications->create($data["name"]);
-			
-			if ($this->Applications->save($entry)) {
-				$this->Flash->success(__('The table has been saved.'), ['plugin' => 'Tusk']);
-				return $this->redirect(['action' => 'index']);
-			}
-
-			$this->Flash->error(__('The table could not be saved. Please, try again.'), ['plugin' => 'Tusk']);
-        }
-
     }
 
     /**
@@ -94,35 +76,51 @@ class ApplicationsController extends AppController
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
 	public function edit($tableName) {
-		$groups = $this->Groups->getGroups();
 		$entry = $this->Applications->getByName($tableName);
 		
 		if (!$entry) {
 			$entry = $this->Applications->newEmptyEntity();
 			$entry['name'] = $tableName;
 		}
-		
-        if ($this->request->is(['patch', 'post', 'put'])) {
-			$data = $this->request->getData();
-			$application = $this->Applications->patchEntity($entry, $data);
-            
+
+		$this->set([
+			"tableName" => $tableName
+		]);
+
+		$this->compose($entry, [
+			'success' => __('The table has been saved.'),
+			'error' => __('The table could not be saved. Please, try again.')
+		]);
+	}
+
+	public function preCompose($entry) {
+		$groups = $this->Groups->getGroups();
+
+		$this->set([
+			'groups' => $this->addEmptyOption($groups)
+		]);
+
+		return $entry;
+	}
+
+	public function preSave($data, $params) {
+		if ($params['action'] == "edit") {
 			if ($data['name'] != $data['currentName']) {
 				$this->Applications->rename($data["currentName"], $data["name"]);
 			}
+		}
 
-			if ($this->Applications->save($application)) {
-				$this->Flash->success(__('The table has been saved.'), ['plugin' => 'Tusk']);
-                return $this->redirect(['action' => 'index']);
-            }
+		if ($params['action'] == "add") {
+			$applications = $this->Applications->getList();
+			if (in_array($data['name'], $applications)) {
+				$this->Flash->error(__('The table ' . $data['name'] . ' already exists.'), ['plugin' => 'Tusk']);
+				return;
+			}
 
-            $this->Flash->error(__('The table could not be saved. Please, try again.'), ['plugin' => 'Tusk']);
-        }
-		
-		$this->set([
-			"tableName" => $tableName,
-			'entry' => $entry,
-			'groups' => $this->addEmptyOption($groups)
-		]);
+			$this->Applications->create($data["name"]);
+		}
+
+		return $data;
 	}
 
 	public function newGroup() {
@@ -177,8 +175,7 @@ class ApplicationsController extends AppController
      * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete(string $tableName)
-    {
+    public function delete(string $tableName) {
 		$entry = $this->Applications->getByName($tableName);
 		if ($entry) {
 			$this->Applications->delete($entry);

@@ -23,7 +23,6 @@ class FieldsHelper extends Helper {
 	}
 
 	private function getField($field, $value) {
-		
 		$field->alias = $field->alias ?: $field->name;
 		$params = $field->toArray();
 		
@@ -32,10 +31,27 @@ class FieldsHelper extends Helper {
 			$params['settings'] = json_decode($field->settings, true);
 		}
 
-		if (in_array($field['type'], $this->FieldHandler->types)) {
+		return $this->output($field['type'], $params);
+	}
+
+	public function control($params = []) {
+		$params = array_merge([
+			'type' => 'default',
+			'value' => '',
+		], $params);
+
+		return $this->output($params['type'], $params);
+	}
+
+	private function output($type, $params) {
+		if (!isset($params['alias'])) {
+			$params['alias'] = $params['name'];
+		}
+
+		if (in_array($type, $this->FieldHandler->types)) {
 			return $this->_View->element('Fieldtypes' . DS . 'default', ['params' => $params]);
 		}
 
-		return $this->_View->element('Fieldtypes' . DS . $field['type'], ['params' => $params]);
+		return $this->_View->element('Fieldtypes' . DS . $type, ['params' => $params]);
 	}
 }

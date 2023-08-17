@@ -4,7 +4,6 @@ declare(strict_types=1);
 namespace Tusk\Controller;
 
 use Tusk\Controller\AppController;
-use Tusk\Handlers\FieldHandler;
 
 /**
  * Tables Controller
@@ -15,7 +14,6 @@ class TablesController extends AppController
 {
 	public function initialize(): void {
 		parent::initialize();
-		$this->FieldHandler = new FieldHandler();
     }
 
     /**
@@ -54,9 +52,16 @@ class TablesController extends AppController
 	 */
 	public function add($tableName = null) {
 		$this->Tables->setTable($tableName);
-		$defaults = $this->FieldHandler->getDefaults($tableName);
-		$entry = $this->Tables->newEntity($defaults);
-		$this->compose($tableName, $entry, ['title' => 'Add']);
+		
+		// $defaults = $this->FieldHandler->getDefaults($tableName);
+		// echo '<pre>';
+		// var_dump($defaults);
+		// die;
+		// $entry = $this->Tables->newEntity($defaults);
+		$entry = $this->Tables->newEmptyEntity();
+
+		$this->set(['title' => 'Add']);
+		$this->compose($entry, ["redirect" => ['action' => 'view', $tableName]]);
 	}
 
 	/**
@@ -69,8 +74,10 @@ class TablesController extends AppController
 	public function edit($tableName = null, $id = null) {
 		$this->Tables->setTable($tableName);
 		$entry = $this->Tables->get($id);
-		$this->compose($tableName, $entry, ['title' => 'Edit']);
+		$this->set(['title' => 'Edit']);
+		$this->compose($entry, ["redirect" => ['action' => 'view', $tableName]]);
 	}
+
 
 	/**
 	 * Delete method
@@ -97,7 +104,7 @@ class TablesController extends AppController
 		echo "done";
 	}
 
-	public function compose($tableName, $entry, $params) {
+	public function ogCompose($tableName, $entry, $params) {
 		if ($this->request->is(['patch', 'post', 'put'])) {
 			$data = $this->FieldHandler->setFields($tableName, $this->request->getData());
 			$table = $this->Tables->patchEntity($entry, $data);

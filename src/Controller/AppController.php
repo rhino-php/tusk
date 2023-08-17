@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace Tusk\Controller;
 
 use App\Controller\AppController as BaseController;
+use Tusk\Handlers\FieldHandler;
+use Cake\Http\Response;
 
 class AppController extends BaseController
 {
@@ -14,6 +16,8 @@ class AppController extends BaseController
 		$this->loadComponent('Authorization.Authorization');
 
 		$this->bootstrap();
+
+		$this->FieldHandler = new FieldHandler();
 
 		try {
 			$this->Table = $this->fetchTable();
@@ -28,30 +32,41 @@ class AppController extends BaseController
 		}
 	}
 
-	public function compose($entry, $params) {
+	public function compose($entry, $params = []) {
+		$action = $this->request->getParam('action');
 		$_params = [
 			'success' => __('The entry has been saved.'),
 			'error' => __('The entry could not be saved. Please, try again.'),
 			'entity' => 'entry',
 			'redirect' => ['action' => 'index'],
+			'action' => $action
 		];
 		$params = array_merge($_params, $params);
 
 		if (method_exists($this, 'preCompose')) {
-			$entry = $this->preCompose($entry);
+			$pass = $this->request->getParam('pass');
+			$return = $this->preCompose($entry, ...$pass);
+			if (!empty($return)) {
+				$entry = $return;
+			}
 		}
 
 		if ($this->request->is(['patch', 'post', 'put'])) {
 			$data = $this->request->getData();
+		
 			$check = $this->save($entry, $params, $data);
 			if ($check) {
 				return $this->redirect($params['redirect']);
 			}
 		}
 
+		$tableName = $this->Table->getTable();
+		$fields = $this->FieldHandler->getFields($tableName);
+
 		$this->set([
 			$params['entity'] => $entry,
-			'action' => $this->request->getParam('action')
+			'action' => $action,
+			'fields' => $fields
 		]);
 
 		try {
@@ -65,16 +80,19 @@ class AppController extends BaseController
 	}
 
 	public function save($entry, $params, $data) {
+		$tableName = $this->Table->getTable();
+		$data = $this->FieldHandler->setFields($tableName, $data);
+		
 		if (method_exists($this, 'preSave')) {
-			$data = $this->preSave($data);
-
+			$data = $this->preSave($data, $params);
+			
 			if ($data == false) {
 				return false;
 			}
 		}
 
 		$entry = $this->Table->patchEntity($entry, $data);
-
+		
 		if ($this->Table->save($entry)) {
 			$this->Flash->success($params['success'], ['plugin' => 'Tusk']);
 			return true;
@@ -82,5 +100,15 @@ class AppController extends BaseController
 
 		$this->Flash->error($params['error']);
 		return false;
+	}
+
+	public function render(?string $template = null, ?string $layout = null): Response {
+		$this->viewBuilder()->addHelper('Tusk.Fields');
+		$tableName = $this->Table->getTable();
+		$fields = $this->FieldHandler->getFields($tableName);
+		$this->set([
+			'fields' => $fields
+		]);
+		return parent::render($template, $layout);
 	}
 }

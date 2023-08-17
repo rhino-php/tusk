@@ -20,7 +20,14 @@ class FieldHandler {
 		],
 		"checkbox" => [
 			"alias" => "Checkbox",
-			"type" => "boolean"
+			"type" => "boolean",
+			"settings" => [
+				'defaults' => [
+					'type' => 'text',
+					'description' => 'Default options',
+					'default' => 1
+				],
+			]
 		],
 		"select" => [
 			"alias" => "Select",
@@ -32,7 +39,7 @@ class FieldHandler {
 					'default' => ''
 				],
 				'defaults' => [
-					'type' => 'defaults',
+					'type' => 'text',
 					'description' => 'Default options',
 					'default' => ''
 				],
@@ -65,7 +72,7 @@ class FieldHandler {
 		
 		foreach ($columns as $column) {
 			$name = $column['Field'];
-			$fields[] = $this->getField($name, $tableName, $column);
+			$fields[$name] = $this->getField($name, $tableName, $column);
 		}
 
 		return $fields;

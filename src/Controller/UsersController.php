@@ -155,44 +155,4 @@ class UsersController extends AppController
 			return $this->redirect(['controller' => 'Users', 'action' => 'login']);
 		}
 	}
-
-	public function ogCompose($user, $params = []) {
-		$roles = [];
-		$_roles = $this->Users->Roles->find()->select(['id', 'name'])->all();
-		foreach ($_roles as $role) {
-			$roles[$role['id']] = $role['name'];
-		}
-
-		if ($this->request->is(['patch', 'post', 'put'])) {
-			$data = $this->request->getData();
-
-			if ($data['newPassword'] === $data['repeatPassword']) {
-				if (!empty($data['newPassword'])) {
-					$data['password'] = $data['newPassword'];
-				}
-
-				$user = $this->Users->patchEntity($user, $data);
-
-				if ($this->Users->save($user)) {
-					$this->Flash->success(__('The user has been saved.'), ['plugin' => 'Tusk']);
-					return $this->redirect(['action' => 'index']);
-				}
-
-				$this->Flash->error(__('The user could not be saved. Please, try again.'), ['plugin' => 'Tusk']);
-			} else {
-				$this->Flash->error(__('Password does not match.'), ['plugin' => 'Tusk']);
-			}
-		}
-		
-		$this->set(array_merge(compact('user', 'roles'), $params));
-
-		try {
-			return $this->render('compose');
-		} catch (MissingTemplateException $exception) {
-			if (Configure::read('debug')) {
-				throw $exception;
-			}
-			throw new NotFoundException();
-		}
-	}
 }

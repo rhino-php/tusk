@@ -18,42 +18,21 @@ class RolesController extends AppController {
 
 	public function add() {
 		$entry = $this->Roles->newEmptyEntity();
-		$this->compose($entry, ['title' => 'Add']);
+		$this->set(['title' => 'Add']);
+		$this->compose($entry);
 	}
 
 	public function edit($id) {
 		$entry = $this->Roles->get($id);
-		$this->compose($entry, ['title' => 'Add']);
+		$this->set(['title' => 'Edit']);
+		$this->compose($entry);
 	}
 
-	public function compose($entry, $params) {
+	public function preCompose() {
 		$applications = $this->Roles->Applications->getList(["phinxlog", "tusk_phinxlog"], false);
-
-		if ($this->request->is(['patch', 'post', 'put'])) {
-			$data = $this->request->getData();
-			$table = $this->Roles->patchEntity($entry, $data);
-
-			if ($this->Roles->save($table)) {
-				$this->Flash->success(__('The entry has been saved.'), ['plugin' => 'Tusk']);
-
-				return $this->redirect(['action' => 'index']);
-			}
-			$this->Flash->error(__('The table could not be saved. Please, try again.'), ['plugin' => 'Tusk']);
-		}
-
-		$this->set(array_merge([
-			'entry' => $entry,
+		$this->set([
 			'accessTypes' => $this->Roles->accessTypes,
 			'applications' => $applications
-		], $params));
-
-		try {
-			return $this->render('compose');
-		} catch (MissingTemplateException $exception) {
-			if (Configure::read('debug')) {
-				throw $exception;
-			}
-			throw new NotFoundException();
-		}
+		]);
 	}
 }

@@ -29,12 +29,45 @@ class FieldsController extends AppController
 
 	public function add(string $tableName) {
 		$entry = $this->Fields->newEmptyEntity();
-		$this->compose($tableName, $entry, ['title' => 'Add']);
+		$this->set(['title' => 'Add']);
+		$this->compose($entry, ["redirect" => ['action' => 'index', $tableName]]);
 	}
-
+	
 	public function edit(string $tableName, string $field) {
 		$entry = $this->Fields->getByName($field, $tableName);
-		$this->compose($tableName, $entry, ['title' => 'Edit']);
+		$this->set(['title' => 'Edit']);
+		$this->compose($entry, ["redirect" => ['action' => 'index', $tableName]]);
+	}
+
+	public function preCompose($entry, $tableName, $field = null) {
+		$settings = $this->getOptions($tableName, $entry['type'], $entry['name']);
+		$types = $this->FieldHandler->getTypes();
+
+		$this->set([
+			"tableName" => $tableName,
+			"types" => $types,
+			'settings' => $settings
+		]);
+	}
+
+	public function preSave($data, $params) {
+		$pass = $this->request->getParam('pass');
+		$tableName = $pass[0];
+		$data = $this->FieldHandler->setFiledData($data);
+
+		$dbData = $data;
+		$dbData['type'] = $this->FieldHandler->getDatabaseType($data['type']);
+
+		if ($params['action'] == 'add') {
+			$this->Fields->create($tableName, $dbData);
+		} else {
+			if ($data['name'] != $data['currentName']) {
+				$this->Fields->rename($tableName, $dbData["currentName"], $dbData["name"]);
+			}
+			$this->Fields->update($tableName, $dbData["name"], $dbData);
+		}
+
+		return $data;
 	}
 
 	public function delete(string $tableName, string $field) {
@@ -46,7 +79,7 @@ class FieldsController extends AppController
 		return $this->redirect(['action' => 'index', $tableName]);
 	}
 
-	public function compose($tableName, $entry, $params) {
+	public function ogCompose($tableName, $entry, $params) {
 		if ($this->request->is(['patch', 'post', 'put'])) {
 			$data = $this->request->getData();
 			$data = $this->FieldHandler->setFiledData($data);
@@ -98,10 +131,13 @@ class FieldsController extends AppController
 
 		if (isset($fieldName)) {
 			$field = $this->Fields->getByName($fieldName, $tableName);
-			$values = json_decode($field['settings'], true);
-			foreach ($settings as $key => $setting) {
-				if (isset($values[$key])) {
-					$settings[$key]['value'] = $values[$key];
+
+			if (isset($field['settings'])) {
+				$values = json_decode($field['settings'], true);
+				foreach ($settings as $key => $setting) {
+					if (isset($values[$key])) {
+						$settings[$key]['value'] = $values[$key];
+					}
 				}
 			}
 		}

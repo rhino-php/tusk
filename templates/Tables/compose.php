@@ -1,5 +1,4 @@
 <h1><?= $title ?></h1>
-<?php $this->loadHelper('Tusk.Fields'); ?>
 <?= $this->Form->create($entry, ["class" => "stack"]); ?>
 
 <?= $this->Fields->render($fields, $entry) ?>
