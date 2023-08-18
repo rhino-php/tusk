@@ -22,7 +22,6 @@ use Cake\Http\Exception\NotFoundException;
 use Cake\Http\Response;
 use Cake\View\Exception\MissingTemplateException;
 use Tusk\Controller\AppController as BaseController;
-use Tusk\Model\ApplicationTrait;
 use Cake\Datasource\Exception\RecordNotFoundException;
 
 use Tusk\Model\Table\PagesTable;
@@ -35,7 +34,6 @@ use Tusk\Model\Table\PagesTable;
  * @link https://book.cakephp.org/4/en/controllers/pages-controller.html
  */
 class ContentsController extends BaseController {
-	use ApplicationTrait;
 
 	public function initialize(): void {
 		parent::initialize();

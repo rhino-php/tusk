@@ -16,9 +16,12 @@
 
 	<?= $this->Form->control('active', ["type" => "checkbox"]) ?>
 
-	<?= $this->Form->control('fields', ["type" => "select", "options" => $fields, "multiple" => true]) ?>
+	<?php if (isset($appFields)) : ?>
+	<?= $this->Form->control('overviewFields', ["type" => "select", "options" => $appFields, "multiple" => true]) ?>
+	<?php endif ?>
 
 	<?= $this->Form->hidden('currentName', ["value" => isset($tableName) ? $tableName : '']) ?>
+	<?= $this->Form->hidden('id') ?>
 
 	<div class="cluster">
 		<?= $this->Form->button('Save') ?>

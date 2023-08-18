@@ -35,6 +35,7 @@ class TablesController extends AppController
      */
     public function view($tableName = null) {
         $this->Tables->setTable($tableName);
+		
 		$columns = $this->FieldHandler->listColumns($tableName);
 		$data = $this->paginate($this->Tables);
 
@@ -52,14 +53,7 @@ class TablesController extends AppController
 	 */
 	public function add($tableName = null) {
 		$this->Tables->setTable($tableName);
-		
-		// $defaults = $this->FieldHandler->getDefaults($tableName);
-		// echo '<pre>';
-		// var_dump($defaults);
-		// die;
-		// $entry = $this->Tables->newEntity($defaults);
 		$entry = $this->Tables->newEmptyEntity();
-
 		$this->set(['title' => 'Add']);
 		$this->compose($entry, ["redirect" => ['action' => 'view', $tableName]]);
 	}
@@ -99,37 +93,8 @@ class TablesController extends AppController
 		return $this->redirect(['action' => 'view', $tableName]);
 	}
 
-	public function createTable() {
-		$this->Tables->createTable();
-		echo "done";
-	}
 
-	public function ogCompose($tableName, $entry, $params) {
-		if ($this->request->is(['patch', 'post', 'put'])) {
-			$data = $this->FieldHandler->setFields($tableName, $this->request->getData());
-			$table = $this->Tables->patchEntity($entry, $data);
-
-			if ($this->Tables->save($table)) {
-				$this->Flash->success(__('The entry has been saved.'), ['plugin' => 'Tusk']);
-
-				return $this->redirect(['action' => 'view', $tableName]);
-			}
-			$this->Flash->error(__('The table could not be saved. Please, try again.'), ['plugin' => 'Tusk']);
-		}
-	
-		$fields = $this->FieldHandler->getFields($tableName);
-		$this->set(array_merge([
-			'entry' => $entry,
-			'fields' => $fields
-		], $params));
-
-		try {
-			return $this->render('compose');
-		} catch (MissingTemplateException $exception) {
-			if (Configure::read('debug')) {
-				throw $exception;
-			}
-			throw new NotFoundException();
-		}
+	public function preRender() {
+		
 	}
 }

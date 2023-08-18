@@ -22,9 +22,6 @@ class AppTable extends Table {
 
 	public function beforeFind() {
 		$tableName = $this->getTable();
-		$fields = $this->FieldHandler->getFields($tableName); 
-		// echo '<pre>';
-		// var_dump($fields);
-		// die;
+		$fields = $this->FieldHandler->getFields($tableName);
 	}
 }

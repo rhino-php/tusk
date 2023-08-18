@@ -56,11 +56,12 @@
 									"edit",
 									["action" => 'edit', $table['name']],
 									['class' => 'button']
-									) ?>
-								<?= $this->Html->link(
-									"delete",
-									["action" => 'delete', $table['name']],
-									['class' => 'button']
+								) ?>
+
+								<?= $this->Form->postLink(
+									__('Delete'),
+									['action' => 'delete', $table['name']],
+									['confirm' => __('Are you sure you want to delete: {0}?', $table['name']), 'class' => 'button']
 								) ?>
 							</td>
 						</tr>

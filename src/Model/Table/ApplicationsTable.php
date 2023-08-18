@@ -81,6 +81,12 @@ class ApplicationsTable extends Table
 		return $tables;
 	}
 
+	public function beforeMarshal($event, $data, $options) {
+		if (!empty($data['overviewFields'])) {
+			$data['overviewFields'] = json_encode($data['overviewFields']);
+		}
+	}
+
 	public function hasTable(string $tableName) : bool {
 		return $this->abstract->hasTable($tableName);
 	}

@@ -6,9 +6,13 @@ namespace Tusk\Controller;
 use App\Controller\AppController as BaseController;
 use Tusk\Handlers\FieldHandler;
 use Cake\Http\Response;
+use Tusk\Model\Table\ApplicationsTable;
+use Tusk\Model\ApplicationTrait;
 
 class AppController extends BaseController
 {
+	use ApplicationTrait;
+
 	public function initialize(): void
     {
         parent::initialize();
@@ -18,6 +22,7 @@ class AppController extends BaseController
 		$this->bootstrap();
 
 		$this->FieldHandler = new FieldHandler();
+		$this->Apps = new ApplicationsTable();
 		$this->useTable = false;
 		
 		try {
@@ -101,13 +106,19 @@ class AppController extends BaseController
 	}
 
 	public function render(?string $template = null, ?string $layout = null): Response {
+		if (method_exists($this, 'preRender')) {
+			$this->preRender();
+		}
+
 		$this->viewBuilder()->addHelper('Tusk.Fields');
 
 		if ($this->useTable) {
 			$tableName = $this->Table->getTable();
 			$fields = $this->FieldHandler->getFields($tableName);
+			$app = $this->Apps->getByName($tableName);
 			$this->set([
-				'fields' => $fields
+				'fields' => $fields,
+				'app' => $app
 			]);
 		}
 

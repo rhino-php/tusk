@@ -4,13 +4,11 @@ declare(strict_types=1);
 namespace Tusk\Controller;
 
 use Tusk\Controller\AppController;
-use Tusk\Model\ApplicationTrait;
 use Tusk\Handlers\FieldHandler;
 use App\View\AjaxView;
 
 class FieldsController extends AppController
 {
-	use ApplicationTrait;
 
 	public function initialize(): void {
 		parent::initialize();

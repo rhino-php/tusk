@@ -22,7 +22,6 @@ use Cake\Http\Exception\NotFoundException;
 use Cake\Http\Response;
 use Cake\View\Exception\MissingTemplateException;
 use Tusk\Controller\AppController as BaseController;
-use Tusk\Model\ApplicationTrait;
 
 /**
  * Static content controller
@@ -32,7 +31,6 @@ use Tusk\Model\ApplicationTrait;
  * @link https://book.cakephp.org/4/en/controllers/pages-controller.html
  */
 class MediaController extends BaseController {
-	use ApplicationTrait;
 	
 	private $root = [0 => 'Root'];
 	

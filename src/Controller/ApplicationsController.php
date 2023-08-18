@@ -5,16 +5,13 @@ namespace Tusk\Controller;
 
 use Tusk\Controller\AppController;
 use Tusk\Model\Table\GroupsTable;
-use Tusk\Model\ApplicationTrait;
 
 /**
  * Tables Controller
  *
  * @method \Tusk\Model\Entity\Table[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
-class ApplicationsController extends AppController
-{
-	use ApplicationTrait;
+class ApplicationsController extends AppController {
 
 	public function initialize(): void {
 		parent::initialize();
@@ -93,11 +90,18 @@ class ApplicationsController extends AppController
 		]);
 	}
 
-	public function preCompose($entry) {
+	public function preCompose($entry, $tableName = null) {
 		$groups = $this->Groups->getGroups();
 
+		if (!empty($tableName)) {
+			$appFields = $this->FieldHandler->listColumns($tableName);
+			$this->set([
+				"appFields" => $this->setValueAsKey($appFields)
+			]);
+		}
+
 		$this->set([
-			'groups' => $this->addEmptyOption($groups)
+			'groups' => $this->addEmptyOption($groups),
 		]);
 
 		return $entry;
