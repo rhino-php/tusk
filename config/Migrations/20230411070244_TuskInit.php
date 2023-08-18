@@ -121,6 +121,10 @@ class TuskInit extends AbstractMigration
 				'limit' => 100,
 				'null' => false,
 			])
+			->addColumn('overviewFields', 'string', [
+				'default' => null,
+				'null' => true,
+			])
 			->addColumn('active', 'boolean', [
 				'default' => 1,
 			])

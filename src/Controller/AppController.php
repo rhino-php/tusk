@@ -116,6 +116,9 @@ class AppController extends BaseController
 			$tableName = $this->Table->getTable();
 			$fields = $this->FieldHandler->getFields($tableName);
 			$app = $this->Apps->getByName($tableName);
+			if (empty($app)) {
+				$app = $this->Apps->newEntity(['name' => $tableName]);
+			}
 			$this->set([
 				'fields' => $fields,
 				'app' => $app

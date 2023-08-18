@@ -8,11 +8,11 @@
 <div class="tables index content stack">
 	<div class="table-wrapper">
 		<table>
-			<caption><?= __(isset($app['alias']) ? $app['alias'] : $app['name']) ?></caption>
+			<caption><?= __(!empty($app['alias']) ? $app['alias'] : $app['name']) ?></caption>
 			<thead>
 				<tr>
 					<?php foreach ($columns as $column) : ?>
-						<?php if (!in_array($column, $app->overviewData)) {
+						<?php if (!empty($app->overviewData) && !in_array($column, $app->overviewData)) {
 							continue;
 						} ?>
 						<th data-cell="<?= h(ucfirst($column)) ?>"><?= $this->Paginator->sort($column) ?></th>
@@ -26,7 +26,7 @@
 				<?php foreach ($data as $entry) : ?>
 					<tr>
 						<?php foreach ($columns as $column) : ?>
-							<?php if (!in_array($column, $app->overviewData)) {
+							<?php if (!empty($app->overviewData) && !in_array($column, $app->overviewData)) {
 								continue;
 							} ?>
 							<td data-cell="<?= h(ucfirst($column)) ?>"><?= h($entry->{$column}) ?></td>

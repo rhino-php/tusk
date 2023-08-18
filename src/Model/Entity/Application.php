@@ -12,7 +12,7 @@ class Application extends Entity
 
 	protected function _getOverviewData() {
 		if (empty($this->overviewFields)) {
-			return null;
+			return [];
 		}
 		
 		return json_decode($this->overviewFields, true);
