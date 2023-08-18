@@ -83,6 +83,9 @@ trait TuskView
 		$object = json_decode($json);
 
 		$content = '';
+		// echo '<pre>';
+		// var_dump($object->blocks);
+		// die;
 		foreach ($object->blocks as $key => $block) {
 			$data = $block->data;
 
@@ -90,6 +93,18 @@ trait TuskView
 				case 'header':
 					$level = 'h' . $data->level;
 					$content .= '<' . $level . '>' . $data->text . '</' . $level . '>';
+					break;
+
+				case 'list':
+					# code...
+					$items = '';
+					foreach ($data->items as $listItem) {
+						$items .= '<li>' . $listItem . '</li>';
+					}
+
+					$style = $data->style == "ordered" ? 'ol' : 'ul';
+
+					$content .= '<' . $style . '>' . $items . '</' . $style . '>';
 					break;
 				
 				default:

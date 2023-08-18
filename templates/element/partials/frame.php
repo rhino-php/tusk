@@ -15,7 +15,7 @@
 		
 		<main id="main" class="main-content">
 		
-			<div class="outer-bound stack--200">
+			<div class="outer-bound">
 				<?= $this->fetch('content') ?>
 			</div>
 

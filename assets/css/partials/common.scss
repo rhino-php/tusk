@@ -43,11 +43,11 @@ body {
   @include shapes.box;
 }
 
-.box--inverted {
+.box--inverted, .box--alt {
 	@include shapes.box(
-		$color: color('background'),
-		$background: color('secondary'),
-		$border-color: color('background')
+		$color: var(--tusk-text-color),
+		$background: var(--tusk-contrast-color),
+		$border-color: var(--tusk-background-color)
 	);
 }
 
@@ -63,6 +63,22 @@ body {
   @include shapes.cluster;
 }
 
+.cluster--none, .cluster--0 {
+	@include shapes.cluster(0);
+}
+
+.cluster--100 {
+  @include shapes.cluster(var(--tusk-margin-100));
+}
+
+.cluster--200 {
+  @include shapes.cluster(var(--tusk-margin-200));
+}
+
+.cluster--600 {
+  @include shapes.cluster(var(--tusk-margin-200));
+}
+
 .cluster-end {
   justify-content: flex-end;
 }
@@ -73,6 +89,18 @@ body {
 
 .stack {
   @include shapes.stack;
+}
+
+.stack--200 {
+  @include shapes.stack(var(--tusk-margin-200));
+}
+
+.stack--300 {
+  @include shapes.stack(var(--tusk-margin-300));
+}
+
+.stack--600 {
+  @include shapes.stack(var(--tusk-margin-600));
 }
 
 .icon {

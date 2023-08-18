@@ -8,7 +8,6 @@
 	table {
 		width: 100%;
 		border-collapse: collapse;
-		
 		overscroll-behavior: contain;
 	}
 
@@ -22,36 +21,31 @@
 	th,
 	td,
 	caption {
-		padding: 0.1rem 0.75rem;
+		padding: var(--tusk-margin-200) var(--tusk-margin-200);
 		text-align: left;
-	}
-
-	th,
-	caption {
-		font-weight: 600;
-		color: var(--tusk-text-color) !important;
 	}
 	
 	caption {
 		padding: var(--tusk-margin-300) var(--tusk-margin-300);
-		background-color: var(--tusk-primary-color);
+		background-color: var(--tusk-secondary-color-600);
 		color: var(--tusk-contrast-color);
 		font-weight: 800;
 		@include type-setting(600);
 	}
-
+	
 	th {
-		background-color: var(--tusk-primary-color-200);
-		color: var(--tusk-contrast-color);
+		background-color: var(--tusk-secondary-color-300);
+		color: var(--tusk-text-color);
+		font-weight: 600;
 		font-weight: 800;
 	}
 
 	tr {
-		background-color: var(--tusk-contrast-color-300);
+		background-color: var(--tusk-secondary-color-200);
 	}
-
+	
 	tr:nth-of-type(2n + 2) {
-		background-color: var(--tusk-contrast-color-400);
+		background-color: var(--tusk-contrast-color);
 	}
 
 	td {

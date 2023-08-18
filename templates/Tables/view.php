@@ -32,16 +32,21 @@
 							<td data-cell="<?= h(ucfirst($column)) ?>"><?= h($entry->{$column}) ?></td>
 						<?php endforeach ?>
 						<td class="actions" data-cell="Actions">
-							<div class="cluster">
+							<div class="pill cluster-end">
 								<?= $this->Html->link(
-									__('Edit'),
+									$this->svg("Tusk.eye"),
+									['action' => 'view', $tableName, $entry->id],
+									['escape' => false, 'title' => __("View Entry"), 'class' => 'button']
+								) ?>
+								<?= $this->Html->link(
+									$this->svg("Tusk.edit"),
 									['action' => 'edit', $tableName, $entry->id],
-									['class' => 'button']
+									['escape' => false, 'title' => __("Edit Entry"), 'class' => 'button']
 								) ?>
 								<?= $this->Form->postLink(
-									__('Delete'),
+									$this->svg("Tusk.trash"),
 									['action' => 'delete', $tableName, $entry->id],
-									['confirm' => __('Are you sure you want to delete # {0}?', $entry->id), 'class' => 'button']
+									['confirm' => __('Are you sure you want to delete # {0}?', $entry->id), 'escape' => false, 'title' => __("Delete Entry"),  'class' => 'button']
 								) ?>
 							</div>
 						</td>
@@ -52,7 +57,10 @@
 	</div>
 
 	<div class="cluster">
-		<?= $this->Html->link(__('new'), ['action' => 'add', $tableName], ['class' => 'button']) ?>
+		<?php 
+			$newButton = $this->svg("Tusk.plus") . '<span>' . __('New Entry') . '</span>';
+		?>
+		<?= $this->Html->link($newButton, ['action' => 'add', $tableName], ['escape' => false, 'class' => 'button icon-button']) ?>
 	</div>
 
 	<?= $this->element('pagination') ?>

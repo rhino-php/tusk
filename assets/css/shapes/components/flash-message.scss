@@ -2,10 +2,10 @@
 @use "shapes";
 
 
-$info-color: skyblue;
-$success-color: green;
-$warning-color: yellow;
-$error-color: red;
+$info-color: var(--tusk-text-color-100);
+$success-color: var(--tusk-primary-color-600);
+$warning-color: rgb(238, 202, 57);
+$error-color: rgb(238, 84, 57);
 
 .flash-messages {
   position: sticky;
@@ -21,6 +21,7 @@ $error-color: red;
   .message {
 	color: var(--tusk-text-color);
 	background-color: $info-color;
+	padding: var(--tusk-margin-200) 0;
 		
     .icon {
 		font-size: 2rem;

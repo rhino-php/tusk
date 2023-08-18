@@ -40,7 +40,7 @@ label {
 .input {
 	display: flex;
 	flex-direction: column;
-	min-width: 28ex;
+	min-width: 32ex;
 	width: fit-content;
 	align-items: flex-start;
 	gap: 0.25rem;
@@ -51,14 +51,26 @@ label {
 	gap: 1rem;
 }
 
-.icon-button {
-	@include shapes.button-reset;
-	height: 2.7em;
-}
-
 .button, button {
 	@include shapes.button;
 	font-weight: 600;
+}
+
+.button-reset {
+	@include shapes.button-reset;
+}
+
+.icon-button {
+	// @include shapes.button-reset;
+	height: 2.7em;
+	display: flex;
+	gap: var(--tusk-margin-200);
+	justify-content: center;
+	align-items: center;
+
+	* {
+		display: inline-block;
+	}
 }
 
 .alt-button {

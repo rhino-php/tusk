@@ -1,5 +1,5 @@
 <h1><?= $title ?></h1>
-<?= $this->Form->create($entry, ["class" => "stack"]); ?>
+<?= $this->Form->create($entry, ["class" => "stack--300"]); ?>
 
 <?= $this->Fields->render($fields, $entry) ?>
 

@@ -72,13 +72,15 @@ $max-supported-screen-width: 3440px;
 $gutter: 1rem;
 
 $margins: (
+	100: $gutter * 0.25,
 	200: $gutter * 0.5,
 	300: $gutter,
 	400: $gutter * 2,
 	500: $gutter * 4,
 	600: $gutter * 6,
-	800: $gutter * 9,
-	900: $gutter * 12,
+	700: $gutter * 8,
+	800: $gutter * 10,
+	900: $gutter * 14,
 );
 
 /********************

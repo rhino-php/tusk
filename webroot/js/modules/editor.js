@@ -27,7 +27,7 @@ export default class Editor {
 					class: Header,
 					inlineToolbar: ['link']
 				},
-				// list: List 
+				list: List 
 			},
 
 			autofocus: true,

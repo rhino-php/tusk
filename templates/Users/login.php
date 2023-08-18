@@ -9,6 +9,6 @@
 		<?= $this->Form->control('email', ['required' => true]) ?>
 		<?= $this->Form->control('password', ['required' => true]) ?>
 		<?= $this->Form->control('remember_me', ['type' => 'checkbox']); ?>
-		<?= $this->Form->submit(__('Login')); ?>
+		<?= $this->Form->submit(__('Login'), ['class' => 'button']); ?>
     <?= $this->Form->end() ?>
 </div>

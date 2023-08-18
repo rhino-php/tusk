@@ -9,6 +9,7 @@
  */
 
 @use 'settings';
+@use 'sass:map';
 
 // Edit as needed
 
@@ -34,12 +35,12 @@
 @forward"shapes/lib/button" with (
   $color: var(--tusk-contrast-color),
   $background-color: var(--tusk-primary-color),
-  $padding: settings.$gutter,
-  $border-radius: 0,
+  $padding: var(--tusk-margin-100) var(--tusk-margin-300),
+  $border-radius: calc(var(--tusk-border-radius) * 0.5),
   $border-width: var(--tusk-border-width),
   $border-color: var(--tusk-primary-color),
   $border-color-hover: var(--tusk-primary-color),
-	$background-color-hover: transparent
+  $background-color-hover: transparent
 );
 
 @forward"shapes/lib/box" with (

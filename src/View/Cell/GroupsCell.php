@@ -138,6 +138,12 @@ class GroupsCell extends Cell {
 						'icon' => "Tusk.settings",
 						'buttons' => [
 							[
+								'name' => 'Applikation-Manager',
+								'icon' => "Tusk.unlock",
+								'link' => ['controller' => 'Applications', "action" => "index"],
+								'rights' => 'tusk_apps'
+							],
+							[
 								'name' => 'Nutzerverwaltung',
 								'icon' => "Tusk.users",
 								'link' => ['controller' => 'Users', 'action' => 'index'],
@@ -148,12 +154,6 @@ class GroupsCell extends Cell {
 								'icon' => "Tusk.lock",
 								'link' => ['controller' => 'Roles', 'action' => 'index'],
 								'rights' => 'tusk_roles'
-							],
-							[
-								'name' => 'Applikation-Manager',
-								'icon' => "Tusk.book",
-								'link' => ['controller' => 'Applications', "action" => "index"],
-								'rights' => 'tusk_apps'
 							]
 						]
 					],

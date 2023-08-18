@@ -179,6 +179,16 @@ var settings = {
 		dest: dist + "css/vendor/",
 	},
 
+	vendor: {
+		src: [
+			// end in "src/path*/**" to copy all contents to the folder "dist/path"
+			"./node_modules/@editorjs/editorjs*/**",
+			"./node_modules/@editorjs/header*/**",
+			"./node_modules/@editorjs/list*/**",
+		],
+		dest: dist + "vendor/"
+	},
+
 	fonts: {
 		src: src + "font/**/*",
 		dest: dist + "font/",
@@ -209,7 +219,7 @@ var settings = {
 	},
 
 	clean: {
-		folders: dist + '/(css|font|icon|img|js)'
+		folders: dist + '/(css|font|icon|img|js|vendor)'
 	}
 };
 
@@ -360,6 +370,11 @@ function jsVendor() {
 		.pipe(gulp.dest(settings.jsVendor.dest));
 }
 
+function vendor() {
+	return gulp.src(settings.vendor.src)
+		.pipe($.plumber({ errorHandler: $.notify.onError("Error: <%= error.message %>") }))
+		.pipe(gulp.dest(settings.vendor.dest));
+}
 
 function fonts() {
 	return gulp.src(settings.fonts.src)
@@ -474,7 +489,7 @@ function checkKey() {
 /*
  * Task: Build all
  */
-exports.build = series(cleanDist, ts, js, jsModules, jsVendor, css, cssVendor, images, icons, fonts, favicon);
+exports.build = series(cleanDist, ts, js, jsModules, jsVendor, css, cssVendor, vendor, images, icons, fonts, favicon);
 
 exports.default = gulpDefault;
 exports.cleanDist = cleanDist;
@@ -489,3 +504,4 @@ exports.favicon = favicon;
 exports.jsModules = jsModules;
 exports.templates = templates;
 exports.ts = ts;
+exports.vendor = vendor;
