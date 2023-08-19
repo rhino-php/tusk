@@ -47,8 +47,19 @@ label {
 }
 
 .checkbox {
-	display: flex;
-	gap: 1rem;
+	// display: flex;
+	// gap: var(--tusk-margin-200);
+
+	label {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		input {
+			margin-right: var(--tusk-margin-200);
+		}
+	}
+	
 }
 
 .button, button {

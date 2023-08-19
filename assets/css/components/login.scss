@@ -1,6 +1,6 @@
 .login {
 	background-color: var(--tusk-background-color);
-	// color: var(--tusk-contrast-color);
+	grid-template-rows: 0 auto;
 
 	.main-content {
 		display: flex;

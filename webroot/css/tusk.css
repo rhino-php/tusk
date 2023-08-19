@@ -845,9 +845,13 @@ label {
   gap: 0.25rem;
 }
 
-.checkbox {
+.checkbox label {
   display: flex;
-  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+.checkbox label input {
+  margin-right: var(--tusk-margin-200);
 }
 
 .button, .button-container a, button {
@@ -1949,6 +1953,7 @@ body {
 
 .login {
   background-color: var(--tusk-background-color);
+  grid-template-rows: 0 auto;
 }
 .login .main-content {
   display: flex;
