@@ -40,7 +40,9 @@ body {
 }
 
 .box {
-  @include shapes.box;
+  @include shapes.box(
+	$color: var(--tusk-contrast-color)
+  );
 }
 
 .box--inverted, .box--alt {

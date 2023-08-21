@@ -48,7 +48,7 @@ class GroupsCell extends Cell {
 				$apps[] = [
 					'name' => isset($app['alias']) ? $app['alias'] : $app["name"],
 					'icon' => null,
-					'link' => ['controller' => 'Tables', "action" => "view", $app['name']],
+					'link' => ['controller' => 'Tables', "action" => "index", $app['name']],
 					'rights' => $app['name']
 				];
 				$handledApps[] = $app['name'];
@@ -69,7 +69,7 @@ class GroupsCell extends Cell {
 			$groups[] = [
 				'name' => isset($app['alias']) ? $app['alias'] : $app["name"],
 				'icon' => null,
-				'link' => ['controller' => 'Tables', "action" => "view", $app['name']],
+				'link' => ['controller' => 'Tables', "action" => "index", $app['name']],
 				'rights' => $app['name']
 			];
 		}
@@ -122,13 +122,13 @@ class GroupsCell extends Cell {
 							[
 								'name' => 'Elements',
 								'icon' => "Tusk.book",
-								'link' => ['controller' => 'Tables', 'action' => 'view', 'tusk_elements'],
+								'link' => ['controller' => 'Tables', 'action' => 'index', 'tusk_elements'],
 								'rights' => 'tusk_elements'
 							],
 							[
 								'name' => 'Layouts',
 								'icon' => "Tusk.book",
-								'link' => ['controller' => 'Tables', 'action' => 'view', 'tusk_layouts'],
+								'link' => ['controller' => 'Tables', 'action' => 'index', 'tusk_layouts'],
 								'rights' => 'tusk_layouts'
 							]
 						]

@@ -55,11 +55,16 @@ class RolesTable extends Table {
 			return $rights;
 		}
 
+		if (!in_array($type, $this->accessTypes)) {
+			return true;
+		}
+
 		return in_array($type, $rights);
 	}
 
 	private function getRights($access, $app) {
 		$rights = [];
+
 		foreach ($this->accessTypes as $type) {
 			$param = $app . '_' . $type;
 

@@ -21,7 +21,7 @@ class TablesController extends AppController
      *
      * @return \Cake\Http\Response|null|void Renders view
      */
-    public function index() {
+    public function list() {
         $tables = $this->Tables->getList();
         $this->set(compact('tables'));
     }
@@ -33,7 +33,7 @@ class TablesController extends AppController
      * @return \Cake\Http\Response|null|void Renders view
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function view($tableName = null) {
+    public function index($tableName = null) {
         $this->Tables->setTable($tableName);
 		
 		$columns = $this->FieldHandler->listColumns($tableName);
@@ -72,6 +72,27 @@ class TablesController extends AppController
 		$this->compose($entry, ["redirect" => ['action' => 'view', $tableName]]);
 	}
 
+	/**
+	 * Edit method
+	 *
+	 * @param string|null $id Table id.
+	 * @return \Cake\Http\Response|null|void Redirects on successful edit, renders view otherwise.
+	 * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
+	 */
+	public function view($tableName = null, $id = null) {
+		$this->Tables->setTable($tableName);
+		$entry = $this->Tables->get($id);
+		$this->set(['title' => 'View', 'readonly' => true]);
+		$this->compose($entry, ["redirect" => ['action' => 'view', $tableName]]);
+	}
+
+
+	public function preSave($data, $params) {
+		if ($params['action'] == "view") {
+			$this->Flash->warning('A View can not be saved.');
+		}
+	}
+
 
 	/**
 	 * Delete method
@@ -91,10 +112,5 @@ class TablesController extends AppController
 		}
 
 		return $this->redirect(['action' => 'view', $tableName]);
-	}
-
-
-	public function preRender() {
-		
 	}
 }

@@ -11,18 +11,18 @@ class FieldsHelper extends Helper {
 		$this->FieldHandler = new FieldHandler();
 	}
 
-	public function render($fields, $values) {
+	public function render($fields, $values, $options = []) {
 		$content = '';
 
 		foreach ($fields as $field) {
 			$name = $field['name'];
-			$content .= $this->getField($field, $values[$name]);
+			$content .= $this->getField($field, $values[$name], $options);
 		}
 
 		return $content;
 	}
 
-	private function getField($field, $value) {
+	private function getField($field, $value, $options = []) {
 		$field->alias = $field->alias ?: $field->name;
 		$params = $field->toArray();
 		
@@ -31,27 +31,27 @@ class FieldsHelper extends Helper {
 			$params['settings'] = json_decode($field->settings, true);
 		}
 
-		return $this->output($field['type'], $params);
+		return $this->output($field['type'], $params, $options);
 	}
 
-	public function control($params = []) {
+	public function control($params = [], $options = []) {
 		$params = array_merge([
 			'type' => 'default',
 			'value' => '',
 		], $params);
 
-		return $this->output($params['type'], $params);
+		return $this->output($params['type'], $params, $options);
 	}
 
-	private function output($type, $params) {
+	private function output($type, $params, $options = []) {
 		if (!isset($params['alias'])) {
 			$params['alias'] = $params['name'];
 		}
 
 		if (in_array($type, $this->FieldHandler->types)) {
-			return $this->_View->element('Fieldtypes' . DS . 'default', ['params' => $params]);
+			return $this->_View->element('Fieldtypes' . DS . 'default', ['params' => $params, 'options' => $options]);
 		}
 
-		return $this->_View->element('Fieldtypes' . DS . $type, ['params' => $params]);
+		return $this->_View->element('Fieldtypes' . DS . $type, ['params' =>$params, 'options' => $options]);
 	}
 }

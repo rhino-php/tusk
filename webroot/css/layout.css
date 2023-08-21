@@ -496,6 +496,10 @@ a:focus, button:focus, input:focus, select:focus, textarea:focus {
   outline: none;
 }
 
+input[type=text], textarea {
+  cursor: text;
+}
+
 input, textarea, select, input[type=file] {
   background-color: var(--tusk-contrast-color);
   color: var(--tusk-text-color);
@@ -506,9 +510,9 @@ input, textarea, select, input[type=file] {
   margin-bottom: 0rem;
   padding: 0.25em 0.5em;
 }
-
-input[type=text], textarea {
-  cursor: text;
+input[readonly], textarea[readonly], select[readonly], input[type=file][readonly] {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 input[type=checkbox] {

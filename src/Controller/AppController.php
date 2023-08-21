@@ -8,6 +8,7 @@ use Tusk\Handlers\FieldHandler;
 use Cake\Http\Response;
 use Tusk\Model\Table\ApplicationsTable;
 use Tusk\Model\ApplicationTrait;
+use Tusk\Model\Table\RolesTable;
 
 class AppController extends BaseController
 {
@@ -18,24 +19,60 @@ class AppController extends BaseController
         parent::initialize();
 		$this->loadComponent('Authentication.Authentication');
 		$this->loadComponent('Authorization.Authorization');
+		$this->user = $this->Authentication->getIdentity();
 
-		$this->bootstrap();
-
-		$this->FieldHandler = new FieldHandler();
-		$this->Apps = new ApplicationsTable();
 		$this->useTable = false;
 		
 		try {
 			$this->Table = $this->fetchTable();
 			$this->useTable = true;
 		} catch (\Throwable $th) {}
+
+		$this->bootstrap();
+
+		$this->FieldHandler = new FieldHandler();
+		$this->Apps = new ApplicationsTable();
     }
 	
 	private function bootstrap() {
-		$this->user = $this->Authentication->getIdentity();
-		
 		if (!empty($this->user)) {
 			$this->set(['user' => $this->user]);
+		}
+
+		if ($this->useTable && !empty($this->user)) {
+			$action = $this->request->getParam('action');
+			$role = $this->user->role_id;
+			$app = $this->Table->getTable();
+
+			if ($app == "tables") {
+				$pass = $this->request->getParam('pass');
+				$app = $pass[0];
+			}
+
+			$Roles = new RolesTable();
+			$right = $Roles->checkGroupRights($role, $app, $action);
+
+			if (!$right) {
+				$this->setAction('noAccess');
+			}
+
+			$rights = $Roles->checkGroupRights($role, $app);
+			$this->set(['rights' => $rights]);
+		}
+	}
+
+	public function noAccess() {
+		$this->response = $this->response->withStatus(403);
+		$this->set(['uri' => $this->request->getenv('REQUEST_URI')]);
+		$this->useTable = false;
+		
+		try {
+			return $this->render('Tusk.App/no_access');
+		} catch (MissingTemplateException $exception) {
+			if (Configure::read('debug')) {
+				throw $exception;
+			}
+			throw new NotFoundException();
 		}
 	}
 
