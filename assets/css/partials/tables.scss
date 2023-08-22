@@ -20,12 +20,12 @@
 
 	th,
 	td,
-	caption {
+	caption, .caption {
 		padding: var(--tusk-margin-200) var(--tusk-margin-200);
 		text-align: left;
 	}
 	
-	caption {
+	caption, .caption {
 		padding: var(--tusk-margin-300) var(--tusk-margin-300);
 		background-color: var(--tusk-secondary-color-600);
 		color: var(--tusk-contrast-color);

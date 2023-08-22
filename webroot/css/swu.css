@@ -1006,11 +1006,11 @@ label {
 }
 .table-wrapper th,
 .table-wrapper td,
-.table-wrapper caption {
+.table-wrapper caption, .table-wrapper .caption {
   padding: var(--tusk-margin-200) var(--tusk-margin-200);
   text-align: left;
 }
-.table-wrapper caption {
+.table-wrapper caption, .table-wrapper .caption {
   padding: var(--tusk-margin-300) var(--tusk-margin-300);
   background-color: var(--tusk-secondary-color-600);
   color: var(--tusk-contrast-color);
@@ -1969,34 +1969,45 @@ body {
   height: auto;
 }
 
+.pages h1 {
+  padding: var(--tusk-margin-300) var(--tusk-margin-300);
+  background-color: var(--tusk-secondary-color-600);
+  color: var(--tusk-contrast-color);
+  font-weight: 800;
+}
 .pages .page-list {
   list-style: none;
 }
 .pages .page-list .page-item {
-  padding: 0.5rem 0 0 1rem;
+  padding: 0.5rem 1rem;
   background-color: var(--tusk-contrast-color);
 }
 .pages .page-list .page-item__body {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+}
+.pages .page-list .page-item .page-item:first-of-type {
+  margin-top: 0.5rem;
 }
 .pages .page-list .page-item .page-item {
   margin-left: 1rem;
+  padding-right: 0;
 }
 .pages .page-list li:nth-of-type(2n - 1) {
-  background-color: var(--tusk-primary-color-200);
+  background-color: var(--tusk-secondary-color-200);
 }
 .pages .page-list li:nth-of-type(2n - 1) li:nth-of-type(2n - 1) {
   background-color: var(--tusk-contrast-color);
 }
 .pages .page-list li:nth-of-type(2n - 1) li:nth-of-type(2n - 1) li:nth-of-type(2n - 1) {
-  background-color: var(--tusk-primary-color-200);
+  background-color: var(--tusk-secondary-color-200);
 }
 .pages .page-list li:nth-of-type(2n - 1) li:nth-of-type(2n - 1) li:nth-of-type(2n - 1) li:nth-of-type(2n - 1) {
   background-color: var(--tusk-contrast-color);
 }
 .pages .page-list li:nth-of-type(2n - 1) li:nth-of-type(2n - 1) li:nth-of-type(2n - 1) li:nth-of-type(2n - 1) li:nth-of-type(2n - 1) {
-  background-color: var(--tusk-primary-color-200);
+  background-color: var(--tusk-secondary-color-200);
 }
 .pages .page-list ul {
   list-style: none;

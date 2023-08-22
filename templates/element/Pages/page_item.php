@@ -4,12 +4,26 @@
 			<?= $this->Html->link($page['name'], ['action' => 'layout', $page['id']]) ?>
 
 			<div>
-				<?= $this->Html->link('edit', ['action' => 'change', $page['id']], ['class' => 'button']) ?>
-				<?= $this->Form->postLink(
-					__('Delete'),
-					['action' => 'delete', $page['id']],
-					['confirm' => __('Are you sure you want to delete # {0}?', $page['name']), 'class' => 'button']
-				) ?>
+				<?php
+					$this->start('actions');
+					echo $this->element("layout-elements/actions", [
+						"view" => [
+							"link" => ['action' => 'layout', $page['id']],
+							"valid" => in_array('view', $rights)
+						],
+						"edit" => [
+							"link" => ['action' => 'change', $page['id']],
+							"valid" => in_array('edit', $rights)
+						],
+						"delete" => [
+							"link" => ['action' => 'delete', $page['id']],
+							"valid" => in_array('delete', $rights),
+							"confirm" => __('Are you sure you want to delete # {0}?', $page['name']),
+						],
+					]);
+					$this->end();
+				?>
+				<?= $this->fetch('actions'); ?>
 			</div>
 		</div>
 
