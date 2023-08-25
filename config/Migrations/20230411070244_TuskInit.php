@@ -36,6 +36,7 @@ class TuskInit extends AbstractMigration
 			])
 			->addColumn('role_id', 'string', [
 				'default' => 1,
+				'limit' => 100,
 				'null' => false,
 			])
 			->addColumn('theme', 'string', [
@@ -287,7 +288,7 @@ class TuskInit extends AbstractMigration
 						'email' => 'rhino@example.com',
 						'password' => '$2y$10$D6POTVNQcplsR2bvLXiS3.fnS310gKtaWkLC.82MxMuzRQPhxpv46',
 						'theme' => 'tusk',
-						'role_id' => 1
+						'role_id' => '1'
 					]
 				])
 				->saveData();

@@ -8,8 +8,8 @@
 					<th><?= $this->Paginator->sort('name') ?></th>
 					<th><?= $this->Paginator->sort('created') ?></th>
 					<th><?= $this->Paginator->sort('modified') ?></th>
-					
-					<th class="actions"><?= __('Actions') ?></th>
+
+					<th class="actions" align="right"><?= __('Actions') ?></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -21,8 +21,22 @@
 						<td><?= h($role->modified) ?></td>
 
 						<td class="actions">
-							<?= $this->Html->link(__('Edit'), ['action' => 'edit', $role->id]) ?>
-							<?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $role->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>
+							<?php
+							$this->start('actions');
+							echo $this->element("layout-elements/actions", [
+								"edit" => [
+									"link" => ['action' => 'edit', $role->id],
+									"valid" => in_array('edit', $rights)
+								],
+								"delete" => [
+									"link" => ['action' => 'delete', $role->id],
+									"valid" => in_array('delete', $rights),
+									"confirm" => __('Are you sure you want to delete # {0}?', $role->id),
+								],
+							]);
+							$this->end();
+							?>
+							<?= $this->fetch('actions'); ?>
 						</td>
 					</tr>
 				<?php endforeach; ?>

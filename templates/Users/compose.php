@@ -14,7 +14,7 @@
 		echo $this->Form->control('name');
 		echo $this->Form->control('email');
 		echo $this->Form->control('theme');
-		
+
 		if ($role == 1) {
 			echo $this->Form->control('role_id');
 		}

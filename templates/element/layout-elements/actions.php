@@ -1,5 +1,5 @@
 <div class="pill cluster-end">
-	<?php if ($view['valid']) {
+	<?php if (isset($view) && $view['valid']) {
 		echo $this->Html->link(
 			$this->svg("Tusk.eye"),
 			$view['link'],
@@ -11,7 +11,7 @@
 		);
 	}
 	?>
-	<?php if ($edit['valid']) {
+	<?php if (isset($edit) && $edit['valid']) {
 		echo $this->Html->link(
 			$this->svg("Tusk.edit"),
 			$edit['link'],
@@ -22,7 +22,7 @@
 			]
 		);
 	} ?>
-	<?php if ($delete['valid']) {
+	<?php if (isset($delete) && $delete['valid']) {
 		echo $this->Form->postLink(
 			$this->svg("Tusk.trash"),
 			$delete['link'],

@@ -39,7 +39,7 @@ class AppController extends BaseController
 			$this->set(['user' => $this->user]);
 		}
 
-		if ($this->useTable && !empty($this->user)) {
+		if ($this->useTable && !empty($this->user) && !empty($this->user->role_id)) {
 			$action = $this->request->getParam('action');
 			$role = $this->user->role_id;
 			$app = $this->Table->getTable();

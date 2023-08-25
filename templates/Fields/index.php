@@ -10,17 +10,31 @@
 				<th>Actions</th>
 			</tr>
 			<?php if (!empty($columns)) : ?>
-			<?php foreach ($columns as $column) : ?>
-				<tr>
-					<?php foreach ($rows as $row) : ?>
-						<td><?= $column[$row] ?></td>
-					<?php endforeach ?>
-					<td>
-						<?= $this->Html->link("edit", ["action" => 'edit', $tableName, $column["Field"]]) ?>
-						<?= $this->Html->link("delete", ["action" => 'delete', $tableName, $column["Field"]]) ?>
-					</td>
-				</tr>
-			<?php endforeach ?>
+				<?php foreach ($columns as $column) : ?>
+					<tr>
+						<?php foreach ($rows as $row) : ?>
+							<td><?= $column[$row] ?></td>
+						<?php endforeach ?>
+						<td>
+							<?php
+							$this->start('actions');
+							echo $this->element("layout-elements/actions", [
+								"edit" => [
+									"link" => ['action' => 'edit', $tableName, $column["Field"]],
+									"valid" => in_array('edit', $rights)
+								],
+								"delete" => [
+									"link" => ['action' => 'delete', $tableName, $column["Field"]],
+									"valid" => in_array('edit', $rights),
+									"confirm" => __('Are you sure you want to delete: {0}?', $column["Field"]),
+								],
+							]);
+							$this->end();
+							?>
+							<?= $this->fetch('actions'); ?>
+						</td>
+					</tr>
+				<?php endforeach ?>
 			<?php endif ?>
 		</table>
 	</div>

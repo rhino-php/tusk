@@ -16,7 +16,7 @@
 					<th><?= $this->Paginator->sort('email') ?></th>
 					<th><?= $this->Paginator->sort('created') ?></th>
 					<th><?= $this->Paginator->sort('modified') ?></th>
-					<th class="actions"><?= __('Actions') ?></th>
+					<th class="actions" align="right"><?= __('Actions') ?></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -27,8 +27,22 @@
 						<td><?= h($user->created) ?></td>
 						<td><?= h($user->modified) ?></td>
 						<td class="actions">
-							<?= $this->Html->link(__('Edit'), ['action' => 'edit', $user->id]) ?>
-							<?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->id)]) ?>
+							<?php
+							$this->start('actions');
+							echo $this->element("layout-elements/actions", [
+								"edit" => [
+									"link" => ['action' => 'edit', $user->id],
+									"valid" => in_array('edit', $rights)
+								],
+								"delete" => [
+									"link" => ['action' => 'delete', $user->id],
+									"valid" => in_array('delete', $rights),
+									"confirm" => __('Are you sure you want to delete # {0}?', $user->id),
+								],
+							]);
+							$this->end();
+							?>
+							<?= $this->fetch('actions'); ?>
 						</td>
 					</tr>
 				<?php endforeach; ?>

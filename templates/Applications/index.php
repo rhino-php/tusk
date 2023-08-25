@@ -6,7 +6,7 @@
 			<thead>
 				<tr>
 					<th colspan="2">Table</th>
-					<th>Actions</th>
+					<th class="actions" align="right">Actions</th>
 				</tr>
 			</thead>
 
@@ -47,22 +47,27 @@
 								) ?>
 							</td>
 							<td colspan="2">
-								<?= $this->Html->link(
-									"fields",
-									["controller" => "Fields", "action" => 'index', $table['name']],
-									['class' => 'button']
-								) ?>
-								<?= $this->Html->link(
-									"edit",
-									["action" => 'edit', $table['name']],
-									['class' => 'button']
-								) ?>
 
-								<?= $this->Form->postLink(
-									__('Delete'),
-									['action' => 'delete', $table['name']],
-									['confirm' => __('Are you sure you want to delete: {0}?', $table['name']), 'class' => 'button']
-								) ?>
+								<?php
+								$this->start('actions');
+								echo $this->element("layout-elements/actions", [
+									"view" => [
+										"link" => ["controller" => "Fields", "action" => 'index', $table['name']],
+										"valid" => in_array('view', $rights)
+									],
+									"edit" => [
+										"link" => ['action' => 'edit', $table['name']],
+										"valid" => in_array('edit', $rights)
+									],
+									"delete" => [
+										"link" => ['action' => 'delete', $table['name']],
+										"valid" => in_array('edit', $rights),
+										"confirm" => __('Are you sure you want to delete: {0}?', $table['name']),
+									],
+								]);
+								$this->end();
+								?>
+								<?= $this->fetch('actions'); ?>
 							</td>
 						</tr>
 					<?php endforeach ?>
