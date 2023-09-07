@@ -55,7 +55,7 @@ class TablesController extends AppController
 		$this->Tables->setTable($tableName);
 		$entry = $this->Tables->newEmptyEntity();
 		$this->set(['title' => 'Add']);
-		$this->compose($entry, ["redirect" => ['action' => 'view', $tableName]]);
+		$this->compose($entry, ["redirect" => ['action' => 'index', $tableName]]);
 	}
 
 	/**
@@ -69,7 +69,7 @@ class TablesController extends AppController
 		$this->Tables->setTable($tableName);
 		$entry = $this->Tables->get($id);
 		$this->set(['title' => 'Edit']);
-		$this->compose($entry, ["redirect" => ['action' => 'view', $tableName]]);
+		$this->compose($entry, ["redirect" => ['action' => 'index', $tableName]]);
 	}
 
 	/**
@@ -83,7 +83,7 @@ class TablesController extends AppController
 		$this->Tables->setTable($tableName);
 		$entry = $this->Tables->get($id);
 		$this->set(['title' => 'View', 'readonly' => true]);
-		$this->compose($entry, ["redirect" => ['action' => 'view', $tableName]]);
+		$this->compose($entry, ["redirect" => ['action' => 'index', $tableName]]);
 	}
 
 
@@ -91,6 +91,7 @@ class TablesController extends AppController
 		if ($params['action'] == "view") {
 			$this->Flash->warning('A View can not be saved.');
 		}
+		return $data;
 	}
 
 

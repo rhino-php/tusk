@@ -38,6 +38,12 @@ class FieldHandler {
 					'description' => 'Komma separated List',
 					'default' => ''
 				],
+				'applications' => [
+					'type' => 'select',
+					'description' => 'Applications',
+					'default' => '',
+					'settings' => ['options' => '', 'multiSelect' => false, 'allowEmpty' => false]
+				],
 				'defaults' => [
 					'type' => 'text',
 					'description' => 'Default options',

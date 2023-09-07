@@ -47,7 +47,6 @@
 								) ?>
 							</td>
 							<td colspan="2">
-
 								<?php
 								$this->start('actions');
 								echo $this->element("layout-elements/actions", [
