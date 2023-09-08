@@ -112,6 +112,28 @@ class TablesController extends AppController
 			$this->Flash->error(__('The table could not be deleted. Please, try again.'), ['plugin' => 'Tusk']);
 		}
 
-		return $this->redirect(['action' => 'view', $tableName]);
+		return $this->redirect(['action' => 'index', $tableName]);
+	}
+
+	public function export($tableName) {
+		$this->Tables->setTable($tableName);
+		$data = $this->Tables->find();
+		$header = $this->FieldHandler->listColumns($tableName);
+
+		$delimiter = ';';
+		$enclosure = '"';
+		$newline = '\r\n';
+
+		$this->set(compact('data'));
+		$this->viewBuilder()
+			->setClassName('CsvView.Csv')
+			->setOptions([
+				'serialize' => 'data',
+				'header' => $header,
+				'delimiter' => $delimiter,
+				'enclosure' => $enclosure,
+				'newline' => $newline
+			]);
+
 	}
 }

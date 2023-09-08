@@ -67,6 +67,8 @@
 			$newButton = $this->svg("Tusk.plus") . '<span>' . __('New Entry') . '</span>';
 			echo $this->Html->link($newButton, ['action' => 'add', $tableName], ['escape' => false, 'class' => 'button icon-button']);
 		} ?>
+
+		<?= $this->Html->link($this->svg("Tusk.download") . '<span>' . __('Export to CSV') . '</span>', ['action' => 'export', $tableName], ['escape' => false, 'class' => 'button icon-button', 'download' => $tableName . '.csv']); ?>
 	</div>
 
 	<?= $this->element('pagination') ?>

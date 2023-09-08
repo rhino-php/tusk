@@ -42,7 +42,7 @@
 							<td>
 								<?= $this->Html->link(
 									isset($table['alias']) ? $table['alias'] : $table['name'],
-									["controller" => "Tables", "action" => 'view', $table['name']],
+									["controller" => "Tables", "action" => 'index', $table['name']],
 									// ['class' => 'button']
 								) ?>
 							</td>
