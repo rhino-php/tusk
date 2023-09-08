@@ -12,10 +12,10 @@
 /**
  * Import modules, modules are stored in `src/js/modules/`
  */
-import Nav from "/tusk/js/vendor/nav.js";
-import FlashMessages from "/tusk/js/vendor/flash-messages.js";
-import LightBox from "/tusk/js/vendor/light-box.js";
-import Overlay from "/tusk/js/vendor/overlay.js";
+import Nav from "./vendor/nav.js";
+import FlashMessages from "./vendor/flash-messages.js";
+import LightBox from "./vendor/light-box.js";
+import Overlay from "./vendor/overlay.js";
 // import LazyLoading from "/js/vendor/lazyload.js";
 // import Map from "/js/vendor/map.js";
 // import Slider from "/js/vendor/slider.js";

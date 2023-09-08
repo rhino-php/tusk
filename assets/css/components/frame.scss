@@ -97,8 +97,9 @@ body {
 
 		a[aria-current] {
 			background-color: var(--tusk-primary-color);
+			color: var(--tusk-contrast-color);
 		}
-
+		
 		summary[aria-current] {
 			background-color: var(--tusk-primary-color-200);
 		}

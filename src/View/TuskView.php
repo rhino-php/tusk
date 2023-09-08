@@ -51,7 +51,7 @@ trait TuskView
 		return isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : "#";
 	}
 
-	public function getCurrent(mixed $args) : ?string {
+	public function getCurrent($args) : ?string {
 		if (is_string($args)) {
 			if ($args != $this->request->getEnv("REQUEST_URI")) {
 				return null;

@@ -213,8 +213,8 @@ var settings = {
 	},
 
 	favicon: {
-		src: src + "icon/logo.svg",
-		dest: dist + "icon/favicons/",
+		src: src + "icon/tusk.svg",
+		dest: dist + "favicons/",
 		background: "#ffffff",
 	},
 

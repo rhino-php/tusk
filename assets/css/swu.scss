@@ -1,11 +1,10 @@
 /**
  * main.scss
  */
-
 $colors: (
-	primary: #39ca40,
-	secondary: #046a9e,
-	background: #046a9e,
+	primary: #0082c4,
+	secondary: #c2c1bf,
+	background: #0c0e26,
 	contrast: #F9F9F9,
 	// color-for-bg(var(--primary-color), var(--background-color), $text-color)
 	text: #0c0e26 // #333
@@ -14,7 +13,7 @@ $colors: (
 // change to path if needed
 @forward "shapes/lib/reset" with ($list-reset: false);
 
-@forward 'partials/root' with ($prefix: --tusk-, $colors : $colors);
+@forward 'partials/root' with ($prefix: --tusk-, $colors: $colors);
 
 @forward "partials";
 

@@ -88,6 +88,8 @@ class UsersController extends AppController
 		if ($data['newPassword'] === $data['repeatPassword']) {
 			if (!empty($data['newPassword'])) {
 				$data['password'] = $data['newPassword'];
+			} else {
+				unset($data['password']);
 			}
 			return $data;
 		}

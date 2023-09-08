@@ -1,5 +1,5 @@
-import DragDrop from "/tusk/js/modules/dragdrop.js";
-import Editor from "/tusk/js/modules/editor.js";
+import DragDrop from "./dragdrop.js";
+import Editor from "./editor.js";
 
 export default class LayoutElements {
 	constructor() {

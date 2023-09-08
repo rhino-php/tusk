@@ -3,7 +3,7 @@
  */
 $colors: (
 	primary: #4ADCB1,
-	secondary: #2b3287,
+	secondary: #c2c1bf,
 	background: #0c0e26,
 	contrast: #F9F9F9,
 	// color-for-bg(var(--primary-color), var(--background-color), $text-color)
@@ -13,7 +13,7 @@ $colors: (
 // change to path if needed
 @forward "shapes/lib/reset" with ($list-reset: false);
 
-@forward 'partials/root' with ($prefix: --tusk-);
+@forward 'partials/root' with ($prefix: --tusk-, $colors: $colors);
 
 @forward "partials";
 
