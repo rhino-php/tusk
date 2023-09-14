@@ -55,7 +55,7 @@ class ApplicationsTable extends Table
 	public function getByName($tableName) {
 		$query = $this->find()->where(['Applications.name' => $tableName]);
 		
-		if ($query->isEmpty()) {
+		if ($query->all()->isEmpty()) {
 			return false;
 		}
 

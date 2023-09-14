@@ -169,7 +169,7 @@ class FieldsTable extends Table {
 
 	public function checkForEntry($fieldName, $tableName) {
 		$query = $this->find()->where(['name' => $fieldName, 'tableName' => $tableName]);
-		if (!$query->isEmpty()) {
+		if (!$query->all()->isEmpty()) {
 			return $query->first();
 		}
 	
