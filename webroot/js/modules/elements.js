@@ -1,9 +1,110 @@
-/**
- * @project       rhino
- * @author        carsten.coull@swu.de
- * @build         Fri, Sep 8, 2023 11:37 AM ET
- * @release       656bd8c951d0ae89ed98b06db718f065a8753f28 [main]
- * @copyright     Copyright (c) 2023, SWU Stadtwerke Ulm / Neu-Ulm GmbH
- *
- */
-import DragDrop from"./dragdrop.js";import Editor from"./editor.js";export default class LayoutElements{constructor(){this.DragDrop=new DragDrop,this.elements=document.querySelectorAll(".layout-element"),this.DragDrop.loadElements(this.elements,this.setPosition)}setModal(e){e.addEventListener("modalOpen",(e=>this.initForm(e))),e.addEventListener("modalClosed",(e=>this.onDispatch(e)))}initForm(e){this.modal=e.detail;let t=this.modal.modalMain.querySelector("form"),n=t.querySelector("[name=html]");this.editor=n?new Editor("editor",n.value):null,t.addEventListener("submit",(e=>{e.preventDefault(),this.editor?this.editor.save().then((e=>{n.value=JSON.stringify(e),this.editor.destroy(),this.sendFrom(t)})):this.sendFrom(t)}))}sendFrom(e){fetch(e.getAttribute("action"),{method:"POST",body:new FormData(e)}).then((e=>e.json())).then((e=>{if(200!=e.status)throw new Exception("something went wrong");this.modal.closeModal()})).catch((e=>{}))}onDispatch(e){let t=e.detail;this.element=t.parentNode.parentNode;let n=this.readId(this.element);n||window.location.reload(),fetch("/tusk/contents/element/"+n,{headers:{"X-Requested-With":"XMLHttpRequest"}}).then((e=>e.text())).then((e=>this.updateContent(e))).catch()}updateContent(e){if(!e.length)return void this.element.remove();let t=this.element.querySelector(".element-container");t&&(t.innerHTML=e)}readId(e){return e.id.replace("element-","")}setPosition(e,t){let n=e.id.replace("element-","");t<0&&(t=0),fetch("/tusk/contents/change/"+n+"?"+new URLSearchParams({key:"position",value:t}),{headers:{"X-Requested-With":"XMLHttpRequest"}}).then((e=>e.json())).then((e=>{})).catch()}}
+import DragDrop from "./dragdrop.js";
+import Editor from "./editor.js";
+
+export default class LayoutElements {
+	constructor() {
+		this.DragDrop = new DragDrop();
+		this.elements = document.querySelectorAll('.layout-element');
+		this.DragDrop.loadElements(this.elements, this.setPosition);
+	}
+
+	setModal(modal) {
+		modal.addEventListener('modalOpen', (event) => this.initForm(event));
+		modal.addEventListener('modalClosed', (event) => this.onDispatch(event));
+	}
+
+	initForm(event) {
+		this.modal = event.detail;
+		let form = this.modal.modalMain.querySelector('form');
+		let html = form.querySelector('[name=html]');
+
+		if (html) {
+			this.editor = new Editor('editor', html.value);
+		} else {
+			this.editor = null;
+		}
+
+		form.addEventListener('submit', (event) => {
+			event.preventDefault();
+
+			if (this.editor) {
+				this.editor.save().then((data) => {
+					html.value = JSON.stringify(data);
+					this.editor.destroy();
+					this.sendFrom(form);
+				});
+			} else {
+				this.sendFrom(form);
+			}
+		})
+	}
+
+	sendFrom(form) {
+		fetch(form.getAttribute('action'), {
+			method: 'POST',
+			body: new FormData(form)
+		})
+		.then(response => response.json())
+		.then((json) => {
+			if (json.status != 200) {
+				throw new Exception('something went wrong');
+			}
+			this.modal.closeModal();
+		})
+		.catch(err => console.log(err))
+	}
+
+	onDispatch(event) {
+		let button = event.detail;
+		this.element = button.parentNode.parentNode;
+		let id = this.readId(this.element);
+
+		if (!id) {
+			window.location.reload();
+		}
+
+		fetch('/tusk/contents/element/' + id, {
+			headers: {
+				'X-Requested-With': 'XMLHttpRequest'
+			}
+		}).then(response => response.text()).then(text => this.updateContent(text)).catch();
+	}
+
+	updateContent(content) {
+		if (!content.length) {
+			this.element.remove();
+			return;
+		}
+		
+		let container = this.element.querySelector('.element-container');
+		if (container) {
+			container.innerHTML = content;
+		}
+	}
+
+	readId(element) {
+		return element.id.replace('element-', '');
+	}
+
+	setPosition(element, position) {
+		let id = element.id.replace('element-', '');
+
+		if (position < 0) {
+			position = 0;
+		}
+
+		fetch('/tusk/contents/change/' + id + "?" + new URLSearchParams({
+			key: 'position',
+			value: position
+		}), {
+			headers: {
+				'X-Requested-With': 'XMLHttpRequest'
+			}
+		})
+		.then(response => response.json())
+		.then(json => console.log(json))
+		.catch();
+	}
+
+}
+//# sourceMappingURL=elements.js.map

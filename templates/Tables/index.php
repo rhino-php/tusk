@@ -7,6 +7,30 @@
 
 ?>
 <div class="tables index content stack">
+
+	<details>
+		<summary>Filter</summary>
+		<?= $this->Form->create(null, [
+			'url' => [
+				'action' => 'setFilter',
+				$tableName
+			], 'type' => 'post', 'class' => 'cluster']) 
+		?>
+		<?= $this->Form->select("field", $columns, ['value' => $field]) ?>
+		<?= $this->Form->select("operator", $operators, ['value' => $operator]) ?>
+		<?= $this->Form->input("query", ['value' => $query]) ?>
+		<div class="cluster">
+			<?= $this->Form->button("Filter") ?>
+			<?= $this->Html->Link('clear Filter', [
+				'action' => 'clearFilter',
+				$tableName
+			],
+			['class' => 'alt-button'])
+			?>
+		</div>
+		<?= $this->Form->end() ?>
+	</details>
+
 	<div class="table-wrapper">
 		<table>
 			<caption class="caption"><?= __(!empty($app['alias']) ? $app['alias'] : $app['name']) ?></caption>
@@ -70,6 +94,8 @@
 
 		<?= $this->Html->link($this->svg("Tusk.download") . '<span>' . __('Export to CSV') . '</span>', ['action' => 'export', $tableName], ['escape' => false, 'class' => 'button icon-button', 'download' => $tableName . '.csv']); ?>
 	</div>
+
+
 
 	<?= $this->element('pagination') ?>
 </div>

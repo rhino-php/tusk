@@ -9,10 +9,12 @@ use Cake\Http\Response;
 use Tusk\Model\Table\ApplicationsTable;
 use Tusk\Model\ApplicationTrait;
 use Tusk\Model\Table\RolesTable;
+use Tusk\Handlers\FilterHandler;
 
 class AppController extends BaseController
 {
 	use ApplicationTrait;
+	use FilterHandler;
 
 	public function initialize(): void
     {
@@ -32,6 +34,7 @@ class AppController extends BaseController
 
 		$this->FieldHandler = new FieldHandler();
 		$this->Apps = new ApplicationsTable();
+		$this->Session = $this->request->getSession();
     }
 	
 	private function bootstrap() {
@@ -104,9 +107,13 @@ class AppController extends BaseController
 			}
 		}
 
+		$positions = $this->getFilterPosition($entry->id);
+
 		$this->set([
 			$params['entity'] => $entry,
 			'action' => $action,
+			'nextId' => $positions['next'],
+			'prevId' => $positions['prev']
 		]);
 
 		try {
@@ -158,7 +165,8 @@ class AppController extends BaseController
 			}
 			$this->set([
 				'fields' => $fields,
-				'app' => $app
+				'app' => $app,
+				'tableName' => $tableName
 			]);
 		}
 

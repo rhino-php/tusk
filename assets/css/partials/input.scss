@@ -15,6 +15,12 @@ a, button, input, select, textarea {
 	}
 }
 
+[disabled] {
+	opacity: 0.6;
+	pointer-events: none;
+	cursor: default;
+}
+
 input[type=text], textarea {
 	cursor: text;
 }

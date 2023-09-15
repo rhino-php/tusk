@@ -35,9 +35,12 @@ class TablesController extends AppController
      */
     public function index($tableName = null) {
         $this->Tables->setTable($tableName);
-		
 		$columns = $this->FieldHandler->listColumns($tableName);
-		$data = $this->paginate($this->Tables);
+
+		$filter = $this->getFilter();
+		$order = $this->getOrder();
+		$query = $this->Tables->find("all")->where($filter)->order($order);
+		$data = $this->paginate($query);
 
         $this->set([
 			'data' => $data,

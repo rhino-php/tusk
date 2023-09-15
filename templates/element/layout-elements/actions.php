@@ -1,4 +1,4 @@
-<div class="pill cluster-end">
+<div class="cluster-end pill">
 	<?php if (isset($view) && $view['valid']) {
 		echo $this->Html->link(
 			$this->svg("Tusk.eye"),
@@ -17,7 +17,7 @@
 			$edit['link'],
 			[
 				'escape' => false,
-				'title' => __("Edit Entry"), 
+				'title' => __("Edit Entry"),
 				'class' => 'button'
 			]
 		);
