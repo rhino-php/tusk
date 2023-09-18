@@ -2,7 +2,9 @@
 @use "shapes";
 
 @mixin padding {
-	padding: 0.25em 0.5em;
+	--form-element-spacing-vertical: 0.25em;
+	--form-element-spacing-horizontal: 0.25em;
+	padding: var(--form-element-spacing-vertical) var(--form-element-spacing-horizontal);
 }
 
 a, button, input, select, textarea {
@@ -25,7 +27,7 @@ input[type=text], textarea {
 	cursor: text;
 }
 
-input, textarea, select, input[type=file] {
+input, textarea, select, input[type=file], input[input] {
 	background-color: var(--tusk-contrast-color);
 	color: var(--tusk-text-color);
 	border: var(--tusk-border-width) var(--tusk-border-type) var(--tusk-border-color);

@@ -3,6 +3,7 @@ namespace Tusk\Handlers;
 
 use Cake\Database\Expression\QueryExpression;
 use Cake\ORM\Query;
+use InvalidArgumentException;
 
 Trait FilterHandler {
 	public $operators =	[
@@ -17,6 +18,27 @@ Trait FilterHandler {
 		"empty",
 		"not empty",
 	];
+
+	public function filter($query) {
+		$filter = $this->getFilter();
+		$order = $this->getOrder();
+		return $query->where($filter)->order($order);
+	}
+
+	public function paginateFilter($query) {
+		$query = $this->filter($query);
+
+		try {
+			$data = $this->paginate($query);
+		} catch (InvalidArgumentException $th) {
+			$tableName = $this->Table->getTable();
+			$this->deleteFilter($tableName);
+			$data = $this->paginate($this->Table);
+			$this->Flash->error($th->getMessage());
+		}
+
+		return $data;
+	}
 
 	public function setFilter($tableName) {
 		if ($this->request->is("post")) {
@@ -40,6 +62,11 @@ Trait FilterHandler {
 	}
 
 	public function clearFilter($tableName) {
+		$this->deleteFilter($tableName);
+		return $this->redirect(['action' => 'index', $tableName]);
+	}
+	
+	public function deleteFilter($tableName) {
 		$session = $this->Session->read('filter');
 
 		if (isset($session[$tableName])) {
@@ -47,7 +74,6 @@ Trait FilterHandler {
 		}
 
 		$this->Session->write('filter', $session);
-		return $this->redirect(['action' => 'index', $tableName]);
 	}
 
 	public function getFilter() {
@@ -128,11 +154,9 @@ Trait FilterHandler {
 	}
 
 	public function getFilterPosition($id) {
-		$tableName = $this->Table->getTable();
-		$this->Tables->setTable($tableName);
-		$filter = $this->getFilter();
-		$order = $this->getOrder();
-		$query = $this->Tables->find("all")->where($filter)->order($order)->all();
+		$this->getTable();
+
+		$query = $this->filter($this->Table->find())->all();
 		$data = $query->toList();
 
 		$position = array_search($id, array_column($data, 'id'));
@@ -147,6 +171,7 @@ Trait FilterHandler {
 
 	private function applyFilter($field, $operator, $query = null) {
 		$filter = null;
+
 		switch ($operator) {
 			case 'contains':
 				$filter = function (QueryExpression $exp, Query $q) use ($field, $query) {

@@ -10,12 +10,20 @@ if (isset($readonly) && $readonly) {
 
 <?= $this->Form->create($entry, ["class" => "stack--300"]); ?>
 
-<div class="cluster pill">
-	<?= $this->Html->link("prev", ["controller" => "tables", "action" => $action, $tableName, $prevId], ["class" => "button", "disabled" => empty($prevId)]) ?>
-	<?= $this->Html->link("next", ["controller" => "tables", "action" => $action, $tableName, $nextId], ["class" => "button", "disabled" => empty($nextId)]) ?>
-</div>
+<?php if ($action != 'add') : ?>
+	<div class="cluster pill">
+		<?= $this->Html->link("prev", ["controller" => "tables", "action" => $action, $tableName, $prevId], ["class" => "button", "disabled" => empty($prevId)]) ?>
+		<?= $this->Html->link("next", ["controller" => "tables", "action" => $action, $tableName, $nextId], ["class" => "button", "disabled" => empty($nextId)]) ?>
+	</div>
+<?php endif ?>
 
 <?= $this->Fields->render($fields, $entry, $options) ?>
+
+<?php if ($entry->getVirtual() > 0) {
+	foreach ($entry->getVirtual() as $virtual) {
+		echo $this->Fields->control(['name' => $virtual, 'value' => $entry[$virtual]], ['readonly' => true]);
+	}
+} ?>
 
 <div class="cluster pill">
 	<?php if ($action != 'view') : ?>

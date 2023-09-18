@@ -65,6 +65,10 @@ body {
   @include shapes.cluster;
 }
 
+.cluster--even > * {
+	flex: 0px 1 1;
+}
+
 .cluster--none, .cluster--0 {
 	@include shapes.cluster(0);
 }

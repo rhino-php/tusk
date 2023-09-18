@@ -657,6 +657,10 @@ body {
   flex-wrap: wrap;
 }
 
+.cluster--even > * {
+  flex: 0px 1 1;
+}
+
 .cluster--none, .cluster--0 {
   gap: 0;
   display: flex;
@@ -821,7 +825,7 @@ input[type=text], textarea {
   cursor: text;
 }
 
-input, textarea, select, input[type=file] {
+input, textarea, select, input[type=file], input[input] {
   background-color: var(--tusk-contrast-color);
   color: var(--tusk-text-color);
   border: var(--tusk-border-width) var(--tusk-border-type) var(--tusk-border-color);
@@ -829,9 +833,11 @@ input, textarea, select, input[type=file] {
   font-size: 1rem;
   line-height: 1.55em;
   margin-bottom: 0rem;
-  padding: 0.25em 0.5em;
+  --form-element-spacing-vertical: 0.25em;
+  --form-element-spacing-horizontal: 0.25em;
+  padding: var(--form-element-spacing-vertical) var(--form-element-spacing-horizontal);
 }
-input[readonly], textarea[readonly], select[readonly], input[type=file][readonly] {
+input[readonly], textarea[readonly], select[readonly], input[type=file][readonly], input[input][readonly] {
   cursor: not-allowed;
   opacity: 0.5;
 }

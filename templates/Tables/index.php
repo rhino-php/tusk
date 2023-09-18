@@ -8,18 +8,20 @@
 ?>
 <div class="tables index content stack">
 
-	<details>
-		<summary>Filter</summary>
-		<?= $this->Form->create(null, [
+	<?= $this->Form->create(null, [
 			'url' => [
 				'action' => 'setFilter',
 				$tableName
 			], 'type' => 'post', 'class' => 'cluster']) 
 		?>
-		<?= $this->Form->select("field", $columns, ['value' => $field]) ?>
-		<?= $this->Form->select("operator", $operators, ['value' => $operator]) ?>
-		<?= $this->Form->input("query", ['value' => $query]) ?>
-		<div class="cluster">
+		
+		<div class="cluster cluster--even pill">
+			<?= $this->Form->select("field", $columns, ['value' => $field]) ?>
+			<?= $this->Form->select("operator", $operators, ['value' => $operator]) ?>
+			<?= $this->Form->input("query", ['value' => $query]) ?>
+		</div>
+
+		<div class="cluster pill">
 			<?= $this->Form->button("Filter") ?>
 			<?= $this->Html->Link('clear Filter', [
 				'action' => 'clearFilter',
@@ -28,8 +30,7 @@
 			['class' => 'alt-button'])
 			?>
 		</div>
-		<?= $this->Form->end() ?>
-	</details>
+	<?= $this->Form->end() ?>
 
 	<div class="table-wrapper">
 		<table>
@@ -85,7 +86,7 @@
 		</table>
 	</div>
 
-	<div class="cluster">
+	<div class="cluster pill">
 		<?php
 		if (in_array('add', $rights)) {
 			$newButton = $this->svg("Tusk.plus") . '<span>' . __('New Entry') . '</span>';

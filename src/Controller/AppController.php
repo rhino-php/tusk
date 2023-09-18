@@ -10,6 +10,7 @@ use Tusk\Model\Table\ApplicationsTable;
 use Tusk\Model\ApplicationTrait;
 use Tusk\Model\Table\RolesTable;
 use Tusk\Handlers\FilterHandler;
+use Cake\ORM\Exception\MissingTableClassException;
 
 class AppController extends BaseController
 {
@@ -62,6 +63,23 @@ class AppController extends BaseController
 			$rights = $Roles->checkGroupRights($role, $app);
 			$this->set(['rights' => $rights]);
 		}
+	}
+
+	public function setTable($tableName) {
+		$alias = ucfirst($tableName);
+		$this->getTableLocator()->setConfig($alias, ['table' => $tableName]);
+		try {
+			$this->Table = $this->fetchTable($alias);
+		} catch (MissingTableClassException $th) {
+			$this->Table = $this->Tables->setTable($tableName);
+		}
+	}
+
+	public function getTable($tableName = null) {
+		if (!isset($this->Table)) {
+			$this->setTable($tableName);
+		}
+		return $this->Table;
 	}
 
 	public function noAccess() {

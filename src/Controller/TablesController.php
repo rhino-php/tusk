@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Tusk\Controller;
 
 use Tusk\Controller\AppController;
-
+use InvalidArgumentException;
 /**
  * Tables Controller
  *
@@ -34,13 +34,10 @@ class TablesController extends AppController
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function index($tableName = null) {
-        $this->Tables->setTable($tableName);
+        $this->setTable($tableName);
 		$columns = $this->FieldHandler->listColumns($tableName);
 
-		$filter = $this->getFilter();
-		$order = $this->getOrder();
-		$query = $this->Tables->find("all")->where($filter)->order($order);
-		$data = $this->paginate($query);
+		$data = $this->paginateFilter($this->Table->find("all"));
 
         $this->set([
 			'data' => $data,
@@ -55,8 +52,8 @@ class TablesController extends AppController
 	 * @return \Cake\Http\Response|null|void Redirects on successful add, renders view otherwise.
 	 */
 	public function add($tableName = null) {
-		$this->Tables->setTable($tableName);
-		$entry = $this->Tables->newEmptyEntity();
+		$this->setTable($tableName);
+		$entry = $this->Table->newEmptyEntity();
 		$this->set(['title' => 'Add']);
 		$this->compose($entry, ["redirect" => ['action' => 'index', $tableName]]);
 	}
@@ -69,8 +66,8 @@ class TablesController extends AppController
 	 * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
 	 */
 	public function edit($tableName = null, $id = null) {
-		$this->Tables->setTable($tableName);
-		$entry = $this->Tables->get($id);
+		$this->setTable($tableName);
+		$entry = $this->Table->get($id);
 		$this->set(['title' => 'Edit']);
 		$this->compose($entry, ["redirect" => ['action' => 'index', $tableName]]);
 	}
@@ -83,8 +80,8 @@ class TablesController extends AppController
 	 * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
 	 */
 	public function view($tableName = null, $id = null) {
-		$this->Tables->setTable($tableName);
-		$entry = $this->Tables->get($id);
+		$this->setTable($tableName);
+		$entry = $this->Table->get($id);
 		$this->set(['title' => 'View', 'readonly' => true]);
 		$this->compose($entry, ["redirect" => ['action' => 'index', $tableName]]);
 	}
@@ -106,10 +103,10 @@ class TablesController extends AppController
 	 * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
 	 */
 	public function delete($tableName = null, $id = null) {
-		$this->Tables->setTable($tableName);
+		$this->setTable($tableName);
 		$this->request->allowMethod(['post', 'delete']);
-		$entry = $this->Tables->get($id);
-		if ($this->Tables->delete($entry)) {
+		$entry = $this->Table->get($id);
+		if ($this->Table->delete($entry)) {
 			$this->Flash->success(__('The table has been deleted.'), ['plugin' => 'Tusk']);
 		} else {
 			$this->Flash->error(__('The table could not be deleted. Please, try again.'), ['plugin' => 'Tusk']);
@@ -119,8 +116,8 @@ class TablesController extends AppController
 	}
 
 	public function export($tableName) {
-		$this->Tables->setTable($tableName);
-		$data = $this->Tables->find();
+		$this->setTable($tableName);
+		$data = $this->Table->find();
 		$header = $this->FieldHandler->listColumns($tableName);
 
 		$delimiter = ';';
