@@ -175,16 +175,23 @@ class AppController extends BaseController
 		$this->viewBuilder()->addHelper('Tusk.Fields');
 
 		if ($this->useTable) {
-			$tableName = $this->Table->getTable();
+			// if (!$this->get('tableName')) {
+				$tableName = $this->Table->getTable();
+				$this->set([
+					'tableName' => $tableName
+				]);
+			// }
+			
 			$fields = $this->FieldHandler->getFields($tableName);
 			$app = $this->Apps->getByName($tableName);
+			
 			if (empty($app)) {
 				$app = $this->Apps->newEntity(['name' => $tableName]);
 			}
+
 			$this->set([
 				'fields' => $fields,
-				'app' => $app,
-				'tableName' => $tableName
+				'app' => $app
 			]);
 		}
 
