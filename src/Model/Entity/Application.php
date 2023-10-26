@@ -6,7 +6,7 @@ use Cake\ORM\Entity;
 
 class Application extends Entity
 {
-	protected $_virtual = [
+	protected array $_virtual = [
 		'overviewData'
 	];
 

@@ -15,7 +15,7 @@ class SidebarFixture extends TestFixture
      *
      * @var string
      */
-    public $table = 'sidebar';
+    public string $table = 'sidebar';
     /**
      * Init method
      *

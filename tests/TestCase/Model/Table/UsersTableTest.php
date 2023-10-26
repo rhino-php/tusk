@@ -23,7 +23,7 @@ class UsersTableTest extends TestCase
      *
      * @var array<string>
      */
-    protected $fixtures = [
+    protected array $fixtures = [
         'plugin.Tusk.Users',
         'plugin.Tusk.Articles',
     ];

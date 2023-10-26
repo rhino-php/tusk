@@ -6,7 +6,7 @@ use Cake\ORM\Entity;
 
 class Role extends Entity
 {
-	protected $_virtual = [
+	protected array $_virtual = [
 		'accessData'
 	];
 

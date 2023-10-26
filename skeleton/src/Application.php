@@ -31,6 +31,7 @@ use Cake\Routing\Middleware\RoutingMiddleware;
 use Authentication\AuthenticationService;
 use Authentication\AuthenticationServiceInterface;
 use Authentication\AuthenticationServiceProviderInterface;
+use Authentication\Identifier\AbstractIdentifier;
 use Authentication\Middleware\AuthenticationMiddleware;
 use Cake\Routing\Router;
 use Psr\Http\Message\ServerRequestInterface;
@@ -163,6 +164,12 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
         // Load more plugins here
     }
 
+	/**
+	 * Returns a service provider instance.
+	 *
+	 * @param \Psr\Http\Message\ServerRequestInterface $request Request
+	 * @return \Authentication\AuthenticationServiceInterface
+	 */
 	public function getAuthenticationService(ServerRequestInterface $request): AuthenticationServiceInterface
 	{
 		$path = $request->getPath();
@@ -170,8 +177,8 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
 		if (preg_match("*tusk*", $path)) {
 			// Reuse fields in multiple authenticators.
 			$fields = [
-				IdentifierInterface::CREDENTIAL_USERNAME => 'email',
-				IdentifierInterface::CREDENTIAL_PASSWORD => 'password',
+				AbstractIdentifier::CREDENTIAL_USERNAME => 'email',
+				AbstractIdentifier::CREDENTIAL_PASSWORD => 'password'
 			];
 
 			$login = Router::url(['plugin' => 'Tusk', 'controller' => 'Users', 'action' => 'login']);
@@ -180,6 +187,9 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
 				'unauthenticatedRedirect' => Router::url(['plugin' => 'Tusk', 'controller' => 'Users', 'action' => 'login']),
 				'queryParam' => 'redirect',
 			]);
+
+			// Load the authenticators, you want session first
+			$authenticationService->loadAuthenticator('Authentication.Session');
 			
 			// Load identifiers, ensure we check email and password fields
 			$authenticationService->loadIdentifier('Authentication.Password', [
@@ -196,9 +206,6 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
 				'fields' => $fields,
 				'loginUrl' => $login
 			]);
-			
-			// Load the authenticators, you want session first
-			$authenticationService->loadAuthenticator('Authentication.Session');
 
 			// If the user is on the login page, check for a cookie as well.
 			$authenticationService->loadAuthenticator('Authentication.Cookie', [
@@ -210,11 +217,10 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
 		}
 
 		$authenticationService = new AuthenticationService();
-		// Load identifiers, ensure we check email and password fields
-		$authenticationService->loadIdentifier('Authentication.Password');
 		// Load the authenticators, you want session first
 		$authenticationService->loadAuthenticator('Authentication.Session');
-
+		// Load identifiers
+		$authenticationService->loadIdentifier('Authentication.Password', compact('fields'));
 
 		return $authenticationService;
 	}

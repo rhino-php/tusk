@@ -34,9 +34,7 @@ class WidgetsController extends AppController
      */
     public function view($id = null)
     {
-        $widget = $this->Widgets->get($id, [
-            'contain' => [],
-        ]);
+        $widget = $this->Widgets->get($id, contain: []);
 
         $this->set(compact('widget'));
     }
@@ -70,9 +68,7 @@ class WidgetsController extends AppController
      */
     public function edit($id = null)
     {
-        $widget = $this->Widgets->get($id, [
-            'contain' => [],
-        ]);
+        $widget = $this->Widgets->get($id, contain: []);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $widget = $this->Widgets->patchEntity($widget, $this->request->getData());
             if ($this->Widgets->save($widget)) {

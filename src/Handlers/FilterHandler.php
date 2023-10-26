@@ -22,6 +22,7 @@ Trait FilterHandler {
 	public function filter($query) {
 		$filter = $this->getFilter();
 		$order = $this->getOrder();
+
 		return $query->where($filter)->order($order);
 	}
 
@@ -114,7 +115,7 @@ Trait FilterHandler {
 	}
 
 	public function getOrder() {
-		$order = null;
+		$order = [];
 		$sort = 'id';
 		$direction = 'asc';
 		$tableName = $this->Table->getTable();

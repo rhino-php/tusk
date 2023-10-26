@@ -21,7 +21,7 @@ class TagsControllerTest extends TestCase
      *
      * @var array<string>
      */
-    protected $fixtures = [
+    protected array $fixtures = [
         'plugin.Tusk.Tags',
         'plugin.Tusk.Articles',
     ];

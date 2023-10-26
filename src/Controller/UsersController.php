@@ -32,9 +32,7 @@ class UsersController extends AppController
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function view($id = null) {
-        $user = $this->Users->get($id, [
-            'contain' => ['Articles'],
-        ]);
+        $user = $this->Users->get($id, contain: ['Articles']);
 
         $this->set(compact('user'));
     }
@@ -61,9 +59,7 @@ class UsersController extends AppController
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
     public function edit($id = null) {
-        $user = $this->Users->get($id, [
-			'contain' => ['Roles']
-		]);
+        $user = $this->Users->get($id, contain: ['Roles']);
 		$this->compose($user, [
 			'entity' => 'user',
 			'success' => __('The user has been saved.'),

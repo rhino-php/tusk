@@ -14,7 +14,7 @@
 				$tableName
 			], 'type' => 'post', 'class' => 'cluster']) 
 		?>
-		
+
 		<div class="cluster cluster--even pill">
 			<?= $this->Form->select("field", $columns, ['value' => $field]) ?>
 			<?= $this->Form->select("operator", $operators, ['value' => $operator]) ?>

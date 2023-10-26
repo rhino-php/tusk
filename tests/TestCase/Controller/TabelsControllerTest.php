@@ -21,7 +21,7 @@ class TabelsControllerTest extends TestCase
      *
      * @var array<string>
      */
-    protected $fixtures = [
+    protected array $fixtures = [
         'plugin.Tusk.Tabels',
     ];
 

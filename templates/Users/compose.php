@@ -9,7 +9,7 @@
 <div>
 	<h1><?= __($action) ?> User</h1>
 	<?= $this->Form->create($user, ["class" => "stack"]); ?>
-	
+
 	<?php
 		echo $this->Form->control('name');
 		echo $this->Form->control('email');
