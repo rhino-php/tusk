@@ -1,16 +1,16 @@
 <?php
 declare(strict_types=1);
 
-namespace Tusk\Test\TestCase\Controller;
+namespace App\Test\TestCase\Controller;
 
+use App\Controller\TagsController;
 use Cake\TestSuite\IntegrationTestTrait;
 use Cake\TestSuite\TestCase;
-use Tusk\Controller\TagsController;
 
 /**
- * Tusk\Controller\TagsController Test Case
+ * App\Controller\TagsController Test Case
  *
- * @uses \Tusk\Controller\TagsController
+ * @uses \App\Controller\TagsController
  */
 class TagsControllerTest extends TestCase
 {
@@ -21,16 +21,17 @@ class TagsControllerTest extends TestCase
      *
      * @var array<string>
      */
-    protected array $fixtures = [
-        'plugin.Tusk.Tags',
-        'plugin.Tusk.Articles',
+    protected $fixtures = [
+        'app.Tags',
+        'app.Articles',
+        'app.ArticlesTags',
     ];
 
     /**
      * Test index method
      *
      * @return void
-     * @uses \Tusk\Controller\TagsController::index()
+     * @uses \App\Controller\TagsController::index()
      */
     public function testIndex(): void
     {
@@ -41,7 +42,7 @@ class TagsControllerTest extends TestCase
      * Test view method
      *
      * @return void
-     * @uses \Tusk\Controller\TagsController::view()
+     * @uses \App\Controller\TagsController::view()
      */
     public function testView(): void
     {
@@ -52,7 +53,7 @@ class TagsControllerTest extends TestCase
      * Test add method
      *
      * @return void
-     * @uses \Tusk\Controller\TagsController::add()
+     * @uses \App\Controller\TagsController::add()
      */
     public function testAdd(): void
     {
@@ -63,7 +64,7 @@ class TagsControllerTest extends TestCase
      * Test edit method
      *
      * @return void
-     * @uses \Tusk\Controller\TagsController::edit()
+     * @uses \App\Controller\TagsController::edit()
      */
     public function testEdit(): void
     {
@@ -74,7 +75,7 @@ class TagsControllerTest extends TestCase
      * Test delete method
      *
      * @return void
-     * @uses \Tusk\Controller\TagsController::delete()
+     * @uses \App\Controller\TagsController::delete()
      */
     public function testDelete(): void
     {

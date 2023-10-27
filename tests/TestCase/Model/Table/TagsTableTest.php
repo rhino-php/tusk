@@ -1,20 +1,20 @@
 <?php
 declare(strict_types=1);
 
-namespace Tusk\Test\TestCase\Model\Table;
+namespace App\Test\TestCase\Model\Table;
 
+use App\Model\Table\TagsTable;
 use Cake\TestSuite\TestCase;
-use Tusk\Model\Table\TagsTable;
 
 /**
- * Tusk\Model\Table\TagsTable Test Case
+ * App\Model\Table\TagsTable Test Case
  */
 class TagsTableTest extends TestCase
 {
     /**
      * Test subject
      *
-     * @var \Tusk\Model\Table\TagsTable
+     * @var \App\Model\Table\TagsTable
      */
     protected $Tags;
 
@@ -23,9 +23,9 @@ class TagsTableTest extends TestCase
      *
      * @var array<string>
      */
-    protected array $fixtures = [
-        'plugin.Tusk.Tags',
-        'plugin.Tusk.Articles',
+    protected $fixtures = [
+        'app.Tags',
+        'app.Articles',
     ];
 
     /**
@@ -56,7 +56,7 @@ class TagsTableTest extends TestCase
      * Test validationDefault method
      *
      * @return void
-     * @uses \Tusk\Model\Table\TagsTable::validationDefault()
+     * @uses \App\Model\Table\TagsTable::validationDefault()
      */
     public function testValidationDefault(): void
     {
@@ -67,7 +67,7 @@ class TagsTableTest extends TestCase
      * Test buildRules method
      *
      * @return void
-     * @uses \Tusk\Model\Table\TagsTable::buildRules()
+     * @uses \App\Model\Table\TagsTable::buildRules()
      */
     public function testBuildRules(): void
     {

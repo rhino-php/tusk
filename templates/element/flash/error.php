@@ -1,15 +1,11 @@
 <?php
-
 /**
  * @var \App\View\AppView $this
  * @var array $params
  * @var string $message
  */
-
-$params['class'] = 'error';
+if (!isset($params['escape']) || $params['escape'] !== false) {
+    $message = h($message);
+}
 ?>
-
-<?= $this->element("flash/default", [
-	'message' => $message,
-	'params' => $params
-]) ?>
+<div class="message error" onclick="this.classList.add('hidden');"><?= $message ?></div>
