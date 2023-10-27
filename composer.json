@@ -1,6 +1,6 @@
 {
-    "name": "coullc/rhino",
-    "description": "Skeleton app for Tusk, a CMS built on CakePHP",
+    "name": "coull/tusk",
+    "description": "Skeleton app for Rhino, a CMS built on CakePHP",
     "homepage": "https://rhino.coull.dev",
     "authors": [
         {
