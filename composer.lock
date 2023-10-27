@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a81381bea91e485cea42e7439ac8c04a",
+    "content-hash": "9f7f1f17520a8bcd434b77090c15aed0",
     "packages": [
         {
             "name": "cakephp/authentication",
@@ -498,17 +498,17 @@
             "time": "2023-08-30T09:31:38+00:00"
         },
         {
-            "name": "coullc/tusk",
-            "version": "2.0.0",
+            "name": "coull/rhino",
+            "version": "2.0.4",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Tyqo/tusk.git",
-                "reference": "0d5e9dfd7be67c519d8cf2d5102b05feffa163a2"
+                "url": "https://github.com/Tyqo/rhino.git",
+                "reference": "c83d8cfa5737399e202a264228c26c52cf992323"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Tyqo/tusk/zipball/0d5e9dfd7be67c519d8cf2d5102b05feffa163a2",
-                "reference": "0d5e9dfd7be67c519d8cf2d5102b05feffa163a2",
+                "url": "https://api.github.com/repos/Tyqo/rhino/zipball/c83d8cfa5737399e202a264228c26c52cf992323",
+                "reference": "c83d8cfa5737399e202a264228c26c52cf992323",
                 "shasum": ""
             },
             "require": {
@@ -526,7 +526,7 @@
             "type": "cakephp-plugin",
             "autoload": {
                 "psr-4": {
-                    "Tusk\\": "src/"
+                    "Rhino\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -540,17 +540,17 @@
                     "role": "Author"
                 }
             ],
-            "description": "Tusk, a CMS and Application-Framework plugin for CakePHP",
+            "description": "Rhino, a CMS and Application-Framework plugin for CakePHP",
             "homepage": "https://rhino.coull.dev",
             "keywords": [
                 "cakephp",
                 "cms"
             ],
             "support": {
-                "issues": "https://github.com/Tyqo/tusk/issues",
-                "source": "https://github.com/Tyqo/tusk/tree/2.0.0"
+                "issues": "https://github.com/Tyqo/rhino/issues",
+                "source": "https://github.com/Tyqo/rhino/tree/2.0.4"
             },
-            "time": "2023-10-26T19:42:56+00:00"
+            "time": "2023-10-27T07:29:04+00:00"
         },
         {
             "name": "laminas/laminas-diactoros",

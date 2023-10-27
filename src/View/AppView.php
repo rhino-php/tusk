@@ -17,7 +17,7 @@ namespace App\View;
 
 use Cake\Core\Configure;
 use Cake\View\View;
-use Tusk\View\TuskView;
+use Rhino\View\RhinoView;
 
 /**
  * Application View
@@ -28,7 +28,7 @@ use Tusk\View\TuskView;
  */
 class AppView extends View
 {
-	use TuskView;
+	use RhinoView;
     /**
      * Initialization hook method.
      *
