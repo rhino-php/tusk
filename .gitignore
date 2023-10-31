@@ -59,4 +59,5 @@ webroot/js
 webroot/icon
 webroot/img
 webroot/font
+.history/package-lock.json
 .history/
