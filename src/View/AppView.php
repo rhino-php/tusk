@@ -41,8 +41,9 @@ class AppView extends View
     public function initialize(): void
     {
 		parent::initialize();
-		$this->addHelper('Rhino.Icon');
 		$this->loadHelper('Authentication.Identity');
+		$this->addHelper('Rhino.Icon');
+		$this->loadHelper('Rhino.Menu');
 
 		Configure::load('app', 'default', true);
 		$local = Configure::read('App.defaultLocale');

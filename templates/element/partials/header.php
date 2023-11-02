@@ -21,9 +21,15 @@
 			</div>
 		</button>
 
-		<!-- $this->parsePHP(PATHTOWEBROOT . 'templates/shapes/components/nav.php', [
-			'navId' => 'main-nav',
-			'parentId' => $rootId
-		]); ?> -->
+		<nav>
+		<?= $this->Menu->get(1, [
+			'limit' => 1,
+			'ul' => ['class' => 'nav-list cluster list-style-none'],
+			'li' => ['class' => 'nav-list__item'],
+			'link' => ['class' => 'button alt-button'],
+			'summary' => ['class' => 'button alt-button'],
+			'details' => ['role' => 'list'],
+		]); ?>
+		</nav>
 	</div>
 </header>
