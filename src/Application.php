@@ -188,8 +188,6 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
 				'queryParam' => 'redirect',
 			]);
 
-			
-
 			// Load the authenticators, you want session first
 			$authenticationService->loadAuthenticator('Authentication.Session');
 
@@ -200,8 +198,7 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
 
 			// If the user is on the login page, check for a cookie as well.
 			$authenticationService->loadAuthenticator('Authentication.Cookie', [
-				'fields' => $fields,
-				'loginUrl' => $login
+				'fields' => $fields
 			]);
 
 			// Load identifiers, ensure we check email and password fields
