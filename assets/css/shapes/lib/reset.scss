@@ -41,28 +41,28 @@ img, picture, video {
 ///////////////////
 
 ol, ul {
-	list-style: none;
-	counter-reset: li;
+// 	list-style: none;
+// 	counter-reset: li;
+	padding-left: 2ch;
 
-	> li {
-		position: relative;
-		padding-left: 2ch;
+	// > li {
+// 		position: relative;
 
-		&::before {
-			position: absolute;
-			left: 0;
-		}
-	}
+// 		&::before {
+// 			position: absolute;
+// 			left: 0;
+// 		}
+	// }
 }
 
-ol > li::before {
-	content: counter(li)'.';
-	counter-increment: li;
-}
+// ol > li::before {
+// 	content: counter(li)'.';
+// 	counter-increment: li;
+// }
 
-ul > li::before {
-	content: var(--bullet-list-char, '•');
-}
+// ul > li::before {
+// 	content: var(--bullet-list-char, '•');
+// }
 
 input, button, textarea, select {
 	font: inherit;

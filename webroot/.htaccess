@@ -6,4 +6,12 @@
 
 <IfModule mod_mime.c>
 	AddType text/javascript js mjs
+	Header set Cache-Control "max-age=0"
+</IfModule>
+
+<IfModule headers_module>
+  <FilesMatch ".(js|mjs)$">
+    Header set Cache-Control "public, must-revalidate, max-age=0"
+    Header unset ETag
+  </FilesMatch>
 </IfModule>

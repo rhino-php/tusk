@@ -26,3 +26,10 @@ RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1 [R=301,L]
 # i.e.  http://www.example.com/foo/ to https://www.example.com/foo/
 # The leading slash is made optional so that this will work either in httpd.conf
 # or .htaccess context
+
+<IfModule headers_module>
+  <FilesMatch ".(js|mjs)$">
+    Header set Cache-Control "public, must-revalidate, max-age=0"
+    Header unset ETag
+  </FilesMatch>
+</IfModule>
