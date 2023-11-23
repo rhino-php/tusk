@@ -1,51 +1,9 @@
 /**
-* src/css/partials/_webfonts.scss
-*
-* @author Carsten Coull <c.coull@agentur-halma.de>
-* @author Johannes Braun <j.braun@agentur-halma.de>
-* @package halma-kickstart
-* @version 2021-05-28
-*/
-/************
- * Webfonts *
- ************/
-/**
- * @example
+ * @project       tusk
+ * @author        carsten.coull@swu.de
+ * @build         Thu, Nov 23, 2023 5:10 PM ET
+ * @release       c6af71f453d4bbd5dc746d71dc3560cdb3c6c3c4 [main]
+ * @copyright     Copyright (c) 2023, SWU Stadtwerke Ulm / Neu-Ulm GmbH
  *
- * @include font-face('FontName', '../fonts/FontName-Regular', normal, normal, $file-types: woff2);
- * @include font-face('FontName', '../fonts/FontName-Bold', bold, normal, $file-types: woff2);
- * @include font-face('FontName', '../fonts/FontName-Italic', normal, italic, $file-types: woff2);
  */
-/* inter-200 - latin */
-@font-face {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 200;
-  src: local(""), url("/font/inter-v3-latin/inter-v3-latin-200.woff2") format("woff2"), url("/font/inter-v3-latin/inter-v3-latin-200.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  font-display: swap;
-}
-/* inter-regular - latin */
-@font-face {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 400;
-  src: local(""), url("/font/inter-v3-latin/inter-v3-latin-regular.woff2") format("woff2"), url("/font/inter-v3-latin/inter-v3-latin-regular.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  font-display: swap;
-}
-/* inter-700 - latin */
-@font-face {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 700;
-  src: local(""), url("/font/inter-v3-latin/inter-v3-latin-700.woff2") format("woff2"), url("/font/inter-v3-latin/inter-v3-latin-700.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  font-display: swap;
-}
-/* inter-800 - latin */
-@font-face {
-  font-family: "Inter";
-  font-style: normal;
-  font-weight: 800;
-  src: local(""), url("/font/inter-v3-latin/inter-v3-latin-800.woff2") format("woff2"), url("/font/inter-v3-latin/inter-v3-latin-800.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  font-display: swap;
-}
-/*# sourceMappingURL=webfonts.css.map */
+@font-face{font-family:Inter;font-style:normal;font-weight:200;src:local(""),url(/font/inter-v3-latin/inter-v3-latin-200.woff2) format("woff2"),url(/font/inter-v3-latin/inter-v3-latin-200.woff) format("woff");font-display:swap}@font-face{font-family:Inter;font-style:normal;font-weight:400;src:local(""),url(/font/inter-v3-latin/inter-v3-latin-regular.woff2) format("woff2"),url(/font/inter-v3-latin/inter-v3-latin-regular.woff) format("woff");font-display:swap}@font-face{font-family:Inter;font-style:normal;font-weight:700;src:local(""),url(/font/inter-v3-latin/inter-v3-latin-700.woff2) format("woff2"),url(/font/inter-v3-latin/inter-v3-latin-700.woff) format("woff");font-display:swap}@font-face{font-family:Inter;font-style:normal;font-weight:800;src:local(""),url(/font/inter-v3-latin/inter-v3-latin-800.woff2) format("woff2"),url(/font/inter-v3-latin/inter-v3-latin-800.woff) format("woff");font-display:swap}

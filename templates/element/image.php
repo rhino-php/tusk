@@ -1,1 +1,3 @@
-<h2>image</h2>
+<div class="hero-image">
+	<div><?= $this->Rhino->parseMedia($html) ?></div>
+</div>

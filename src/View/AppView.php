@@ -17,7 +17,6 @@ namespace App\View;
 
 use Cake\Core\Configure;
 use Cake\View\View;
-use Rhino\View\RhinoView;
 
 /**
  * Application View
@@ -28,7 +27,6 @@ use Rhino\View\RhinoView;
  */
 class AppView extends View
 {
-	use RhinoView;
     /**
      * Initialization hook method.
      *
@@ -44,6 +42,7 @@ class AppView extends View
 		$this->loadHelper('Authentication.Identity');
 		$this->addHelper('Rhino.Icon');
 		$this->loadHelper('Rhino.Menu');
+		$this->loadHelper('Rhino.Rhino');
 
 		Configure::load('app', 'default', true);
 		$local = Configure::read('App.defaultLocale');

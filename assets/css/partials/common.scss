@@ -191,3 +191,10 @@ img {
 	background-color: var(--background-color);
 	color: var(--contrast-color);
 }
+
+.hero-image {
+	max-height: 60vh;
+	overflow: hidden;
+	object-fit: cover;
+	object-position: center;
+}
