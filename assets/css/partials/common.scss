@@ -192,9 +192,15 @@ img {
 	color: var(--contrast-color);
 }
 
-.hero-image {
+.hero-image img {
 	max-height: 60vh;
 	overflow: hidden;
 	object-fit: cover;
 	object-position: center;
+}
+
+.grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: var(--spacing, 2rem);
 }
