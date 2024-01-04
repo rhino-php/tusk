@@ -11,6 +11,5 @@
 			'parentId' => 4
 		]); ?> -->
 
-		<?= $this->Rhino->parseWidget(1) ?>
 	</div>
 </footer>
