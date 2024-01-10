@@ -40,7 +40,7 @@ class AppView extends View
     {
 		parent::initialize();
 		$this->loadHelper('Authentication.Identity');
-		$this->addHelper('Rhino.Icon');
+		$this->loadHelper('Rhino.Icon');
 		$this->loadHelper('Rhino.Menu');
 		$this->loadHelper('Rhino.Rhino');
 

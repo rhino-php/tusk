@@ -23,14 +23,14 @@
 
 		<nav>
 		<?php 
-		// echo $this->Menu->get(4, [
-		// 	'limit' => 0,
-		// 	'ul' => ['class' => 'nav-list cluster list-style-none'],
-		// 	'li' => ['class' => 'nav-list__item'],
-		// 	'link' => ['class' => 'button alt-button'],
-		// 	'summary' => ['class' => 'button alt-button'],
-		// 	'details' => ['role' => 'list'],
-		// ]); 
+		echo $this->Menu->get(1, [
+			'limit' => 0,
+			'ul' => ['class' => 'nav-list cluster list-style-none'],
+			'li' => ['class' => 'nav-list__item'],
+			'link' => ['class' => 'button alt-button'],
+			'summary' => ['class' => 'button alt-button'],
+			'details' => ['role' => 'list'],
+		]); 
 		?>
 		</nav>
 	</div>

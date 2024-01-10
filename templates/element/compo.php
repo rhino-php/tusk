@@ -1,4 +1,13 @@
-<div class="inner-bound cluster">
-	<div><?= $this->Rhino->region('stuff') ?></div>
-	<div><?= $this->Rhino->region('more') ?></div>
+<div class="inner-bound grid">
+	<article>
+		<?= $this->Rhino->slot(parentId: $id) ?>
+	</article>
+
+	<figure class="stack">
+		<?= $this->Rhino->slot(parentId: $id) ?>
+
+		<figcaption>
+			<?= $this->Rhino->slot(parentId: $id) ?>
+		</figcaption>
+	</figure>
 </div>
