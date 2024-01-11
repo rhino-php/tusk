@@ -5,8 +5,6 @@
 	<?= $this->element('partials/head') ?>
 </head>
 
-<?= $this->fetch('Rhino') ?>
-
 <body>
 	<a href="#main" class="skip-link button">common.skip-navigation</a>
 
@@ -20,6 +18,8 @@
 	<?= $this->element('partials/footer') ?>
 
 	<!-- To do: add Loading screen -->
+
+	<?= $this->fetch('Rhino') ?>
 </body>
 
 </html>

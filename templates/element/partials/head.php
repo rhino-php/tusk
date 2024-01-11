@@ -13,7 +13,7 @@
 	<!-- To do: add Version Number to css -->
 	<?= $this->Html->css(['webfonts', 'main']) ?>
 
-		<!-- Load main javascript -->
+	<!-- Load main javascript -->
 	<?= $this->Html->script(['main'], ["type" => "module"]) ?>
 
 	<?= $this->fetch('meta') ?>
