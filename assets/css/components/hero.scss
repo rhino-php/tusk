@@ -1,0 +1,21 @@
+@use "settings" as *;
+@use "shapes" as *;
+
+.hero {
+	img {
+		max-height: 80vh;
+		overflow: hidden;
+		object-fit: cover;
+		object-position: center;
+	}
+
+	&-caption {
+		position: absolute;
+		bottom: 4rem;
+		left: 0;
+		right: 0;
+		color: white;
+		font-weight: 800;
+		font-size: 5rem;
+	}
+}
