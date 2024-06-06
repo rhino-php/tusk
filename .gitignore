@@ -62,3 +62,4 @@ webroot/font
 .history/package-lock.json
 .history/
 *.sql
+webroot/css/
