@@ -17,7 +17,6 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Rhino\Controller\PagesController as BaseController;
-;
 
 /**
  * Static content controller
