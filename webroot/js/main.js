@@ -1,28 +1,20 @@
 /**
- * src/js/main.js
+ * app/js/main.js
  *
  * Main javascript file
  *
- * @author Johannes Braun <j.braun@agentur-halma.de>
- * @author Carsten Coull <c.coull@agentur-halma.de>
- * @package halma-kickstart
- * @version 2021-05-28
+ * @author Carsten Coull <carsten.coull@swu.de>
+ * @package vt-dispo
+ * @version 2023-10-25
  */
 
 /**
- * Import modules, modules are stored in `src/js/modules/`
+ * Import modules, modules are stored in `app/js/modules/`
  */
-import Nav from "/js/vendor/nav.js";
-import FlashMessages from "/js/vendor/flash-messages.js";
-import LightBox from "/js/vendor/light-box.js";
-import Overlay from "/js/vendor/overlay.js";
-// import LazyLoading from "/js/vendor/lazyload.js";
-// import Map from "/js/vendor/map.js";
-// import Slider from "/js/vendor/slider.js";
-// Ideas for further modules
-// - Slider / Carousel
-// - Lightbox
-// - Overlay
+import ThemeSwitcher from "/js/modules/theme-switcher.js";
+import Modal from "/js/modules/modal.js";
+import Menu from "/js/modules/menu.js";
+
 
 /**
  * Application main class
@@ -32,10 +24,10 @@ class MAIN {
 	 * Constructor
 	 */
 	constructor() {
-		// Class properties, can only be declared inside a method … :-(
 		this.debug = false;
+
 		document.addEventListener("DOMContentLoaded", () => this.init());
-		window.onload = () => this.pageInit();
+		window.addEventListener("load", () => this.main());
 	}
 
 	/**
@@ -47,41 +39,12 @@ class MAIN {
 		if (this.debug) {
 			console.debug("MAIN::init");
 		}
+		this.Core = new Core(this);
 
-		document.body.classList.add("page-has-loaded");
-
-		// get scrollbar width to be able to use .full-width
-		// @see https://destroytoday.com/blog/100vw-and-the-horizontal-overflow-you-probably-didnt-know-about
-		const scrollbarWidth = window.innerWidth - document.body.clientWidth;
-		document.body.style.setProperty("--scrollbarWidth", scrollbarWidth + "px");
-
-		window.addEventListener("resize", () => this.throttle(this.resizeHandler), { passive: true });
-		window.addEventListener("scroll", () => this.throttle(this.scrollHandler), { passive: true });
-	}
-
-	/**
-	 * pageInit
-	 * Called on window.load, i.e. when the page and all assets have been
-	 * loaded completely and the page has rendered
-	 *
-	 * @return void
-	 */
-	pageInit() {
-		if (this.debug) {
-			console.debug("MAIN::pageInit");
-		}
-
-		document.body.classList.add("page-has-rendered");
-
-		// Let's see if we have a header element and get it's height (for
-		// detecting scroll past header, see `App.scrollHandler`
-		this.header = document.querySelector("header");
-		if (this.header) {
-			let rect = this.header.getBoundingClientRect();
-			this.headerBottom = rect.top + rect.height;
-		}
-
-		this.main();
+		// Init Moduls that need to start before the page is visible here:
+		this.ThemeSwitcher = new ThemeSwitcher(this);
+		
+		this.Core.init();
 	}
 
 	/**
@@ -91,27 +54,57 @@ class MAIN {
 	 * @return void
 	 */
 	main() {
-		this.Nav = new Nav(this);
-		this.FlashMessages = new FlashMessages(this);
+		if (this.debug) {
+			console.debug("MAIN::main");
+		}
+
+		// Init Moduls here:
+		this.ThemeSwitcher.init();
+		this.Modal = new Modal(this);
+		this.Menu = new Menu(this);
 		
-		this.Overlay = new Overlay(this, {
-			closeButtonIcon: '/icon/cross.svg',
-			closeButtonTitle: 'Close Overlay'
-		});
-		
-		// this.Slider = new Slider(this);
-		this.LightBox = new LightBox(this, {
-			selector: '#main img',
-			prevTitle: 'zum vorherigem Bild',
-			nextTitle: 'zum nächsten Bild',
-			prevIcon: '/icon/chevron-left.svg',
-			nextIcon: '/icon/chevron-right.svg'
-		});
-		
-		// let lazyLoading = new LazyLoading();
-		// lazyLoading.init();
-		// let mapEl = document.querySelector('#map');
-		// let map = new Map(mapEl);
+		this.Core.setup();
+	}
+}
+
+class Core {
+	constructor(main) {
+		this.main = main;
+	}
+
+	init() {
+		document.body.classList.add("page-has-loaded");
+		window.addEventListener("resize", () => this.throttle(this.resizeHandler), { passive: true });
+		window.addEventListener("scroll", () => this.throttle(this.scrollHandler), { passive: true });
+		this._layoutUpdate = new CustomEvent("layout-update", {});
+	}
+
+	/**
+	 * main
+	 * Called on window.load, i.e. when the page and all assets have been
+	 * loaded completely and the page has rendered
+	 *
+	 * @return void
+	 */
+	setup() {
+		if (this.debug) {
+			console.debug("MAIN::pageInit");
+		}
+
+		// Let's see if we have a header element and get it's height (for
+		// detecting scroll past header, see `App.scrollHandler`
+		this.header = document.querySelector("header");
+		if (this.header) {
+			let rect = this.header.getBoundingClientRect();
+			this.headerBottom = rect.top + rect.height;
+		}
+
+		document.body.classList.add("page-has-rendered");
+	}
+
+
+	layoutUpdate() {
+		window.dispatchEvent(this._layoutUpdate);
 	}
 
 	/*
@@ -208,10 +201,6 @@ class MAIN {
 				callback(event, target);
 			}
 		});
-	}
-
-	hideElement() {
-
 	}
 }
 

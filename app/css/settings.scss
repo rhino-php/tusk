@@ -1,0 +1,341 @@
+/**
+ * _settings.scss
+ *
+ * Use Sass variables and custom properties as appropriate, both are possible
+ */
+
+/********
+ * Typo *
+ ********/
+
+$use-type-scale: false;
+$vertical-unit: 1.5rem;
+$modular-scale-ratio: 1.125;
+
+$font-sizes: (
+    100: 0.8,
+    200: 1,
+    300: 1.125,
+    400: 1.2,
+    500: 1.4,
+    600: 1.75,
+    700: 2.1,
+    800: 2.8,
+    900: 3.2,
+);
+
+/************
+ * Measures *
+ ************/
+$min-header-height: 5rem;
+$max-header-height: 6.5rem;
+
+$inner-bound-width: 68rem;
+$outer-bound-width: 86rem;
+
+$min-supported-screen-width: 320px;
+$max-supported-screen-width: 3440px;
+
+$spacing: 1rem;
+
+$spacings: (
+    100: $spacing * 0.25,
+    200: $spacing * 0.5,
+    300: $spacing,
+    400: $spacing * 2,
+    500: $spacing * 4,
+    600: $spacing * 6,
+    700: $spacing * 8,
+    800: $spacing * 10,
+    900: $spacing * 14,
+);
+
+/**********
+ * Colors *
+ **********/
+
+$default-colors: (
+    primary: (
+		100: hsl(201, 64%, 96%),
+		200: hsl(199, 61%, 92%),
+		300: hsl(200, 62%, 78%),
+		400: hsl(200, 63%, 63%),
+		500: hsl(200, 63%, 51%),
+		600: hsl(200, 100%, 38%),
+		700: hsl(205, 81%, 45%),
+		800: hsl(207, 85%, 34%),
+		900: hsl(208, 89%, 24%),
+	),
+    secondary: (
+		100: hsl(127, 43%, 96%),
+		200: hsl(124, 46%, 93%),
+		300: hsl(123, 46%, 80%),
+		400: hsl(123, 45%, 66%),
+		500: hsl(123, 46%, 55%),
+		600: hsl(123, 59%, 44%),
+		700: hsl(124, 64%, 33%),
+		800: hsl(124, 68%, 22%),
+		900: hsl(124, 72%, 11%),
+	),
+	foreground: (
+		100: hsl(0, 0%, 0%),
+		200: hsl(0, 0%, 5%),
+		300: hsl(0, 0%, 10%),
+		400: hsl(0, 0%, 15%),
+		500: hsl(0, 0%, 20%),
+		600: hsl(0, 0%, 25%),
+		700: hsl(0, 0%, 30%),
+		800: hsl(0, 0%, 35%),
+		900: hsl(0, 0%, 40%),
+	),
+	background: (
+		100: hsl(0, 0%, 100%),
+		200: hsl(0, 0%, 95%),
+		300: hsl(0, 0%, 90%),
+		400: hsl(0, 0%, 85%),
+		500: hsl(0, 0%, 80%),
+		600: hsl(0, 0%, 75%),
+		700: hsl(0, 0%, 70%),
+		800: hsl(0, 0%, 65%),
+		900: hsl(0, 0%, 60%),
+	),
+	neutral: (
+		100: hsl(0, 0%, 70%),
+		200: hsl(0, 0%, 65%),
+		300: hsl(0, 0%, 60%),
+		400: hsl(0, 0%, 55%),
+		500: hsl(0, 0%, 50%),
+		600: hsl(0, 0%, 45%),
+		700: hsl(0, 0%, 40%),
+		800: hsl(0, 0%, 35%),
+		900: hsl(0, 0%, 30%),
+	),
+	success: (
+		100: #99d49b,
+		200: #78c77c,
+		300: #58b95c,
+		400: #43a047,
+		500: #317534,
+		600: #285f2a,
+		700: #225124,
+		800: #1c431e,
+		900: #132d14,
+	),
+	warning: (
+		100: #f4e6bd,
+		200: #efd994,
+		300: #ebcb6a,
+		400: #e7be40,
+		500: #d5a515,
+		600: #bd920e,
+		700: #af8607,
+		800: #a27a00,
+		900: #846300,
+	),
+	error: (
+		100: #e8bdbc,
+		200: #de9a98,
+		300: #d47674,
+		400: #cc514e,
+		500: #b0302d,
+		600: #9b2623,
+		700: #901d1a,
+		800: #841411,
+		900: #6d0c0a,
+	),
+	primary-shade: 600, 
+	secondary-shade: 600,
+	foreground-shade: 400,
+	background-shade: 400,
+	neutral-shade: 400,
+	success-shade: 400,
+	warning-shade: 400,
+	error-shade: 400,
+);
+
+$black: #000;
+$white: #fff;
+
+/**********
+ * Border *
+ **********/
+
+$border: (
+    width: 2px,
+    radius: 4px,
+    color: currentColor,
+    type: solid,
+);
+
+$outline: (
+    width: 4px,
+);
+
+/********************
+ * Options/Switches *
+ ********************/
+$debug-base-line-grid: false;
+
+// body-text in full-width containers aligns with outer-bound
+$full-width-fix: true;
+
+// header collapses on scroll-down
+$collapsable-header: true;
+
+// subtracts header height from screen-heighht
+$substract-header-height: false;
+
+// fade in elements when page has loaded
+$fade-in-transition: false;
+
+// loading screen type [spinner, dots, bars]
+$loader: "spinner";
+
+// sets the color for header and hero to contrast-color
+$start-dark-background: false;
+
+// sets the style for the navbar [default, folding]
+$nav-style: "default";
+
+// Toggle wether all ul & ol elements will recive an Overwrite
+$list-reset: false;
+
+// --- pico ---
+
+// Theme color
+$theme-color-primary: "custom-primary"; // amber, azure, blue, cyan, fuchsia, green, grey, indigo, jade, lime, orange, pink, pumpkin, purple, red, sand, slate, violet, yellow, zinc
+$theme-color-secondary: "custom-secondary"; // amber, azure, blue, cyan, fuchsia, green, grey, indigo, jade, lime, orange, pink, pumpkin, purple, red, sand, slate, violet, yellow, zinc
+$theme-color-contrast: "default-contrast"; // amber, azure, blue, cyan, fuchsia, green, grey, indigo, jade, lime, orange, pink, pumpkin, purple, red, sand, slate, violet, yellow, zinc
+
+// Prefix for CSS variables
+$css-var-prefix: "--"; // Must start with "--", change to "--pico-" for Namespacing
+
+// Define the root element used to target <header>, <main>, <footer>
+// with $enable-semantic-container and $enable-responsive-spacings
+$semantic-root-element: "body";
+
+// Enable <header>, <main>, <footer> inside $semantic-root-element as containers
+$enable-semantic-container: true;
+
+// Enable a centered viewport for <header>, <main>, <footer> inside $semantic-root-element
+// Fluid layout if disabled
+$enable-viewport: true;
+
+// Enable responsive spacings for <header>, <main>, <footer>, <section>, <article>
+// Fixed spacings by default
+$enable-responsive-spacings: false;
+
+// Enable responsive typography
+// Fixed root element size (rem) if disabled
+$enable-responsive-typography: false;
+
+// Enable .classes
+// .classless version if disabled
+$enable-classes: true;
+
+// Enable transitions
+$enable-transitions: true;
+
+// Enable overriding with !important
+$enable-important: true;
+
+// Optional parent selector
+// If defined, all HTML tags are wrapped with this selector
+// :root is not wrapped
+$parent-selector: "";
+
+// Breakpoints, viewports and root font size
+$breakpoints: (
+    // Small (landscape phones)
+    // Font size: 17px
+    sm:
+        (
+            breakpoint: 576px,
+            viewport: 510px,
+            root-font-size: 100%,
+        ),
+
+    // Medium (tablets)
+    // Font size: 18px
+    md:
+        (
+            breakpoint: 768px,
+            viewport: 700px,
+            root-font-size: 100%,
+        ),
+
+    // Large
+    // Font size: 19px
+    lg:
+        (
+            breakpoint: 1024px,
+            viewport: 950px,
+            root-font-size: 100%,
+        ),
+
+    // Extra large
+    // Font size: 20px
+    xl:
+        (
+            breakpoint: 1280px,
+            viewport: 1200px,
+            root-font-size: 100%,
+        ),
+
+    // Extra extra large
+    // Font size: 21px
+    xxl:
+        (
+            breakpoint: 1536px,
+            viewport: 1450px,
+            root-font-size: 100%,
+        )
+);
+
+// Modules to export
+$modules: (
+    // Theme
+    "themes/default": true,
+
+    // Layout
+    "layout/document": true,
+    "layout/landmarks": false,
+    "layout/container": true,
+    "layout/section": true,
+    "layout/grid": true,
+    "layout/overflow-auto": true,
+
+    // Content
+    "content/link": true,
+    "content/typography": true,
+    "content/embedded": true,
+    "content/button": true,
+    "content/table": true,
+    "content/code": true,
+    "content/figure": true,
+    "content/miscs": true,
+
+    // Forms
+    "forms/basics": true,
+    "forms/checkbox-radio-switch": true,
+    "forms/input-color": true,
+    "forms/input-date": true,
+    "forms/input-file": true,
+    "forms/input-range": true,
+    "forms/input-search": true,
+
+    // Components
+    "components/accordion": true,
+    "components/card": true,
+    "components/dropdown": true,
+    "components/group": true,
+    "components/loading": true,
+    "components/modal": true,
+    "components/nav": true,
+    "components/progress": true,
+    "components/tooltip": true,
+
+    // Utilities
+    "utilities/accessibility": true,
+    "utilities/reduce-motion": true
+);

@@ -3,12 +3,9 @@
 </div>
 
 <main id="main" class="main-content">
-
 	<?= $this->Rhino->region('content'); ?>
-	
-	<!-- Dummy Element for appling margin to -->
-	<hr class="footer-margin" />
 </main>
+
 <aside>
 	<?= $this->Rhino->region('aside'); ?>
 </aside>

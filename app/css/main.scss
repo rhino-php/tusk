@@ -1,0 +1,12 @@
+// add reset, makes things easier to handel
+@forward "library/reset";
+
+// Add Base pico styling
+// @forward "theme/custom-pico";
+
+// Add Theme
+@forward "theme";
+
+// components are used for specific elements
+@forward "theme_components";
+@forward "components";

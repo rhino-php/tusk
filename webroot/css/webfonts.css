@@ -16,36 +16,80 @@
  * @include font-face('FontName', '../fonts/FontName-Bold', bold, normal, $file-types: woff2);
  * @include font-face('FontName', '../fonts/FontName-Italic', normal, italic, $file-types: woff2);
  */
-/* inter-200 - latin */
+body {
+  font-family: "Noto Sans", Arial, sans-serif;
+}
+
+/* noto-sans-200 - latin */
 @font-face {
-  font-family: "Inter";
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Noto Sans";
   font-style: normal;
   font-weight: 200;
-  src: local(""), url("/font/inter-v3-latin/inter-v3-latin-200.woff2") format("woff2"), url("/font/inter-v3-latin/inter-v3-latin-200.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  font-display: swap;
+  src: url("/font/Noto-sans/noto-sans-v32-latin-200.woff2") format("woff2");
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
-/* inter-regular - latin */
+/* noto-sans-300 - latin */
 @font-face {
-  font-family: "Inter";
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Noto Sans";
+  font-style: normal;
+  font-weight: 300;
+  src: url("/font/Noto-sans/noto-sans-v32-latin-300.woff2") format("woff2");
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* noto-sans-regular - latin */
+@font-face {
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Noto Sans";
   font-style: normal;
   font-weight: 400;
-  src: local(""), url("/font/inter-v3-latin/inter-v3-latin-regular.woff2") format("woff2"), url("/font/inter-v3-latin/inter-v3-latin-regular.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  font-display: swap;
+  src: url("/font/Noto-sans/noto-sans-v32-latin-regular.woff2") format("woff2");
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
-/* inter-700 - latin */
+/* noto-sans-italic - latin */
 @font-face {
-  font-family: "Inter";
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Noto Sans";
+  font-style: italic;
+  font-weight: 400;
+  src: url("/font/Noto-sans/noto-sans-v32-latin-italic.woff2") format("woff2");
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+/* noto-sans-600 - latin */
+@font-face {
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Noto Sans";
   font-style: normal;
-  font-weight: 700;
-  src: local(""), url("/font/inter-v3-latin/inter-v3-latin-700.woff2") format("woff2"), url("/font/inter-v3-latin/inter-v3-latin-700.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  font-display: swap;
+  font-weight: 600;
+  src: url("/font/Noto-sans/noto-sans-v32-latin-600.woff2") format("woff2");
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
-/* inter-800 - latin */
+/* noto-sans-800 - latin */
 @font-face {
-  font-family: "Inter";
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Noto Sans";
   font-style: normal;
   font-weight: 800;
-  src: local(""), url("/font/inter-v3-latin/inter-v3-latin-800.woff2") format("woff2"), url("/font/inter-v3-latin/inter-v3-latin-800.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-  font-display: swap;
+  src: url("/font/Noto-sans/noto-sans-v32-latin-800.woff2") format("woff2");
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
 }
-/*# sourceMappingURL=webfonts.css.map */
+/* noto-sans-900 - latin */
+@font-face {
+  font-display: swap;
+  /* Check https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face/font-display for other options. */
+  font-family: "Noto Sans";
+  font-style: normal;
+  font-weight: 900;
+  src: url("/font/Noto-sans/noto-sans-v32-latin-900.woff2") format("woff2");
+  /* Chrome 36+, Opera 23+, Firefox 39+, Safari 12+, iOS 10+ */
+}
+:root {
+  font-family: "Noto Sans", "Roboto Condensed", "Frutiger", Arial, Helvetica, sans-serif;
+}/*# sourceMappingURL=webfonts.css.map */

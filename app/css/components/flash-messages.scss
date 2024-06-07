@@ -1,0 +1,36 @@
+// @use "../settings" as *;
+// @use "../theme/lib" as *;
+
+// .flash-messages {
+// 	top: var(--spacing-300);
+// 	position: absolute;
+// 	width: 100%;
+// 	@include bound(var(--outer-bound-width), var(--outer-bound));
+// 	right: 0;
+// 	left: 0;
+	
+// 	.message {
+// 		padding: $spacing* 0.5 $spacing;
+// 		border-width: var(--border-width);
+// 		border-style: solid;
+// 		border-color: transparent;
+// 		border-radius: var(--border-radius);
+// 	}
+
+// 	p {
+// 		padding: 0;
+// 		margin-bottom: 0;
+// 		font-weight: 600;
+// 	}
+
+// 	.error {
+// 		background-color: color("error", 400);
+// 		--color: white;
+// 	}
+	
+// 	.success {
+// 		background-color: color("success", 400);
+// 		// border-color: color("success", 100);
+// 		--color: white;
+// 	}
+// }
