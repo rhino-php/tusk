@@ -2,22 +2,29 @@
 <html class="no-js" lang="<?= $local ?>">
 
 <head>
-	<?= $this->element('partials/head') ?>
+	<?= $this->element('../layout/partials/head') ?>
 </head>
 
-<body>
-	<a href="#main" class="skip-link button">common.skip-navigation</a>
+<body class="is-loading">
+	<header class="header box">
+		<?= $this->element('../layout/partials/header') ?>
+	</header>
 
-	<!-- Main header -->
-	<?= $this->element('partials/header') ?>
+	<main class="main-content inner-bound">
+		<?= $this->Rhino->region('content'); ?>
 
-	<!-- Main Content -->
-	<?= $this->element('partials/main') ?>
+		<div class="flash-messages">
+			<?= $this->Flash->render() ?>
+		</div>
+	</main>
 
-	<!-- Main footer -->
-	<?= $this->element('partials/footer') ?>
+	<footer class="footer box">
+		<?= $this->element('../layout/partials/footer') ?>
+	</footer>
 
-	<!-- To do: add Loading screen -->
+	<div class="loading-screen">
+		<div class="loading-screen__animation"></div>
+	</div>
 
 	<?= $this->fetch('Rhino') ?>
 </body>

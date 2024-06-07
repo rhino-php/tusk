@@ -41,7 +41,7 @@ tests.sqlite
 # NetBeans
 nbproject/*
 # Visual Studio Code
-.vscode
+.vscode/
 # nova
 .nova
 # Sass preprocessor
@@ -59,6 +59,8 @@ webroot/js
 webroot/icon
 webroot/img
 webroot/font
-.history/package-lock.json
+webroot/favicon*
+package-lock.json
 .history/
 *.sql
+.github.back

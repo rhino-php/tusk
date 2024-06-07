@@ -40,7 +40,7 @@
         "prefix": "./webroot/",
         "source": "./app/",
         "scssIncludes": [
-            "node_modules/base-theme/scss",
+            "node_modules/@tyqo/base-theme/scss",
             "node_modules/@picocss/pico/scss"
         ]
     },
