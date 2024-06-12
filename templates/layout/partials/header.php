@@ -4,12 +4,12 @@
 		<span>Tusk</span>
 	</a>
 
-	<div id="menu">
-		<nav>
-		<?php
+	<div class="menu">
+		<nav id="main-menu">
+			<?php
 			echo $this->Menu->get(1, [
 				'limit' => 0,
-				'ul' => ['class' => 'nav-list cluster list-style-none'],
+				'ul' => ['class' => 'nav__links nav-list cluster list-style-none'],
 				'li' => ['class' => 'nav-list__item'],
 				'link' => ['class' => 'button alt-button'],
 				'summary' => ['class' => 'button alt-button'],
@@ -17,11 +17,11 @@
 			]);
 			?>
 		</nav>
-
-		<button id="menu-toggle" class="menu__button button">
-			<?= $this->Icon->svg('menu') ?>
-			<?= $this->Icon->svg('x') ?>
-			<span class="sr-only">toggle Menu</span>
-		</button>
 	</div>
+
+	<button id="menu-button" class="menu__button button" aria-expanded="false">
+		<span class="menu--open"><?= $this->Icon->svg('menu'); ?></span>
+		<span class="sr-only">toggle Menu</span>
+	</button>
+</div>
 </div>

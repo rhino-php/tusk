@@ -14,13 +14,6 @@ body {
 	border-radius: 0px;
 }
 
-.header__wrapper {
-	display: flex;
-	flex-direction: row;
-	gap: var(--spacing-400);
-	justify-content: space-between;
-}
-
 .footer {
 	margin-top: var(--spacing-500);
 }
@@ -44,7 +37,7 @@ body {
 }
 
 .logo span {
-    @include for-size(lg-down) {
+    @include for-size(sm-down) {
         display: none;
     }
 }
