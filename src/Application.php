@@ -173,15 +173,19 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
 	}
 
 	public function getAuthenticationService(ServerRequestInterface $request): AuthenticationServiceInterface {
-
-		if ($request->getParam('plugin') === "Rhino") {
+		if ($request->getParam('plugin') === "Rhino" || $request->getParam('prefix') == 'RhinoApp') {
 			// Reuse fields in multiple authenticators.
 			$fields = [
 				AbstractIdentifier::CREDENTIAL_USERNAME => 'email',
 				AbstractIdentifier::CREDENTIAL_PASSWORD => 'password',
 			];
 
-			$login = Router::url(['plugin' => 'Rhino', 'controller' => 'Users', 'action' => 'login']);
+			$login = Router::url([
+				'plugin' => 'Rhino',
+				'controller' => 'Users',
+				'action' => 'login',
+				'prefix' => false,
+			]);
 
 			$authenticationService = new AuthenticationService([
 				'unauthenticatedRedirect' => $login,
@@ -191,13 +195,13 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
 			// Load the authenticators, you want session first
 			$authenticationService->loadAuthenticator('Authentication.Session');
 
-			// Configure form data check to pick email and password
-			$authenticationService->loadAuthenticator('Authentication.Form', [
+			// If the user is on the login page, check for a cookie as well.
+			$authenticationService->loadAuthenticator('Authentication.Cookie', [
 				'fields' => $fields
 			]);
 
-			// If the user is on the login page, check for a cookie as well.
-			$authenticationService->loadAuthenticator('Authentication.Cookie', [
+			// Configure form data check to pick email and password
+			$authenticationService->loadAuthenticator('Authentication.Form', [
 				'fields' => $fields
 			]);
 

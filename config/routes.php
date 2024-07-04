@@ -61,6 +61,10 @@ return static function (RouteBuilder $routes) {
 			->setPass(['page', 'lang'])
 			->setPatterns(['lang' => 'en|fr|es|de'])
 			->setPersist(['lang']);
+			
+		$builder->prefix('Custom', function (RouteBuilder $builder) {
+			$builder->connect('/{controller}/*', ['action'=> 'index']);
+		});
 		
 		/*
 		* Connect catchall routes for all controllers.

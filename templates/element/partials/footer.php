@@ -1,10 +1,10 @@
 <nav class="outer-bound">
 	<div class="stack">
 		<?php if ($this->Identity->isLoggedIn()): ?>
-			<?= $this->Html->link('Logout', ['controller' => 'Users', 'action' => 'logout'], ["class" => 'button']) ?>
+			<?= $this->Html->link('Logout', ['plugin' => 'Rhino', 'controller' => 'Users', 'action' => 'logout'], ["class" => 'button']) ?>
 			<p>Logged in as: <?= $this->Identity->get('email'); ?></p>
 		<?php else: ?>
-			<?= $this->Html->link('Login', ['controller' => 'Users', 'action' => 'login'], ["class" => 'button']) ?>
+			<?= $this->Html->link('Login', ['plugin' => 'Rhino', 'controller' => 'Users', 'action' => 'login'], ["class" => 'button']) ?>
 		<?php endif ?>
 	</div>
 

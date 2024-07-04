@@ -9,9 +9,9 @@
 			<?php
 			echo $this->Menu->get(1, [
 				'limit' => 0,
-				'ul' => ['class' => 'nav__links nav-list cluster list-style-none'],
+				'ul' => ['class' => 'nav-list'],
 				'li' => ['class' => 'nav-list__item'],
-				'link' => ['class' => 'button alt-button'],
+				'link' => ['class' => 'button'],
 				'summary' => ['class' => 'button alt-button'],
 				'details' => ['role' => 'list'],
 			]);
