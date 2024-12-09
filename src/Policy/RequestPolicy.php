@@ -17,7 +17,7 @@ class RequestPolicy implements RequestPolicyInterface {
 	 */
 	public function canAccess(?IdentityInterface $identity, ServerRequest $request): bool|ResultInterface {
 
-		if ($request->getParam('plugin') === "Rhino") {
+		if ($request->getParam('plugin') === "Rhino" || $request->getParam('prefix') == 'RhinoApp') {
 			if (empty($identity)) {
 				if ($request->getParam('controller') !== "Users") {
 					return false;

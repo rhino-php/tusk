@@ -25,4 +25,5 @@ use Rhino\Controller\PagesController as BaseController;
  *
  * @link https://book.cakephp.org/4/en/controllers/pages-controller.html
  */
-class PagesController extends BaseController {}
+class PagesController extends BaseController {
+}

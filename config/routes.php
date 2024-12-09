@@ -51,7 +51,7 @@ return static function (RouteBuilder $routes) {
          * to use (in this case, templates/Pages/home.php)...
          */
 
-        $builder->connect('/', ['controller' => 'Pages', 'action' => 'display']);
+        $builder->connect('/', ['controller' => 'Pages', 'action' => 'display', 'default']);
 
         /*
          * ...and connect the rest of 'Pages' controller's URLs.
@@ -61,11 +61,11 @@ return static function (RouteBuilder $routes) {
 			->setPass(['page', 'lang'])
 			->setPatterns(['lang' => 'en|fr|es|de'])
 			->setPersist(['lang']);
-			
+
 		$builder->prefix('Custom', function (RouteBuilder $builder) {
 			$builder->connect('/{controller}/*', ['action'=> 'index']);
 		});
-		
+
 		/*
 		* Connect catchall routes for all controllers.
 		*

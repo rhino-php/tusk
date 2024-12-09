@@ -64,3 +64,4 @@ package-lock.json
 .history/
 *.sql
 .github.back
+schema-dump-default.lock
